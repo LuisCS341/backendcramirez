@@ -2,7 +2,8 @@
 FROM eclipse-temurin:17-jdk
 
 # Define el JAR que se copiará dentro del contenedor
-ARG JAR_FILE=build/libs/*.jar
+ARG JAR_FILE=target/*.jar
+
 
 # Copia el JAR al contenedor
 COPY ${JAR_FILE} app.jar
