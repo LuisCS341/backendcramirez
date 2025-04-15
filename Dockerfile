@@ -1,11 +1,9 @@
 FROM eclipse-temurin:17-jdk
 
-ARG JAR_FILE=target/*.jar
+# Copia el JAR específico al contenedor
+COPY target/backendcramirez-0.0.1-SNAPSHOT.jar app.jar
 
-# Copia el JAR al contenedor
-COPY ${JAR_FILE} app.jar
-
-# Verifica si el archivo se copió correctamente
+# (Opcional) Verifica si el archivo se copió correctamente
 RUN ls -l /app.jar
 
 # Comando para correr la app
