@@ -1,14 +1,11 @@
-# Usa la imagen base con JDK 17
-FROM eclipse-temurin:17-jdk
-
-# Establece el directorio de trabajo dentro del contenedor
+# Etapa 1: Construcción del JAR
+FROM maven:3.9.4-eclipse-temurin-17 AS build
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Copia el archivo JAR generado por Maven al contenedor
-COPY target/backendcramirez-0.0.1-SNAPSHOT.jar app.jar
-
-# Muestra el contenido del directorio para confirmar que se copió correctamente
-RUN ls -l .
-
-# Comando por defecto al iniciar el contenedor
+# Etapa 2: Imagen final liviana
+FROM eclipse-temurin:17-jdk
+WORKDIR /app
+COPY --from=build /app/target/backendcramirez-0.0.1-SNAPSHOT.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
