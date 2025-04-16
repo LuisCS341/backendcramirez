@@ -33,14 +33,14 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- PostgreSQL Driver -->
+        <!-- MySQL Driver -->
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.7.3</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version> <!-- Usar la versión más reciente si es necesario -->
         </dependency>
 
-        <!-- Spring Boot DevTools (optional for development) -->
+        <!-- Spring Boot DevTools (opcional para desarrollo) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -48,27 +48,27 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Spring Security (optional for authentication) -->
+        <!-- Spring Security (opcional para autenticación) -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
         </dependency>
 
-        <!-- SpringDoc OpenAPI for API Documentation -->
+        <!-- SpringDoc OpenAPI para documentación de API -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>2.8.2</version>
         </dependency>
 
-        <!-- Lombok for reducing boilerplate code -->
+        <!-- Lombok para reducir código repetitivo -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
 
-        <!-- Spring Boot Test (for testing) -->
+        <!-- Spring Boot Test (para pruebas) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -81,7 +81,7 @@
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 
-        <!-- Spring Security Test (optional for testing security) -->
+        <!-- Spring Security Test (opcional para pruebas de seguridad) -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
@@ -89,9 +89,16 @@
         </dependency>
     </dependencies>
 
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+    </repositories>
+
     <build>
         <plugins>
-            <!-- Compiler Plugin for Lombok annotations -->
+            <!-- Plugin de compilación para las anotaciones de Lombok -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -105,7 +112,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Spring Boot Maven Plugin -->
+            <!-- Plugin de Spring Boot Maven -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -120,5 +127,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
