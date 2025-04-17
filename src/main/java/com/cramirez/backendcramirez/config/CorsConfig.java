@@ -16,7 +16,7 @@ public class CorsConfig {
                 registry.addMapping("/**") // Aplica a todas las rutas del backend
                         .allowedOrigins(
                                 "https://frontend-cramirez.vercel.app", // Producción en Vercel
-                                "http://localhost:5173" // Desarrollo local
+                                "http://localhost:5174" // Desarrollo local
                         )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
