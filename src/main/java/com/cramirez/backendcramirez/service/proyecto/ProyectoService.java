@@ -39,8 +39,7 @@ public class ProyectoService {
                 proyecto.getIdProyecto(),
                 proyecto.getIdEmpresa(),
                 proyecto.getIdMatriz(),
-                proyecto.getNombreProyecto(),
-                proyecto.getFechaEntrega()
+                proyecto.getNombreProyecto()
         );
     }
 
@@ -50,7 +49,6 @@ public class ProyectoService {
         proyecto.setIdEmpresa(proyectoDTO.getIdEmpresa());
         proyecto.setIdMatriz(proyectoDTO.getIdMatriz());
         proyecto.setNombreProyecto(proyectoDTO.getNombreProyecto());
-        proyecto.setFechaEntrega(proyectoDTO.getFechaEntrega());
         return proyecto;
     }
 }

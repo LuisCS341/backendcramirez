@@ -11,6 +11,5 @@ public class ProyectoDTO {
     private int idEmpresa;
     private int idMatriz;
     private String nombreProyecto;
-    private String fechaEntrega;
 }
 

@@ -20,6 +20,4 @@ public class Proyecto {
     private int idMatriz;
     @Column(name = "Nombre_Proyecto", nullable = false)
     private String nombreProyecto;
-    @Column(name = "Fecha_entrega", nullable = false)
-    private String fechaEntrega;
 }
