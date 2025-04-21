@@ -12,7 +12,8 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**") // Aplica a todas las rutas de la API
-                        .allowedOrigins("https://frontendcramirez.vercel.app") // Permitir el frontend en Vue
+                        .allowedOrigins("https://www.cramirez-sac.com"
+                                ,"http://localhost:5173")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Métodos HTTP permitidos
                         .allowedHeaders("*") // Permitir todos los headers
                         .allowCredentials(true); // Permitir credenciales (cookies, headers de autenticación)
