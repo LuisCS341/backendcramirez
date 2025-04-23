@@ -12,8 +12,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**") // Aplica a todas las rutas de la API
-                        .allowedOrigins("https://www.cramirez-sac.com"
-                                ,"http://localhost:5173")
+                        .allowedOrigins("https://www.cramirez-sac.com")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Métodos HTTP permitidos
                         .allowedHeaders("*") // Permitir todos los headers
                         .allowCredentials(true); // Permitir credenciales (cookies, headers de autenticación)
