@@ -55,6 +55,14 @@ public class ClienteService {
 
     // Guardar un nuevo cliente
     public ClienteDTO guardarCliente(ClienteDTO clienteDTO) {
+
+        Optional<Cliente> clienteExistente = clienteRepository.findByNumeroIdentificacion(clienteDTO.getNumeroIdentificacion());
+
+        if (clienteExistente.isPresent()) {
+
+            return convertirA_DTO(clienteExistente.get());
+        }
+
         Cliente cliente = convertirA_Entidad(clienteDTO);
         Cliente clienteGuardado = clienteRepository.save(cliente);
         return convertirA_DTO(clienteGuardado);
