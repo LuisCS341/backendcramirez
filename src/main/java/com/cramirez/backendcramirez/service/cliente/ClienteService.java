@@ -83,12 +83,7 @@ public class ClienteService {
                 .orElse(null);
     }
 
-    // Obtener el último ID de cliente generado
-    public Integer obtenerUltimoIdCliente() {
-        return clienteRepository.findTopByOrderByIdClienteDesc()
-                .map(Cliente::getIdCliente)
-                .orElse(null);
-    }
+
 
     public List<ClienteDTO> obtenerClientesPorOperario(int idOperario) {
         System.out.println("ID Operario recibido en el backend: " + idOperario);

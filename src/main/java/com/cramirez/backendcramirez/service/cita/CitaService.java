@@ -51,7 +51,8 @@ public class CitaService {
                 .map(cita -> {
                     cita.setIdCliente(citaDTO.getIdCliente());
                     cita.setFechaCita(citaDTO.getFechaCita());
-                    cita.setIdEstado(citaDTO.getIdEstado());
+                    cita.setHoraCita(citaDTO.getHoraCita());
+                    cita.setPersonaAtiende(citaDTO.getPersonaAtiende());
                     Cita citaActualizada = citaRepository.save(cita);
                     return convertirA_DTO(citaActualizada);
                 })
@@ -63,7 +64,8 @@ public class CitaService {
         dto.setIdCita(cita.getIdCita());
         dto.setIdCliente(cita.getIdCliente());
         dto.setFechaCita(cita.getFechaCita());
-        dto.setIdEstado(cita.getIdEstado());
+        dto.setHoraCita(cita.getHoraCita());
+        dto.setPersonaAtiende(cita.getPersonaAtiende());
         return dto;
     }
 
@@ -72,7 +74,8 @@ public class CitaService {
         cita.setIdCita(dto.getIdCita());
         cita.setIdCliente(dto.getIdCliente());
         cita.setFechaCita(dto.getFechaCita());
-        dto.setIdEstado(dto.getIdEstado());
+        cita.setHoraCita(dto.getHoraCita());
+        cita.setPersonaAtiende(dto.getPersonaAtiende());
         return cita;
     }
 }

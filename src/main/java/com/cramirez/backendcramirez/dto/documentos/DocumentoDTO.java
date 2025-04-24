@@ -1,6 +1,5 @@
 package com.cramirez.backendcramirez.dto.documentos;
 
-import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 

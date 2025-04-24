@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @JsonPropertyOrder({
+        "idCliente",
         "nombresApellidos",
         "ocupacion",
         "documentoIdentificacion",

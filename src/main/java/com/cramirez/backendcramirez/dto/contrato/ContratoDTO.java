@@ -2,6 +2,7 @@ package com.cramirez.backendcramirez.dto.contrato;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import java.util.Date;
 
 @Getter

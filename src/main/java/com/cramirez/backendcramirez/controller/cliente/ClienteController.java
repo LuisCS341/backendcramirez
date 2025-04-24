@@ -34,9 +34,7 @@ public class ClienteController {
     }
 
     @GetMapping("/existe")
-    public ResponseEntity<Boolean> verificarExistenciaPorNumeroIdentificacion(
-            @RequestParam("numeroIdentificacion") String numeroIdentificacion) {
-
+    public ResponseEntity<Boolean> verificarExistenciaPorNumeroIdentificacion(@RequestParam("NumeroIdentificacion") String numeroIdentificacion) {
         boolean existe = clienteService.existeClientePorNumeroIdentificacion(numeroIdentificacion);
         return ResponseEntity.ok(existe);
     }
@@ -53,21 +51,16 @@ public class ClienteController {
 
         clienteDTO.setIdOperario(idOperario);
 
-        clienteService.guardarCliente(clienteDTO);
+        ClienteDTO clienteGuardado = clienteService.guardarCliente(clienteDTO);
 
-        return ResponseEntity.ok(clienteDTO);
+        return ResponseEntity.ok(clienteGuardado);
     }
+
 
     @GetMapping("/operario")
     public List<ClienteDTO> obtenerClientesPorOperario(@RequestHeader("X-User-ID") int idOperario) {
         System.out.println("ID Operario recibido: " + idOperario);
         return clienteService.obtenerClientesPorOperario(idOperario);
-    }
-
-    @GetMapping("/ultimo")
-    public ResponseEntity<Integer> obtenerUltimoIdCliente() {
-        Integer ultimoId = clienteService.obtenerUltimoIdCliente();
-        return ResponseEntity.ok(ultimoId);
     }
 
     @GetMapping("/clientes/operario/{idOperario}/fecha/{fecha}")

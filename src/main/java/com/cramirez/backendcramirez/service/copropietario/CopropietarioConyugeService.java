@@ -3,7 +3,6 @@ package com.cramirez.backendcramirez.service.copropietario;
 import com.cramirez.backendcramirez.dto.copropietario.CopropietarioConyugeDTO;
 import com.cramirez.backendcramirez.entity.copropietario.CopropietarioConyuge;
 import com.cramirez.backendcramirez.repository.copropietario.CopropietarioConyugeRepository;
-import com.cramirez.backendcramirez.repository.copropietario.CopropietarioRepository;
 import com.cramirez.backendcramirez.repository.documento.IdentificacionRepository;
 import com.cramirez.backendcramirez.repository.localizacion.DepartamentoRepository;
 import com.cramirez.backendcramirez.repository.localizacion.DistritoRepository;

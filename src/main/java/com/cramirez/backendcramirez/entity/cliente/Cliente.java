@@ -47,7 +47,7 @@ public class Cliente {
     @Column(name = "Celular",nullable = false)
     private int celularCliente;
 
-    @Column(name = "NumeroIdentificacion",nullable = false)
+    @Column(name = "NumeroIdentificacion",nullable = false,unique = true)
     private String numeroIdentificacion;
 
     @Column(name = "ID_Departamento",nullable = false)
