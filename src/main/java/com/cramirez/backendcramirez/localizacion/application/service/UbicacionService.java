@@ -45,6 +45,28 @@ public class UbicacionService {
         UbicacionDTO dto = new UbicacionDTO();
         dto.setIdUbicacion(ubicacion.getIdUbicacion());
         dto.setUbicacion(ubicacion.getUbicacion());
+        dto.setEmpresaVende(ubicacion.getEmpresaVende());
+        dto.setRucVendedor(ubicacion.getRucVendedor());
+        dto.setDireccionVendedor(ubicacion.getDireccionVendedor());
+        dto.setRepresentanteLegalVendedor(ubicacion.getRepresentanteLegalVendedor());
+        dto.setDniVendedor(ubicacion.getDniVendedor());
+        dto.setNPartidaPoderVendedor(ubicacion.getNPartidaPoderVendedor());
+        dto.setMoneda(ubicacion.getMoneda());
+        dto.setNumCuenta(ubicacion.getNumCuenta());
+        dto.setCci(ubicacion.getCci());
+        dto.setFechaSale(ubicacion.getFechaSale());
+        dto.setFechaFirmaContratoDefinitivo(ubicacion.getFechaFirmaContratoDefinitivo());
+        dto.setAreaMatrizHas(ubicacion.getAreaMatrizHas());
+        dto.setRegistroDe(ubicacion.getRegistroDe());
+        dto.setPartidaMatriz(ubicacion.getPartidaMatriz());
+        dto.setUbicacionLote(ubicacion.getUbicacionLote());
+        dto.setUnidadCatastralMatriz(ubicacion.getUnidadCatastralMatriz());
+        dto.setUrbanizacionMatriz(ubicacion.getUrbanizacionMatriz());
+        dto.setDistritoMatriz(ubicacion.getDistritoMatriz());
+        dto.setProvinciaMatriz(ubicacion.getProvinciaMatriz());
+        dto.setDepartamentoMatriz(ubicacion.getDepartamentoMatriz());
+        dto.setCompraVentaMatriz(ubicacion.getCompraVentaMatriz());
+        dto.setSituacionLegalMatriz(ubicacion.getSituacionLegalMatriz());
         return dto;
     }
 
@@ -52,6 +74,28 @@ public class UbicacionService {
         Ubicacion ubicacion = new Ubicacion();
         ubicacion.setIdUbicacion(dto.getIdUbicacion());
         ubicacion.setUbicacion(dto.getUbicacion());
+        ubicacion.setEmpresaVende(dto.getEmpresaVende());
+        ubicacion.setRucVendedor(dto.getRucVendedor());
+        ubicacion.setDireccionVendedor(dto.getDireccionVendedor());
+        ubicacion.setRepresentanteLegalVendedor(dto.getRepresentanteLegalVendedor());
+        ubicacion.setDniVendedor(dto.getDniVendedor());
+        ubicacion.setNPartidaPoderVendedor(dto.getNPartidaPoderVendedor());
+        ubicacion.setMoneda(dto.getMoneda());
+        ubicacion.setNumCuenta(dto.getNumCuenta());
+        ubicacion.setCci(dto.getCci());
+        ubicacion.setFechaSale(dto.getFechaSale());
+        ubicacion.setFechaFirmaContratoDefinitivo(dto.getFechaFirmaContratoDefinitivo());
+        ubicacion.setAreaMatrizHas(dto.getAreaMatrizHas());
+        ubicacion.setRegistroDe(dto.getRegistroDe());
+        ubicacion.setPartidaMatriz(dto.getPartidaMatriz());
+        ubicacion.setUbicacionLote(dto.getUbicacionLote());
+        ubicacion.setUnidadCatastralMatriz(dto.getUnidadCatastralMatriz());
+        ubicacion.setUrbanizacionMatriz(dto.getUrbanizacionMatriz());
+        ubicacion.setDistritoMatriz(dto.getDistritoMatriz());
+        ubicacion.setProvinciaMatriz(dto.getProvinciaMatriz());
+        ubicacion.setDepartamentoMatriz(dto.getDepartamentoMatriz());
+        ubicacion.setCompraVentaMatriz(dto.getCompraVentaMatriz());
+        ubicacion.setSituacionLegalMatriz(dto.getSituacionLegalMatriz());
         return ubicacion;
     }
 }
