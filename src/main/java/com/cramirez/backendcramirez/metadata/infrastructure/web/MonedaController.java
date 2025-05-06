@@ -1,7 +1,6 @@
 package com.cramirez.backendcramirez.metadata.infrastructure.web;
-
-import com.cramirez.backendcramirez.dto.metadata.MonedaDTO;
-import com.cramirez.backendcramirez.service.metadata.MonedaService;
+import com.cramirez.backendcramirez.metadata.application.service.MonedaService;
+import com.cramirez.backendcramirez.metadata.dto.MonedaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

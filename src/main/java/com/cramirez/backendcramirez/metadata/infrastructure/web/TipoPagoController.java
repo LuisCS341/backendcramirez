@@ -1,7 +1,6 @@
 package com.cramirez.backendcramirez.metadata.infrastructure.web;
-
-import com.cramirez.backendcramirez.dto.metadata.TipoPagoDTO;
-import com.cramirez.backendcramirez.service.metadata.TipoPagoService;
+import com.cramirez.backendcramirez.metadata.application.service.TipoPagoService;
+import com.cramirez.backendcramirez.metadata.dto.TipoPagoDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

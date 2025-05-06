@@ -1,11 +1,10 @@
 package com.cramirez.backendcramirez.lote.application.service;
-
-import com.cramirez.backendcramirez.dto.lote.LoteDTO;
-import com.cramirez.backendcramirez.entity.lote.Lote;
-import com.cramirez.backendcramirez.repository.localizacion.UbicacionRepository;
-import com.cramirez.backendcramirez.repository.lote.LoteRepository;
-import com.cramirez.backendcramirez.repository.metadata.TipoContratoRepository;
-import com.cramirez.backendcramirez.repository.proyecto.ProyectoRepository;
+import com.cramirez.backendcramirez.localizacion.infrastructure.repository.UbicacionRepository;
+import com.cramirez.backendcramirez.lote.domain.entity.Lote;
+import com.cramirez.backendcramirez.lote.dto.LoteDTO;
+import com.cramirez.backendcramirez.lote.infrastructure.repository.LoteRepository;
+import com.cramirez.backendcramirez.metadata.infrastructure.repository.TipoContratoRepository;
+import com.cramirez.backendcramirez.proyecto.infrastructure.repository.ProyectoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

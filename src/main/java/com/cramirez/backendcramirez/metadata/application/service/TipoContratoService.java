@@ -1,8 +1,7 @@
 package com.cramirez.backendcramirez.metadata.application.service;
-
-import com.cramirez.backendcramirez.dto.metadata.TipoContratoDTO;
-import com.cramirez.backendcramirez.entity.metadata.TipoContrato;
-import com.cramirez.backendcramirez.repository.metadata.TipoContratoRepository;
+import com.cramirez.backendcramirez.metadata.domain.entity.TipoContrato;
+import com.cramirez.backendcramirez.metadata.dto.TipoContratoDTO;
+import com.cramirez.backendcramirez.metadata.infrastructure.repository.TipoContratoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

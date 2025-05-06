@@ -1,8 +1,7 @@
 package com.cramirez.backendcramirez.financiamiento.application.service;
-
-import com.cramirez.backendcramirez.dto.financiamiento.FinanciamientoDTO;
-import com.cramirez.backendcramirez.entity.financiamiento.Financiamiento;
-import com.cramirez.backendcramirez.repository.financiamiento.FinanciamientoRepository;
+import com.cramirez.backendcramirez.financiamiento.domain.entity.Financiamiento;
+import com.cramirez.backendcramirez.financiamiento.dto.FinanciamientoDTO;
+import com.cramirez.backendcramirez.financiamiento.infrastructure.repository.FinanciamientoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

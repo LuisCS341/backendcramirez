@@ -1,7 +1,6 @@
 package com.cramirez.backendcramirez.localizacion.infrastructure.web;
-
-import com.cramirez.backendcramirez.entity.localizacion.Departamento;
-import com.cramirez.backendcramirez.service.localizacion.DepartamentoService;
+import com.cramirez.backendcramirez.localizacion.application.service.DepartamentoService;
+import com.cramirez.backendcramirez.localizacion.domain.entity.Departamento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

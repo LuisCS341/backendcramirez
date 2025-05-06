@@ -1,7 +1,6 @@
 package com.cramirez.backendcramirez.financiamiento.infrastructure.web;
-
-import com.cramirez.backendcramirez.dto.financiamiento.FinanciamientoDTO;
-import com.cramirez.backendcramirez.service.financiamiento.FinanciamientoService;
+import com.cramirez.backendcramirez.financiamiento.application.service.FinanciamientoService;
+import com.cramirez.backendcramirez.financiamiento.dto.FinanciamientoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

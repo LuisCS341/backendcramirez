@@ -1,8 +1,7 @@
 package com.cramirez.backendcramirez.metadata.application.service;
-
-import com.cramirez.backendcramirez.dto.metadata.PrefijotelefonicoDTO;
-import com.cramirez.backendcramirez.entity.metadata.Prefijotelefonico;
-import com.cramirez.backendcramirez.repository.metadata.PrefijotelefonicoRepository;
+import com.cramirez.backendcramirez.metadata.domain.entity.Prefijotelefonico;
+import com.cramirez.backendcramirez.metadata.dto.PrefijotelefonicoDTO;
+import com.cramirez.backendcramirez.metadata.infrastructure.repository.PrefijotelefonicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

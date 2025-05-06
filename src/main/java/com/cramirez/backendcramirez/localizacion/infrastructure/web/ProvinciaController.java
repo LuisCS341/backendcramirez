@@ -1,7 +1,6 @@
 package com.cramirez.backendcramirez.localizacion.infrastructure.web;
-
-import com.cramirez.backendcramirez.dto.localizacion.ProvinciaDTO;
-import com.cramirez.backendcramirez.service.localizacion.ProvinciaService;
+import com.cramirez.backendcramirez.localizacion.application.service.ProvinciaService;
+import com.cramirez.backendcramirez.localizacion.dto.ProvinciaDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

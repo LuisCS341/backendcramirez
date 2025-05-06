@@ -1,7 +1,6 @@
 package com.cramirez.backendcramirez.localizacion.infrastructure.web;
-
-import com.cramirez.backendcramirez.dto.localizacion.UbicacionDTO;
-import com.cramirez.backendcramirez.service.localizacion.UbicacionService;
+import com.cramirez.backendcramirez.localizacion.application.service.UbicacionService;
+import com.cramirez.backendcramirez.localizacion.dto.UbicacionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

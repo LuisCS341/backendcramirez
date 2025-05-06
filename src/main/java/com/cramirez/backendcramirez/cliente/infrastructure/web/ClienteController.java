@@ -34,7 +34,7 @@ public class ClienteController {
     }
 
     @GetMapping("/existe")
-    public ResponseEntity<Boolean> verificarExistenciaPorNumeroIdentificacion(@RequestParam("NumeroIdentificacion") String numeroIdentificacion) {
+    public ResponseEntity<Boolean> verificarExistenciaPorNumeroIdentificacion(@RequestParam("numeroIdentificacion") String numeroIdentificacion) {
         boolean existe = clienteService.existeClientePorNumeroIdentificacion(numeroIdentificacion);
         return ResponseEntity.ok(existe);
     }

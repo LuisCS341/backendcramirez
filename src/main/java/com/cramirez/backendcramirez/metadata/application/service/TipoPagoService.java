@@ -1,8 +1,7 @@
 package com.cramirez.backendcramirez.metadata.application.service;
-
-import com.cramirez.backendcramirez.dto.metadata.TipoPagoDTO;
-import com.cramirez.backendcramirez.entity.metadata.TipoPago;
-import com.cramirez.backendcramirez.repository.metadata.TipoPagoRepository;
+import com.cramirez.backendcramirez.metadata.domain.entity.TipoPago;
+import com.cramirez.backendcramirez.metadata.dto.TipoPagoDTO;
+import com.cramirez.backendcramirez.metadata.infrastructure.repository.TipoPagoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

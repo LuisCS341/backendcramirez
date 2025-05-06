@@ -1,6 +1,6 @@
 package com.cramirez.backendcramirez.documento.application.service;
+import com.cramirez.backendcramirez.documento.domain.entity.TipoDocumento;
 import com.cramirez.backendcramirez.documento.infrastructure.repository.TipoDocumentoRepository;
-import com.cramirez.backendcramirez.entity.documento.TipoDocumento;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

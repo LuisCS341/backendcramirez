@@ -1,8 +1,7 @@
 package com.cramirez.backendcramirez.metadata.application.service;
-
-import com.cramirez.backendcramirez.dto.metadata.TipoDTO;
-import com.cramirez.backendcramirez.entity.metadata.Tipo;
-import com.cramirez.backendcramirez.repository.metadata.TipoRepository;
+import com.cramirez.backendcramirez.metadata.domain.entity.Tipo;
+import com.cramirez.backendcramirez.metadata.dto.TipoDTO;
+import com.cramirez.backendcramirez.metadata.infrastructure.repository.TipoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,6 @@
 package com.cramirez.backendcramirez.proyecto.infrastructure.web;
-
-import com.cramirez.backendcramirez.dto.proyecto.ProyectoDTO;
-import com.cramirez.backendcramirez.service.proyecto.ProyectoService;
+import com.cramirez.backendcramirez.proyecto.application.service.ProyectoService;
+import com.cramirez.backendcramirez.proyecto.dto.ProyectoDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

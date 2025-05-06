@@ -1,8 +1,8 @@
 package com.cramirez.backendcramirez.documento.application.service;
 
+import com.cramirez.backendcramirez.documento.domain.entity.Identificacion;
 import com.cramirez.backendcramirez.documento.dto.IdentificacionDTO;
 import com.cramirez.backendcramirez.documento.infrastructure.repository.IdentificacionRepository;
-import com.cramirez.backendcramirez.entity.documento.Identificacion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

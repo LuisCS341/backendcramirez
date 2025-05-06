@@ -1,7 +1,6 @@
 package com.cramirez.backendcramirez.metadata.infrastructure.web;
-
-import com.cramirez.backendcramirez.dto.metadata.OcupacionDTO;
-import com.cramirez.backendcramirez.service.metadata.OcupacionService;
+import com.cramirez.backendcramirez.metadata.application.service.OcupacionService;
+import com.cramirez.backendcramirez.metadata.dto.OcupacionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

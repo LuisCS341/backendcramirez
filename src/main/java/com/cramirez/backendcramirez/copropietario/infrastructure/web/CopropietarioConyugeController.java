@@ -1,7 +1,6 @@
 package com.cramirez.backendcramirez.copropietario.infrastructure.web;
-
-import com.cramirez.backendcramirez.dto.copropietario.CopropietarioConyugeDTO;
-import com.cramirez.backendcramirez.service.copropietario.CopropietarioConyugeService;
+import com.cramirez.backendcramirez.copropietario.application.service.CopropietarioConyugeService;
+import com.cramirez.backendcramirez.copropietario.dto.CopropietarioConyugeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

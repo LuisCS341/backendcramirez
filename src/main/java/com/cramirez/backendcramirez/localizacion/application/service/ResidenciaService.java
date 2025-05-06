@@ -1,8 +1,7 @@
 package com.cramirez.backendcramirez.localizacion.application.service;
-
-import com.cramirez.backendcramirez.dto.localizacion.ResidenciaDTO;
-import com.cramirez.backendcramirez.entity.localizacion.Residencia;
-import com.cramirez.backendcramirez.repository.localizacion.ResidenciaRepository;
+import com.cramirez.backendcramirez.localizacion.domain.entity.Residencia;
+import com.cramirez.backendcramirez.localizacion.dto.ResidenciaDTO;
+import com.cramirez.backendcramirez.localizacion.infrastructure.repository.ResidenciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

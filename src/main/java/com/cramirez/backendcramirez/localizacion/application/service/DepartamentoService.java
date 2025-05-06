@@ -1,7 +1,6 @@
 package com.cramirez.backendcramirez.localizacion.application.service;
-
-import com.cramirez.backendcramirez.entity.localizacion.Departamento;
-import com.cramirez.backendcramirez.repository.localizacion.DepartamentoRepository;
+import com.cramirez.backendcramirez.localizacion.domain.entity.Departamento;
+import com.cramirez.backendcramirez.localizacion.infrastructure.repository.DepartamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

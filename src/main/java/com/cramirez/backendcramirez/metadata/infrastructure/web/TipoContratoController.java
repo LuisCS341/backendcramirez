@@ -1,7 +1,6 @@
 package com.cramirez.backendcramirez.metadata.infrastructure.web;
-
-import com.cramirez.backendcramirez.dto.metadata.TipoContratoDTO;
-import com.cramirez.backendcramirez.service.metadata.TipoContratoService;
+import com.cramirez.backendcramirez.metadata.application.service.TipoContratoService;
+import com.cramirez.backendcramirez.metadata.dto.TipoContratoDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

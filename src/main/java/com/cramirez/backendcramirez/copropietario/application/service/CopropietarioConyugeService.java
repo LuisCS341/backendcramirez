@@ -1,16 +1,17 @@
 package com.cramirez.backendcramirez.copropietario.application.service;
 
-import com.cramirez.backendcramirez.dto.copropietario.CopropietarioConyugeDTO;
-import com.cramirez.backendcramirez.entity.copropietario.CopropietarioConyuge;
-import com.cramirez.backendcramirez.repository.copropietario.CopropietarioConyugeRepository;
+import com.cramirez.backendcramirez.copropietario.domain.entity.CopropietarioConyuge;
+import com.cramirez.backendcramirez.copropietario.dto.CopropietarioConyugeDTO;
+import com.cramirez.backendcramirez.copropietario.infrastructure.repository.CopropietarioConyugeRepository;
 import com.cramirez.backendcramirez.documento.infrastructure.repository.IdentificacionRepository;
-import com.cramirez.backendcramirez.repository.localizacion.DepartamentoRepository;
-import com.cramirez.backendcramirez.repository.localizacion.DistritoRepository;
-import com.cramirez.backendcramirez.repository.localizacion.ProvinciaRepository;
-import com.cramirez.backendcramirez.repository.localizacion.ResidenciaRepository;
-import com.cramirez.backendcramirez.repository.metadata.NacionalidadRepository;
-import com.cramirez.backendcramirez.repository.metadata.PrefijotelefonicoRepository;
-import com.cramirez.backendcramirez.repository.operario.OperarioRepository;
+
+import com.cramirez.backendcramirez.localizacion.infrastructure.repository.DepartamentoRepository;
+import com.cramirez.backendcramirez.localizacion.infrastructure.repository.DistritoRepository;
+import com.cramirez.backendcramirez.localizacion.infrastructure.repository.ProvinciaRepository;
+import com.cramirez.backendcramirez.localizacion.infrastructure.repository.ResidenciaRepository;
+import com.cramirez.backendcramirez.metadata.infrastructure.repository.NacionalidadRepository;
+import com.cramirez.backendcramirez.metadata.infrastructure.repository.PrefijotelefonicoRepository;
+import com.cramirez.backendcramirez.operario.infrastructure.repository.OperarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

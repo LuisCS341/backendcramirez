@@ -1,7 +1,6 @@
 package com.cramirez.backendcramirez.financiamiento.infrastructure.web;
-
-import com.cramirez.backendcramirez.dto.financiamiento.PagoDTO;
-import com.cramirez.backendcramirez.service.financiamiento.PagoService;
+import com.cramirez.backendcramirez.financiamiento.application.service.PagoService;
+import com.cramirez.backendcramirez.financiamiento.dto.PagoDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

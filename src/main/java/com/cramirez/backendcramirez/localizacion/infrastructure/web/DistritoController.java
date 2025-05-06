@@ -1,7 +1,7 @@
 package com.cramirez.backendcramirez.localizacion.infrastructure.web;
 
-import com.cramirez.backendcramirez.dto.localizacion.DistritoDTO;
-import com.cramirez.backendcramirez.service.localizacion.DistritoService;
+import com.cramirez.backendcramirez.localizacion.application.service.DistritoService;
+import com.cramirez.backendcramirez.localizacion.dto.DistritoDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,9 +1,8 @@
 package com.cramirez.backendcramirez.localizacion.application.service;
-
-import com.cramirez.backendcramirez.dto.localizacion.DistritoDTO;
-import com.cramirez.backendcramirez.entity.localizacion.Distrito;
-import com.cramirez.backendcramirez.entity.localizacion.Provincia;
-import com.cramirez.backendcramirez.repository.localizacion.DistritoRepository;
+import com.cramirez.backendcramirez.localizacion.domain.entity.Distrito;
+import com.cramirez.backendcramirez.localizacion.domain.entity.Provincia;
+import com.cramirez.backendcramirez.localizacion.dto.DistritoDTO;
+import com.cramirez.backendcramirez.localizacion.infrastructure.repository.DistritoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

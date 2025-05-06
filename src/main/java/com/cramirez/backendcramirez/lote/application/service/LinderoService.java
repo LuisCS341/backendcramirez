@@ -1,8 +1,7 @@
 package com.cramirez.backendcramirez.lote.application.service;
-
-import com.cramirez.backendcramirez.dto.lote.LinderoDTO;
-import com.cramirez.backendcramirez.entity.lote.Lindero;
-import com.cramirez.backendcramirez.repository.lote.LinderoRepository;
+import com.cramirez.backendcramirez.lote.domain.entity.Lindero;
+import com.cramirez.backendcramirez.lote.dto.LinderoDTO;
+import com.cramirez.backendcramirez.lote.infrastructure.repository.LinderoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

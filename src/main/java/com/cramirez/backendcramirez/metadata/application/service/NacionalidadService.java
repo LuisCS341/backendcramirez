@@ -1,8 +1,7 @@
 package com.cramirez.backendcramirez.metadata.application.service;
-
-import com.cramirez.backendcramirez.dto.metadata.NacionalidadDTO;
-import com.cramirez.backendcramirez.entity.metadata.Nacionalidad;
-import com.cramirez.backendcramirez.repository.metadata.NacionalidadRepository;
+import com.cramirez.backendcramirez.metadata.domain.entity.Nacionalidad;
+import com.cramirez.backendcramirez.metadata.dto.NacionalidadDTO;
+import com.cramirez.backendcramirez.metadata.infrastructure.repository.NacionalidadRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

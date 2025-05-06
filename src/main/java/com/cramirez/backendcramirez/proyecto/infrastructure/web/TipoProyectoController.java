@@ -1,7 +1,6 @@
 package com.cramirez.backendcramirez.proyecto.infrastructure.web;
-
-import com.cramirez.backendcramirez.dto.proyecto.TipoProyectoDTO;
-import com.cramirez.backendcramirez.service.proyecto.TipoProyectoService;
+import com.cramirez.backendcramirez.proyecto.application.service.TipoProyectoService;
+import com.cramirez.backendcramirez.proyecto.dto.TipoProyectoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

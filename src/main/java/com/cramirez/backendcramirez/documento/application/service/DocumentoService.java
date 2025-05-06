@@ -1,8 +1,8 @@
 package com.cramirez.backendcramirez.documento.application.service;
 
+import com.cramirez.backendcramirez.documento.domain.entity.Documento;
 import com.cramirez.backendcramirez.documento.dto.DocumentoDTO;
 import com.cramirez.backendcramirez.documento.infrastructure.repository.DocumentoRepository;
-import com.cramirez.backendcramirez.entity.documento.Documento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;

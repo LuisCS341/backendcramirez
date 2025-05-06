@@ -1,7 +1,6 @@
 package com.cramirez.backendcramirez.metadata.infrastructure.web;
-
-import com.cramirez.backendcramirez.dto.metadata.TipoDTO;
-import com.cramirez.backendcramirez.service.metadata.TipoService;
+import com.cramirez.backendcramirez.metadata.application.service.TipoService;
+import com.cramirez.backendcramirez.metadata.dto.TipoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,8 +1,7 @@
 package com.cramirez.backendcramirez.contrato.application.service;
-
-import com.cramirez.backendcramirez.dto.contrato.ContratoDTO;
-import com.cramirez.backendcramirez.entity.contrato.Contrato;
-import com.cramirez.backendcramirez.repository.contrato.ContratoRepository;
+import com.cramirez.backendcramirez.contrato.domain.entity.Contrato;
+import com.cramirez.backendcramirez.contrato.dto.ContratoDTO;
+import com.cramirez.backendcramirez.contrato.infrastructure.repository.ContratoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

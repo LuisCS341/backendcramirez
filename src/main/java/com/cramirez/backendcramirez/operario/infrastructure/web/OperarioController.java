@@ -1,7 +1,6 @@
 package com.cramirez.backendcramirez.operario.infrastructure.web;
-
-import com.cramirez.backendcramirez.dto.operario.OperarioDTO;
-import com.cramirez.backendcramirez.service.operario.OperarioService;
+import com.cramirez.backendcramirez.operario.application.service.OperarioService;
+import com.cramirez.backendcramirez.operario.dto.OperarioDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

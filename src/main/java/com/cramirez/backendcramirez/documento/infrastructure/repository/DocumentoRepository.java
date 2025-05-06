@@ -1,6 +1,5 @@
 package com.cramirez.backendcramirez.documento.infrastructure.repository;
-
-import com.cramirez.backendcramirez.entity.documento.Documento;
+import com.cramirez.backendcramirez.documento.domain.entity.Documento;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,6 @@
 package com.cramirez.backendcramirez.auth.application.service;
-
-import com.cramirez.backendcramirez.entity.auth.Credenciales;
-import com.cramirez.backendcramirez.repository.auth.CredencialesRepository;
+import com.cramirez.backendcramirez.auth.domain.entity.Credenciales;
+import com.cramirez.backendcramirez.auth.infrastructure.repository.CredencialesRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 

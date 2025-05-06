@@ -1,6 +1,6 @@
 package com.cramirez.backendcramirez.documento.infrastructure.web;
 import com.cramirez.backendcramirez.documento.application.service.TipoDocumentoService;
-import com.cramirez.backendcramirez.entity.documento.TipoDocumento;
+import com.cramirez.backendcramirez.documento.domain.entity.TipoDocumento;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;

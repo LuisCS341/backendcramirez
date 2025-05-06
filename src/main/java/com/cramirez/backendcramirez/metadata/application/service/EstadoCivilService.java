@@ -1,8 +1,7 @@
 package com.cramirez.backendcramirez.metadata.application.service;
-
-import com.cramirez.backendcramirez.dto.metadata.EstadoCivilDTO;
-import com.cramirez.backendcramirez.entity.metadata.EstadoCivil;
-import com.cramirez.backendcramirez.repository.metadata.EstadoCivilRepository;
+import com.cramirez.backendcramirez.metadata.domain.entity.EstadoCivil;
+import com.cramirez.backendcramirez.metadata.dto.EstadoCivilDTO;
+import com.cramirez.backendcramirez.metadata.infrastructure.repository.EstadoCivilRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

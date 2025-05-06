@@ -1,8 +1,7 @@
 package com.cramirez.backendcramirez.financiamiento.application.service;
-
-import com.cramirez.backendcramirez.dto.financiamiento.PagoDTO;
-import com.cramirez.backendcramirez.entity.financiamiento.Pago;
-import com.cramirez.backendcramirez.repository.financiamiento.PagoRepository;
+import com.cramirez.backendcramirez.financiamiento.domain.entity.Pago;
+import com.cramirez.backendcramirez.financiamiento.dto.PagoDTO;
+import com.cramirez.backendcramirez.financiamiento.infrastructure.repository.PagoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

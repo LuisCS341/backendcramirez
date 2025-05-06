@@ -1,8 +1,7 @@
 package com.cramirez.backendcramirez.metadata.application.service;
-
-import com.cramirez.backendcramirez.dto.metadata.OcupacionDTO;
-import com.cramirez.backendcramirez.entity.metadata.Ocupacion;
-import com.cramirez.backendcramirez.repository.metadata.OcupacionRepository;
+import com.cramirez.backendcramirez.metadata.domain.entity.Ocupacion;
+import com.cramirez.backendcramirez.metadata.dto.OcupacionDTO;
+import com.cramirez.backendcramirez.metadata.infrastructure.repository.OcupacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

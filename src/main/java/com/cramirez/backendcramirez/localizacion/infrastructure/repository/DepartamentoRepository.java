@@ -1,6 +1,5 @@
 package com.cramirez.backendcramirez.localizacion.infrastructure.repository;
-
-import com.cramirez.backendcramirez.entity.localizacion.Departamento;
+import com.cramirez.backendcramirez.localizacion.domain.entity.Departamento;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

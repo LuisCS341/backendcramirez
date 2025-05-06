@@ -1,7 +1,7 @@
 package com.cramirez.backendcramirez.proyecto.application.service;
-import com.cramirez.backendcramirez.dto.proyecto.TipoProyectoDTO;
-import com.cramirez.backendcramirez.entity.proyecto.TipoProyecto;
-import com.cramirez.backendcramirez.repository.proyecto.TipoProyectoRepository;
+import com.cramirez.backendcramirez.proyecto.domain.entity.TipoProyecto;
+import com.cramirez.backendcramirez.proyecto.dto.TipoProyectoDTO;
+import com.cramirez.backendcramirez.proyecto.infrastructure.repository.TipoProyectoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

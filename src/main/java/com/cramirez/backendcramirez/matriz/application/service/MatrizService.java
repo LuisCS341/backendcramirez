@@ -1,8 +1,7 @@
 package com.cramirez.backendcramirez.matriz.application.service;
-
-import com.cramirez.backendcramirez.dto.matriz.MatrizDTO;
-import com.cramirez.backendcramirez.entity.matriz.Matriz;
-import com.cramirez.backendcramirez.repository.matriz.MatrizRepository;
+import com.cramirez.backendcramirez.matriz.domain.entity.Matriz;
+import com.cramirez.backendcramirez.matriz.dto.MatrizDTO;
+import com.cramirez.backendcramirez.matriz.infrastructure.repository.MatrizRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

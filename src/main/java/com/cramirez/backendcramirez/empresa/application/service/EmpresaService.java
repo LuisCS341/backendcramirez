@@ -1,8 +1,7 @@
 package com.cramirez.backendcramirez.empresa.application.service;
-
-import com.cramirez.backendcramirez.dto.empresa.EmpresaDTO;
-import com.cramirez.backendcramirez.entity.empresa.Empresa;
-import com.cramirez.backendcramirez.repository.empresa.EmpresaRepository;
+import com.cramirez.backendcramirez.empresa.domain.entity.Empresa;
+import com.cramirez.backendcramirez.empresa.dto.EmpresaDTO;
+import com.cramirez.backendcramirez.empresa.infrastructure.repository.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

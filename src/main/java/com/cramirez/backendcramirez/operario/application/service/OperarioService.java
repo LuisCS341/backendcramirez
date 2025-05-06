@@ -1,8 +1,7 @@
 package com.cramirez.backendcramirez.operario.application.service;
-
-import com.cramirez.backendcramirez.dto.operario.OperarioDTO;
-import com.cramirez.backendcramirez.entity.operario.Operario;
-import com.cramirez.backendcramirez.repository.operario.OperarioRepository;
+import com.cramirez.backendcramirez.operario.domain.entity.Operario;
+import com.cramirez.backendcramirez.operario.dto.OperarioDTO;
+import com.cramirez.backendcramirez.operario.infrastructure.repository.OperarioRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

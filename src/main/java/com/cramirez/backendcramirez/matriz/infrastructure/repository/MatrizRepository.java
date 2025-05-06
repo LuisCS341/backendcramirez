@@ -1,6 +1,5 @@
 package com.cramirez.backendcramirez.matriz.infrastructure.repository;
-
-import com.cramirez.backendcramirez.entity.matriz.Matriz;
+import com.cramirez.backendcramirez.matriz.domain.entity.Matriz;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

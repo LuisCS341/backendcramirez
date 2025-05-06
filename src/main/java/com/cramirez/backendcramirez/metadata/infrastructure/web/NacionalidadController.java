@@ -1,7 +1,6 @@
 package com.cramirez.backendcramirez.metadata.infrastructure.web;
-
-import com.cramirez.backendcramirez.dto.metadata.NacionalidadDTO;
-import com.cramirez.backendcramirez.service.metadata.NacionalidadService;
+import com.cramirez.backendcramirez.metadata.application.service.NacionalidadService;
+import com.cramirez.backendcramirez.metadata.dto.NacionalidadDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,8 +1,7 @@
 package com.cramirez.backendcramirez.proyecto.application.service;
-
-import com.cramirez.backendcramirez.dto.proyecto.ProyectoDTO;
-import com.cramirez.backendcramirez.entity.proyecto.Proyecto;
-import com.cramirez.backendcramirez.repository.proyecto.ProyectoRepository;
+import com.cramirez.backendcramirez.proyecto.domain.entity.Proyecto;
+import com.cramirez.backendcramirez.proyecto.dto.ProyectoDTO;
+import com.cramirez.backendcramirez.proyecto.infrastructure.repository.ProyectoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

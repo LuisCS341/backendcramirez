@@ -1,7 +1,6 @@
     package com.cramirez.backendcramirez.auth.infrastructure.web;
-
-    import com.cramirez.backendcramirez.entity.auth.Credenciales;
-    import com.cramirez.backendcramirez.service.auth.CredencialesService;
+    import com.cramirez.backendcramirez.auth.application.service.CredencialesService;
+    import com.cramirez.backendcramirez.auth.domain.entity.Credenciales;
     import org.springframework.http.HttpStatus;
     import org.springframework.http.ResponseEntity;
     import org.springframework.web.bind.annotation.*;

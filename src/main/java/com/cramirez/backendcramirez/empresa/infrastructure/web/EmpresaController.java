@@ -1,7 +1,6 @@
 package com.cramirez.backendcramirez.empresa.infrastructure.web;
-
-import com.cramirez.backendcramirez.dto.empresa.EmpresaDTO;
-import com.cramirez.backendcramirez.service.empresa.EmpresaService;
+import com.cramirez.backendcramirez.empresa.application.service.EmpresaService;
+import com.cramirez.backendcramirez.empresa.dto.EmpresaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

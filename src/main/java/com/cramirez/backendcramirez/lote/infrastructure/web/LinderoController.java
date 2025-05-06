@@ -1,7 +1,6 @@
 package com.cramirez.backendcramirez.lote.infrastructure.web;
-
-import com.cramirez.backendcramirez.dto.lote.LinderoDTO;
-import com.cramirez.backendcramirez.service.lote.LinderoService;
+import com.cramirez.backendcramirez.lote.application.service.LinderoService;
+import com.cramirez.backendcramirez.lote.dto.LinderoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

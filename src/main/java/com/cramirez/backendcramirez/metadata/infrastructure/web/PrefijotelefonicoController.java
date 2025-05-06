@@ -1,7 +1,6 @@
 package com.cramirez.backendcramirez.metadata.infrastructure.web;
-
-import com.cramirez.backendcramirez.dto.metadata.PrefijotelefonicoDTO;
-import com.cramirez.backendcramirez.service.metadata.PrefijotelefonicoService;
+import com.cramirez.backendcramirez.metadata.application.service.PrefijotelefonicoService;
+import com.cramirez.backendcramirez.metadata.dto.PrefijotelefonicoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

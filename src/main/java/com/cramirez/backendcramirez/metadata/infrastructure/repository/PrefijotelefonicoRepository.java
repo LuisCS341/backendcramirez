@@ -1,6 +1,5 @@
 package com.cramirez.backendcramirez.metadata.infrastructure.repository;
-
-import com.cramirez.backendcramirez.entity.metadata.Prefijotelefonico;
+import com.cramirez.backendcramirez.metadata.domain.entity.Prefijotelefonico;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
