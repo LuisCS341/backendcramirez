@@ -45,6 +45,7 @@ public class UbicacionService {
         UbicacionDTO dto = new UbicacionDTO();
         dto.setIdUbicacion(ubicacion.getIdUbicacion());
         dto.setUbicacion(ubicacion.getUbicacion());
+        dto.setProyecto(ubicacion.getProyecto());
         dto.setEmpresaVende(ubicacion.getEmpresaVende());
         dto.setRucVendedor(ubicacion.getRucVendedor());
         dto.setDireccionVendedor(ubicacion.getDireccionVendedor());
@@ -73,6 +74,7 @@ public class UbicacionService {
         Ubicacion ubicacion = new Ubicacion();
         ubicacion.setIdUbicacion(dto.getIdUbicacion());
         ubicacion.setUbicacion(dto.getUbicacion());
+        ubicacion.setProyecto(dto.getProyecto());
         ubicacion.setEmpresaVende(dto.getEmpresaVende());
         ubicacion.setRucVendedor(dto.getRucVendedor());
         ubicacion.setDireccionVendedor(dto.getDireccionVendedor());

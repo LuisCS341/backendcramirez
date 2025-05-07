@@ -11,6 +11,7 @@ public class UbicacionDTO {
 
     private int idUbicacion;
     private String Ubicacion;
+    private String proyecto;
     private String empresaVende;
     private float rucVendedor;
     private String direccionVendedor;

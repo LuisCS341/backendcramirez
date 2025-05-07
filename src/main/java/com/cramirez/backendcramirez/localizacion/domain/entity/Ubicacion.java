@@ -1,6 +1,5 @@
 package com.cramirez.backendcramirez.localizacion.domain.entity;
-
-import jakarta.persistence.*;
+import  jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +14,9 @@ public class Ubicacion {
 
     @Column(name = "Ubicacion")
     private String Ubicacion;
+
+    @Column(name = "Proyecto")
+    private String proyecto;
 
     @Column(name = "EmpresaVende", nullable = false)
     private String empresaVende;
