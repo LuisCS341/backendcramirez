@@ -58,9 +58,6 @@ public class Ubicacion {
     @Column(name = "PartidaMatriz", nullable = false)
     private String partidaMatriz;
 
-    @Column(name = "UbicacionLote", nullable = false)
-    private String ubicacionLote;
-
     @Column(name = "UnidadCatastralMatriz", nullable = false)
     private String unidadCatastralMatriz;
 

@@ -11,7 +11,6 @@ public class UbicacionDTO {
 
     private int idUbicacion;
     private String Ubicacion;
-
     private String empresaVende;
     private float rucVendedor;
     private String direccionVendedor;
@@ -26,7 +25,6 @@ public class UbicacionDTO {
     private Double areaMatrizHas;
     private String registroDe;
     private String partidaMatriz;
-    private String ubicacionLote;
     private String unidadCatastralMatriz;
     private String urbanizacionMatriz;
     private String distritoMatriz;

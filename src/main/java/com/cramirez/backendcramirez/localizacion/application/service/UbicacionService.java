@@ -59,7 +59,6 @@ public class UbicacionService {
         dto.setAreaMatrizHas(ubicacion.getAreaMatrizHas());
         dto.setRegistroDe(ubicacion.getRegistroDe());
         dto.setPartidaMatriz(ubicacion.getPartidaMatriz());
-        dto.setUbicacionLote(ubicacion.getUbicacionLote());
         dto.setUnidadCatastralMatriz(ubicacion.getUnidadCatastralMatriz());
         dto.setUrbanizacionMatriz(ubicacion.getUrbanizacionMatriz());
         dto.setDistritoMatriz(ubicacion.getDistritoMatriz());
@@ -88,7 +87,6 @@ public class UbicacionService {
         ubicacion.setAreaMatrizHas(dto.getAreaMatrizHas());
         ubicacion.setRegistroDe(dto.getRegistroDe());
         ubicacion.setPartidaMatriz(dto.getPartidaMatriz());
-        ubicacion.setUbicacionLote(dto.getUbicacionLote());
         ubicacion.setUnidadCatastralMatriz(dto.getUnidadCatastralMatriz());
         ubicacion.setUrbanizacionMatriz(dto.getUrbanizacionMatriz());
         ubicacion.setDistritoMatriz(dto.getDistritoMatriz());
