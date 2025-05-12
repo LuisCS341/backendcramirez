@@ -16,5 +16,4 @@ public class TipoProyecto {
     private int idTipoProyecto;
     @Column(name = "TipoProyecto", nullable = false)
     private String tipoProyecto;
-
 }

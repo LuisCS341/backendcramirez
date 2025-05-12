@@ -1,5 +1,6 @@
 package com.cramirez.backendcramirez.cliente.infrastructure.web;
 
+import com.cramirez.backendcramirez.cliente.dto.ClienteConLotesDTO;
 import com.cramirez.backendcramirez.cliente.dto.ClienteDTO;
 import com.cramirez.backendcramirez.cliente.application.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,11 @@ public class ClienteController {
     public ResponseEntity<Boolean> verificarExistenciaPorNumeroIdentificacion(@RequestParam("numeroIdentificacion") String numeroIdentificacion) {
         boolean existe = clienteService.existeClientePorNumeroIdentificacion(numeroIdentificacion);
         return ResponseEntity.ok(existe);
+    }
+
+    @GetMapping("/conlotes")
+    public List<ClienteConLotesDTO> obtenerClientesConLotes() {
+        return clienteService.obtenerClientesConLotes();
     }
 
 

@@ -59,15 +59,15 @@ public class ClienteDTO {
     private String direccion;
     private String correoElectronico;
     private String nombresApellidos;
-    private String Operario;
-    private String PrefijoPais;
-    private String DocumentoIdentificacion;
-    private String EstadoCivil;
+    private String operario;
+    private String prefijoPais;
+    private String documentoIdentificacion;
+    private String estadoCivil;
     private String ocupacion;
-    private String Nacionalidad;
-    private String Residencia;
-    private String Departamento;
-    private String Provincia;
-    private String Distrito;
+    private String nacionalidad;
+    private String residencia;
+    private String departamento;
+    private String provincia;
+    private String distrito;
 
 }

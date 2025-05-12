@@ -19,6 +19,7 @@ public class TipoProyectoService {
         TipoProyectoDTO dto = new TipoProyectoDTO();
         dto.setIdTipoProyecto(tipoProyecto.getIdTipoProyecto());
         dto.setTipoProyecto(tipoProyecto.getTipoProyecto());
+
         return dto;
     }
 

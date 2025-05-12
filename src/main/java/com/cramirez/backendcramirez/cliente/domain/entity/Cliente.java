@@ -1,10 +1,13 @@
 package com.cramirez.backendcramirez.cliente.domain.entity;
 
+import com.cramirez.backendcramirez.lote.domain.entity.Lote;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "Cliente")
@@ -36,7 +39,7 @@ public class Cliente {
     private String nombresApellidos;
 
     @Column(name = "Ocupacion",nullable = false)
-    private String Ocupacion;
+    private String ocupacion;
 
     @Column(name = "Direccion",nullable = false)
     private String direccion;
@@ -69,4 +72,8 @@ public class Cliente {
     protected void onCreate() {
         this.fechaRegistro = LocalDateTime.now();
     }
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Lote> lotes;
+
 }

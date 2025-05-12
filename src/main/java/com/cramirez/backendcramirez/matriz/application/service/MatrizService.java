@@ -1,4 +1,8 @@
 package com.cramirez.backendcramirez.matriz.application.service;
+import com.cramirez.backendcramirez.localizacion.infrastructure.repository.DepartamentoRepository;
+import com.cramirez.backendcramirez.localizacion.infrastructure.repository.DistritoRepository;
+import com.cramirez.backendcramirez.localizacion.infrastructure.repository.ProvinciaRepository;
+import com.cramirez.backendcramirez.localizacion.infrastructure.repository.UbicacionRepository;
 import com.cramirez.backendcramirez.matriz.domain.entity.Matriz;
 import com.cramirez.backendcramirez.matriz.dto.MatrizDTO;
 import com.cramirez.backendcramirez.matriz.infrastructure.repository.MatrizRepository;
@@ -13,10 +17,18 @@ import java.util.stream.Collectors;
 public class MatrizService {
 
     private final MatrizRepository matrizRepository;
+    private final DepartamentoRepository departamentoRepository;
+    private final ProvinciaRepository provinciaRepository;
+    private final DistritoRepository distritoRepository;
+    private final UbicacionRepository ubicacionRepository;
 
     @Autowired
-    public MatrizService(MatrizRepository matrizRepository) {
+    public MatrizService(MatrizRepository matrizRepository, DepartamentoRepository departamentoRepository, ProvinciaRepository provinciaRepository, DistritoRepository distritoRepository, UbicacionRepository ubicacionRepository) {
         this.matrizRepository = matrizRepository;
+        this.departamentoRepository = departamentoRepository;
+        this.provinciaRepository = provinciaRepository;
+        this.distritoRepository = distritoRepository;
+        this.ubicacionRepository = ubicacionRepository;
     }
 
     public List<MatrizDTO> getAllMatrices() {
@@ -55,6 +67,12 @@ public class MatrizService {
         dto.setSituacionLegal(matriz.getSituacionLegal());
         dto.setAlicuota(matriz.getAlicuota());
         dto.setAlicuotaLetras(matriz.getAlicuotaLetras());
+
+        dto.setDepartamento(obtenerTexto(departamentoRepository.findById(matriz.getIdDepartamento()), "NombreDepartamento"));
+        dto.setProvincia(obtenerTexto(provinciaRepository.findById(matriz.getIdProvincia()), "NombreProvincia"));
+        dto.setDistrito(obtenerTexto(distritoRepository.findById(matriz.getIdDistrito()), "NombreDistrito"));
+        dto.setUbicacion(obtenerTexto(ubicacionRepository.findById(matriz.getIdUbicacion()), "Ubicacion"));
+
         return dto;
     }
 
@@ -75,6 +93,16 @@ public class MatrizService {
         matriz.setAlicuota(dto.getAlicuota());
         matriz.setAlicuotaLetras(dto.getAlicuotaLetras());
         return matriz;
+    }
+
+    private String obtenerTexto(Optional<?> entidad, String campo) {
+        return entidad.map(e -> {
+            try {
+                return e.getClass().getMethod("get" + campo).invoke(e).toString();
+            } catch (Exception ex) {
+                return null;
+            }
+        }).orElse(null);
     }
 }
 
