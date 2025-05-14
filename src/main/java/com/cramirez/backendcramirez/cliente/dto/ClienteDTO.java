@@ -30,21 +30,13 @@ import java.time.LocalDateTime;
         "fechaRegistro"
 })
 public class ClienteDTO {
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private int idIdentificacion;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private int idNacionalidad;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private int idResidencia;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private int idDepartamento;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private int idProvincia;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private int idDistrito;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private int idPrefijo;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private int idEstadoCivil;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private int idCliente;
