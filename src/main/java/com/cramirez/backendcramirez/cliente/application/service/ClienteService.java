@@ -76,6 +76,13 @@ public class ClienteService {
         return clienteRepository.existsByNumeroIdentificacion(numeroIdentificacion);
     }
 
+    public Optional<ClienteDTO> obtenerClienteDTOporNumeroIdentificacion(String numeroIdentificacion) {
+        return clienteRepository.findByNumeroIdentificacion(numeroIdentificacion)
+                .map(this::convertirA_DTO);
+    }
+
+
+
 
     public List<ClienteConLotesDTO> obtenerClientesConLotes() {
         List<Cliente> clientes = clienteRepository.findAll();

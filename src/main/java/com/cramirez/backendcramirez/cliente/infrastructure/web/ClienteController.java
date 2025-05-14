@@ -1,5 +1,6 @@
 package com.cramirez.backendcramirez.cliente.infrastructure.web;
 
+import com.cramirez.backendcramirez.cliente.domain.entity.Cliente;
 import com.cramirez.backendcramirez.cliente.dto.ClienteConLotesDTO;
 import com.cramirez.backendcramirez.cliente.dto.ClienteDTO;
 import com.cramirez.backendcramirez.cliente.application.service.ClienteService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/clientes")
@@ -39,6 +41,15 @@ public class ClienteController {
         boolean existe = clienteService.existeClientePorNumeroIdentificacion(numeroIdentificacion);
         return ResponseEntity.ok(existe);
     }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<ClienteDTO> obtenerClientePorNumeroIdentificacion(
+            @RequestParam("numeroIdentificacion") String numeroIdentificacion) {
+        Optional<ClienteDTO> clienteDTO = clienteService.obtenerClienteDTOporNumeroIdentificacion(numeroIdentificacion);
+        return clienteDTO.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+
 
     @GetMapping("/conlotes")
     public List<ClienteConLotesDTO> obtenerClientesConLotes() {

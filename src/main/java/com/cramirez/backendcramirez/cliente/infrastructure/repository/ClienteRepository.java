@@ -13,6 +13,7 @@ import java.util.Optional;
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
     Optional<Cliente> findById(Integer id);
 
+
     Optional<Cliente> findTopByOrderByIdClienteDesc();
 
     List<Cliente> findByIdOperario(int idOperario);
