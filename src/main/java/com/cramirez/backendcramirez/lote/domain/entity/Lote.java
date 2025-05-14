@@ -56,8 +56,8 @@ public class Lote {
     @Column(name="MontoCuotas",nullable = false)
     private Float montoCuotas;
 
-    @Column(name="CatidadCuotas",nullable = false)
-    private int catidadCuotas;
+    @Column(name="CantidadCuotas",nullable = false)
+    private int cantidadCuotas;
 
     @Column(name = "Empresa", nullable = false)
     private String empresa;

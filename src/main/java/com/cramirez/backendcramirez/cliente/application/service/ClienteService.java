@@ -115,7 +115,7 @@ public class ClienteService {
         dto.setPagoInicial(lote.getPagoInicial());
         dto.setSeparacion(lote.getSeparacion());
         dto.setMontoCuotas(lote.getMontoCuotas());
-        dto.setCatidadCuotas(lote.getCatidadCuotas());
+        dto.setCantidadCuotas(lote.getCantidadCuotas());
         dto.setEmpresa(lote.getEmpresa());
         dto.setEmpresaVende(lote.getEmpresaVende());
         dto.setRucVendedor(lote.getRucVendedor());

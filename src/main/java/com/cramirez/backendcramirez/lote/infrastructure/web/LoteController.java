@@ -1,9 +1,11 @@
 package com.cramirez.backendcramirez.lote.infrastructure.web;
+
 import com.cramirez.backendcramirez.lote.application.service.LoteService;
 import com.cramirez.backendcramirez.lote.dto.LoteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController

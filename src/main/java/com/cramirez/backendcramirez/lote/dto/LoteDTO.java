@@ -8,7 +8,6 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-
 import java.util.List;
 
 @Getter
@@ -49,7 +48,7 @@ import java.util.List;
         "pagoInicial",
         "separacion",
         "montoCuotas",
-        "catidadCuotas"
+        "cantidadCuotas"
 })
 public class LoteDTO {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
@@ -72,7 +71,7 @@ public class LoteDTO {
     private Float pagoInicial;
     private String separacion;
     private Float montoCuotas;
-    private int catidadCuotas;
+    private int cantidadCuotas;
     private String empresa;
     private String empresaVende;
     private float rucVendedor;
