@@ -90,6 +90,7 @@ public class LoteService {
         lote.setNumeroLote(dto.getNumeroLote());
         lote.setIdTipoContrato(dto.getIdTipoContrato());
         lote.setAreaLote(dto.getAreaLote());
+        lote.setAreaLoteLetras(dto.getAreaLoteLetras());
         lote.setCostoLote(dto.getCostoLote());
         lote.setMontoLetras(dto.getMontoLetras());
         lote.setPagoInicial(dto.getPagoInicial());
@@ -133,6 +134,7 @@ public class LoteService {
         dto.setNumeroLote(lote.getNumeroLote());
         dto.setIdTipoContrato(lote.getIdTipoContrato());
         dto.setAreaLote(lote.getAreaLote());
+        dto.setAreaLoteLetras(lote.getAreaLoteLetras());
         dto.setCostoLote(lote.getCostoLote());
         dto.setMontoLetras(lote.getMontoLetras());
         dto.setPagoInicial(lote.getPagoInicial());
