@@ -22,13 +22,6 @@ public class LoteController {
         return ResponseEntity.ok(loteService.getAllLotes());
     }
 
-    @GetMapping("/ultimo")
-    public ResponseEntity<Integer> getUltimoLote() {
-        return loteService.getUltimoLote()
-                .map(LoteDTO::getIdLote)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.noContent().build());
-    }
 
 
     @PostMapping

@@ -58,10 +58,6 @@ public class LoteService {
         return convertToDTO(savedLote);
     }
 
-    public Optional<LoteDTO> getUltimoLote() {
-        return loteRepository.findTopByOrderByIdLoteDesc()
-                .map(this::convertToDTO);
-    }
 
 
     public void deleteLote(Integer id) {
