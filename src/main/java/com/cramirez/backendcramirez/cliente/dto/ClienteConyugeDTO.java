@@ -29,6 +29,8 @@ public class ClienteConyugeDTO {
 
         @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         private int idCliente;
+        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+        private int idClienteConyuge;
         @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         private int idNacionalidadConyuge;
         @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -53,13 +55,13 @@ public class ClienteConyugeDTO {
         private String celularConyuge;
         private String numeroIdentificacionConyuge;
 
-        private String OperarioConyuge;
-        private String PrefijoPaisConyuge;
-        private String DocumentoIdentificacionConyuge;
+        private String operarioConyuge;
+        private String prefijoPaisConyuge;
+        private String documentoIdentificacionConyuge;
         private String ocupacionConyuge;
-        private String NacionalidadConyuge;
-        private String ResidenciaConyuge;
-        private String DepartamentoConyuge;
-        private String ProvinciaConyuge;
-        private String DistritoConyuge;
+        private String nacionalidadConyuge;
+        private String residenciaConyuge;
+        private String departamentoConyuge;
+        private String provinciaConyuge;
+        private String distritoConyuge;
 }

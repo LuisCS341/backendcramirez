@@ -1,5 +1,6 @@
 package com.cramirez.backendcramirez.copropietario.dto;
 
+import com.cramirez.backendcramirez.copropietario.domain.entity.Copropietario;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;
@@ -27,7 +28,7 @@ import lombok.Setter;
 public class CopropietarioDTO {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int idCopropietario;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private int idClienteCopropietarios;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int idResidenciaCopropietarios;
@@ -54,14 +55,15 @@ public class CopropietarioDTO {
     private String celularCopropietarios;
     private String numeroIdentificacionCopropietarios;
 
-    private String OperarioCopropietarios;
-    private String PrefijoPaisCopropietarios;
-    private String DocumentoIdentificacionCopropietarios;
-    private String EstadoCivilCopropietarios;
+    private String operarioCopropietarios;
+    private String prefijoPaisCopropietarios;
+    private String documentoIdentificacionCopropietarios;
+    private String estadoCivilCopropietarios;
     private String ocupacionCopropietarios;
-    private String NacionalidadCopropietarios;
-    private String ResidenciaCopropietarios;
-    private String DepartamentoCopropietarios;
-    private String ProvinciaCopropietarios;
-    private String DistritoCopropietarios;
+    private String nacionalidadCopropietarios;
+    private String residenciaCopropietarios;
+    private String departamentoCopropietarios;
+    private String provinciaCopropietarios;
+    private String distritoCopropietarios;
+
 }

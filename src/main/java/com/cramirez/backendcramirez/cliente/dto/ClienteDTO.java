@@ -1,11 +1,13 @@
 package com.cramirez.backendcramirez.cliente.dto;
 
+import com.cramirez.backendcramirez.copropietario.dto.CopropietarioDTO;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Getter
@@ -62,4 +64,6 @@ public class ClienteDTO {
     private String provincia;
     private String distrito;
 
+    private List<CopropietarioDTO> copropietarios;
+    private ClienteConyugeDTO conyuge;
 }

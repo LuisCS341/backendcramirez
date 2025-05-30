@@ -14,34 +14,38 @@ public class ClienteConyuge {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="ID_ClienteConyuge")
-    private Integer idClienteConyuge;
+    private int idClienteConyuge;
 
     @Column(name = "ID_Cliente",nullable = false)
-    private Integer idCliente;
+    private int idCliente;
+
+    @OneToOne
+    @JoinColumn(name = "ID_Cliente", referencedColumnName = "ID_Cliente", insertable = false, updatable = false)
+    private Cliente cliente;
 
     @Column(name = "ID_Nacionalidad",nullable = false)
-    private Integer idNacionalidadConyuge;
+    private int idNacionalidadConyuge;
 
     @Column(name = "ID_Prefijo",nullable = false)
-    private Integer idPrefijoConyuge;
+    private int idPrefijoConyuge;
 
     @Column(name = "ID_Identificacion",nullable = false)
-    private Integer idIdentificacionConyuge;
+    private int idIdentificacionConyuge;
 
     @Column(name = "ID_Residencia",nullable = false)
-    private Integer idResidenciaConyuge;
+    private int idResidenciaConyuge;
 
     @Column(name = "ID_Operario",nullable = false)
-    private Integer idOperarioConyuge;
+    private int idOperarioConyuge;
 
     @Column(name = "ID_Departamento",nullable = false)
-    private Integer idDepartamentoConyuge;
+    private int idDepartamentoConyuge;
 
     @Column(name = "ID_Provincia",nullable = false)
-    private Integer idProvinciaConyuge;
+    private int idProvinciaConyuge;
 
     @Column(name = "ID_Distrito",nullable = false)
-    private Integer idDistritoConyuge;
+    private int idDistritoConyuge;
 
     @Column(name = "Nombres_Apellidos",nullable = false)
     private String NombresApellidosConyuge;

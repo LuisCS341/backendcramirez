@@ -48,19 +48,19 @@ public class CopropietarioService {
 
     public List<CopropietarioDTO> obtenerTodosLosCopropietarios() {
         List<Copropietario> copropietarios = copropietarioRepository.findAll();
-        return copropietarios.stream().map(this::convertirA_DTO).collect(Collectors.toList());
+        return copropietarios.stream().map(this::convertirACopropietarioDTO).collect(Collectors.toList());
     }
 
     public CopropietarioDTO obtenerCopropietarioPorId(int id) {
         return copropietarioRepository.findById(id)
-                .map(this::convertirA_DTO)
+                .map(this::convertirACopropietarioDTO)
                 .orElse(null);
     }
 
     public CopropietarioDTO crearCopropietario(CopropietarioDTO copropietarioDTO) {
         Copropietario copropietario = convertirA_Entidad(copropietarioDTO);
         Copropietario copropietarioGuardado = copropietarioRepository.save(copropietario);
-        return convertirA_DTO(copropietarioGuardado);
+        return convertirACopropietarioDTO(copropietarioGuardado);
     }
 
     public CopropietarioDTO actualizarCopropietario(int id, CopropietarioDTO copropietarioDTO) {
@@ -84,7 +84,7 @@ public class CopropietarioService {
                     copropietario.setNumeroIdentificacionCopropietarios(copropietarioDTO.getNumeroIdentificacionCopropietarios());
 
                     Copropietario copropietarioActualizado = copropietarioRepository.save(copropietario);
-                    return convertirA_DTO(copropietarioActualizado);
+                    return convertirACopropietarioDTO(copropietarioActualizado);
                 })
                 .orElse(null);
     }
@@ -93,7 +93,7 @@ public class CopropietarioService {
         copropietarioRepository.deleteById(id);
     }
 
-    private CopropietarioDTO convertirA_DTO(Copropietario copropietario) {
+    private CopropietarioDTO convertirACopropietarioDTO(Copropietario copropietario) {
         CopropietarioDTO dto = new CopropietarioDTO();
         dto.setIdCopropietario(copropietario.getIdCopropietario());
         dto.setIdClienteCopropietarios(copropietario.getIdClienteCopropietarios());

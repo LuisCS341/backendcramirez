@@ -1,5 +1,6 @@
 package com.cramirez.backendcramirez.copropietario.domain.entity;
 
+import com.cramirez.backendcramirez.cliente.domain.entity.Cliente;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,11 @@ public class Copropietario {
 
     @Column(name = "ID_Cliente",nullable = false)
     private int idClienteCopropietarios;
+
+    @ManyToOne
+    @JoinColumn(name = "ID_Cliente", referencedColumnName = "ID_Cliente", insertable = false, updatable = false)
+    private Cliente cliente;
+
 
     @Column(name = "ID_Residencia",nullable = false)
     private int idResidenciaCopropietarios;

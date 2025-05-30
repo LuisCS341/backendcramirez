@@ -18,8 +18,11 @@ public class CuotaExtraordinaria {
     @Column(name = "ID_Lote")
     private int idLote;
 
-    @Column(name = "CuotaExtraordinaria")
-    private Float cuotaExtraordinaria;
+    @Column(name = "CantidadCuotaExtraordinaria")
+    private Float cantidadCuotaExtraordinaria;
+
+    @Column(name = "MontoCuotaExtraordinaria")
+    private Float montoCuotaExtraordinaria;
 
     @Column(name = "MantenimientoMensual")
     private Float mantenimientoMensual;

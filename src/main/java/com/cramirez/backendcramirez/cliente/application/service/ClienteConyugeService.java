@@ -47,21 +47,21 @@ public class ClienteConyugeService {
     public ClienteConyugeDTO guardarClienteConyuge(ClienteConyugeDTO clienteConyugeDTO) {
         ClienteConyuge clienteConyuge = convertirA_Entidad(clienteConyugeDTO);
         ClienteConyuge clienteConyugeGuardado = clienteConyugeRepository.save(clienteConyuge);
-        return convertirA_DTO(clienteConyugeGuardado);
+        return convertirAClienteConyugeDTO(clienteConyugeGuardado);
     }
 
     // Obtener todos los ClienteConyuge
     public List<ClienteConyugeDTO> obtenerTodosLosClienteConyuges() {
         return clienteConyugeRepository.findAll()
                 .stream()
-                .map(this::convertirA_DTO)
+                .map(this::convertirAClienteConyugeDTO)
                 .collect(Collectors.toList());
     }
 
     // Obtener ClienteConyuge por ID
     public ClienteConyugeDTO obtenerClienteConyugePorId(int id) {
         return clienteConyugeRepository.findById(id)
-                .map(this::convertirA_DTO)
+                .map(this::convertirAClienteConyugeDTO)
                 .orElse(null);
     }
 
@@ -70,7 +70,7 @@ public class ClienteConyugeService {
         return clienteConyugeRepository.findById(id)
                 .map(clienteConyuge -> {
                     actualizarEntidad(clienteConyuge, clienteConyugeDTO);
-                    return convertirA_DTO(clienteConyugeRepository.save(clienteConyuge));
+                    return convertirAClienteConyugeDTO(clienteConyugeRepository.save(clienteConyuge));
                 })
                 .orElse(null);
     }
@@ -80,9 +80,10 @@ public class ClienteConyugeService {
         clienteConyugeRepository.deleteById(id);
     }
 
-    // Conversión de ClienteConyuge a ClienteConyugeDTO
-    private ClienteConyugeDTO convertirA_DTO(ClienteConyuge clienteConyuge) {
+
+    private ClienteConyugeDTO convertirAClienteConyugeDTO(ClienteConyuge clienteConyuge) {
         ClienteConyugeDTO dto = new ClienteConyugeDTO();
+        dto.setIdClienteConyuge(clienteConyuge.getIdClienteConyuge());
         dto.setIdCliente(clienteConyuge.getIdCliente());
         dto.setIdNacionalidadConyuge(clienteConyuge.getIdNacionalidadConyuge());
         dto.setIdPrefijoConyuge(clienteConyuge.getIdPrefijoConyuge());
@@ -134,6 +135,7 @@ public class ClienteConyugeService {
     // Actualización de ClienteConyuge desde DTO
     private void actualizarEntidad(ClienteConyuge clienteConyuge, ClienteConyugeDTO dto) {
         clienteConyuge.setIdCliente(dto.getIdCliente());
+        clienteConyuge.setIdClienteConyuge(dto.getIdClienteConyuge());
         clienteConyuge.setIdNacionalidadConyuge(dto.getIdNacionalidadConyuge());
         clienteConyuge.setIdPrefijoConyuge(dto.getIdPrefijoConyuge());
         clienteConyuge.setOcupacionConyuge(dto.getOcupacionConyuge());

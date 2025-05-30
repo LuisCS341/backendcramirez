@@ -17,31 +17,32 @@ public class CuotaExtraordinariaService {
 
     public List<CuotaExtraordinariaDTO> getAll() {
         return repository.findAll().stream()
-                .map(this::convertToDTO)
+                .map(this::convertirACuotaDTO)
                 .collect(Collectors.toList());
     }
 
     public CuotaExtraordinariaDTO getById(int id) {
         Optional<CuotaExtraordinaria> optional = repository.findById(id);
-        return optional.map(this::convertToDTO).orElse(null);
+        return optional.map(this::convertirACuotaDTO).orElse(null);
     }
 
     public CuotaExtraordinariaDTO save(CuotaExtraordinariaDTO dto) {
         CuotaExtraordinaria entity = convertToEntity(dto);
         CuotaExtraordinaria saved = repository.save(entity);
-        return convertToDTO(saved);
+        return convertirACuotaDTO(saved);
     }
 
     public void deleteById(int id) {
         repository.deleteById(id);
     }
 
-    // DTO → Entity
+
     private CuotaExtraordinaria convertToEntity(CuotaExtraordinariaDTO dto) {
         CuotaExtraordinaria entity = new CuotaExtraordinaria();
         entity.setIdCuotaExtraordinaria(dto.getIdCuotaExtraordinaria());
         entity.setIdLote(dto.getIdLote());
-        entity.setCuotaExtraordinaria(dto.getCuotaExtraordinaria());
+        entity.setCantidadCuotaExtraordinaria(dto.getCantidadCuotaExtraordinaria());
+        entity.setMontoCuotaExtraordinaria(dto.getMontoCuotaExtraordinaria());
         entity.setMantenimientoMensual(dto.getMantenimientoMensual());
         entity.setMantenimientoMensualLetras(dto.getMantenimientoMensualLetras());
         entity.setEstadoCuenta(dto.getEstadoCuenta());
@@ -50,12 +51,12 @@ public class CuotaExtraordinariaService {
         return entity;
     }
 
-    // Entity → DTO
-    private CuotaExtraordinariaDTO convertToDTO(CuotaExtraordinaria entity) {
+    private CuotaExtraordinariaDTO convertirACuotaDTO(CuotaExtraordinaria entity) {
         CuotaExtraordinariaDTO dto = new CuotaExtraordinariaDTO();
         dto.setIdCuotaExtraordinaria(entity.getIdCuotaExtraordinaria());
         dto.setIdLote(entity.getIdLote());
-        dto.setCuotaExtraordinaria(entity.getCuotaExtraordinaria());
+        dto.setCantidadCuotaExtraordinaria(entity.getCantidadCuotaExtraordinaria());
+        dto.setMontoCuotaExtraordinaria(entity.getMontoCuotaExtraordinaria());
         dto.setMantenimientoMensual(entity.getMantenimientoMensual());
         dto.setMantenimientoMensualLetras(entity.getMantenimientoMensualLetras());
         dto.setEstadoCuenta(entity.getEstadoCuenta());

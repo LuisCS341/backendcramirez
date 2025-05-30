@@ -116,6 +116,10 @@ public class LoteService {
         lote.setDepartamentoMatriz(dto.getDepartamentoMatriz());
         lote.setCompraVentaMatriz(dto.getCompraVentaMatriz());
         lote.setSituacionLegalMatriz(dto.getSituacionLegalMatriz());
+        lote.setMantenimientoMensual(dto.getMantenimientoMensual());
+        lote.setMantenimientoMensualLetras(dto.getMantenimientoMensualLetras());
+        lote.setFechaInicioContrato(dto.getFechaInicioContrato());
+        lote.setFechaCancelacionContrato(dto.getFechaCancelacionContrato());
         return lote;
     }
 
@@ -160,6 +164,10 @@ public class LoteService {
         dto.setDepartamentoMatriz(lote.getDepartamentoMatriz());
         dto.setCompraVentaMatriz(lote.getCompraVentaMatriz());
         dto.setSituacionLegalMatriz(lote.getSituacionLegalMatriz());
+        dto.setMantenimientoMensual(lote.getMantenimientoMensual());
+        dto.setMantenimientoMensualLetras(lote.getMantenimientoMensualLetras());
+        dto.setFechaInicioContrato(lote.getFechaInicioContrato());
+        dto.setFechaCancelacionContrato(lote.getFechaCancelacionContrato());
 
 
         dto.setTipoProyecto(obtenerTexto(tipoProyectoRepository.findById(lote.getIdTipoProyecto()), "TipoProyecto"));
@@ -201,7 +209,8 @@ public class LoteService {
         CuotaExtraordinariaDTO dto = new CuotaExtraordinariaDTO();
         dto.setIdCuotaExtraordinaria(cuota.getIdCuotaExtraordinaria());
         dto.setIdLote(cuota.getIdLote());
-        dto.setCuotaExtraordinaria(cuota.getCuotaExtraordinaria());
+        dto.setCantidadCuotaExtraordinaria(cuota.getCantidadCuotaExtraordinaria());
+        dto.setMontoCuotaExtraordinaria(cuota.getMontoCuotaExtraordinaria());
         dto.setMantenimientoMensual(cuota.getMantenimientoMensual());
         dto.setMantenimientoMensualLetras(cuota.getMantenimientoMensualLetras());
         dto.setEstadoCuenta(cuota.getEstadoCuenta());
