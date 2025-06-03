@@ -60,20 +60,20 @@ public class JwtFilter extends OncePerRequestFilter {
 
     private boolean isPublicPath(String path) {
         return path.startsWith("/api/auth") ||
-                path.startsWith("/api/authEmail") ||
-                path.equals("/api/clientes/operario-con-lotes") ||
-                path.equals("/api/clientes") ||
-                path.equals("/api/lotes") ||
-                path.startsWith("/api/clientes/existe") ||
-                path.startsWith("/api/clientes/buscar") ||
+                path.startsWith("/api/buscarCliente") ||
+                path.equals("/api/clientes/existe") ||
+                path.equals("/api/clientes/buscar") ||
+                path.startsWith("/api/clientes/") ||
+                path.startsWith("/api/clienteConyuges") ||
                 path.startsWith("/api/clientes/conlotes") ||
                 path.startsWith("/api/copropietario") ||
-                path.startsWith("/api/buscarCliente") ||
-                path.startsWith("/api/lindero") ||
+                path.startsWith("/api/copropietarioconyuge") ||
+                path.startsWith("/api/matrices") ||
                 path.startsWith("/api/cuotaextraordinaria") ||
-                path.startsWith("/api/clienteConyuges") ||
+                path.startsWith("/api/lindero") ||
                 path.startsWith("/api/clientes/por-operario") ||
-                path.startsWith("/api/copropietarioconyuge");
+                path.startsWith("/api/lotes") ||
+                path.equals("/api/authEmail/send-code") ||
+                path.equals("/api/authEmail/reset-password");
     }
-
 }
