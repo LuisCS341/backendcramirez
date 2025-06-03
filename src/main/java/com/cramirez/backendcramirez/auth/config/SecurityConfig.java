@@ -39,8 +39,10 @@ public class SecurityConfig {
                                 "/api/matrices/**",
                                 "/api/cuotaextraordinaria/**",
                                 "/api/lindero/**",
+                                "/api/clientes/por-operario/**",
                                 "/api/lotes/**",
-                                "/api/authEmail/**"
+                                "/api/authEmail/send-code",
+                                "/api/authEmail/reset-password"
                         ).permitAll()
                         .requestMatchers(HttpMethod.POST,
                                 "/api/buscarCliente/**",
