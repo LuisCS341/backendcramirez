@@ -1,7 +1,6 @@
     package com.cramirez.backendcramirez.auth.infrastructure.web;
     import com.cramirez.backendcramirez.auth.application.service.CredencialesService;
     import com.cramirez.backendcramirez.auth.domain.entity.Credenciales;
-    import com.cramirez.backendcramirez.auth.jwt.JwtUtil;
     import com.cramirez.backendcramirez.auth.dto.CredencialesDTO;
     import org.springframework.http.HttpStatus;
     import org.springframework.http.ResponseEntity;
@@ -14,12 +13,10 @@
     @RequestMapping("/api/auth")
     public class CredencialesController {
 
-        private final JwtUtil jwtUtil;
         private final CredencialesService credencialesService;
 
-        public CredencialesController(CredencialesService credencialesService, JwtUtil jwtUtil) {
+        public CredencialesController(CredencialesService credencialesService) {
             this.credencialesService = credencialesService;
-            this.jwtUtil = jwtUtil;
         }
 
         @PostMapping("/login")
@@ -32,11 +29,7 @@
             if (credencialOpt.isPresent()) {
                 CredencialesDTO credencial = credencialOpt.get();
                 if (credencial.getContrasena().equals(credenciales.getContrasena())) {
-
-                    String token = jwtUtil.generarToken(credencial.getUsuario());
-
                     Map<String, Object> response = Map.of(
-                            "token", token,
                             "rol", credencial.getIdTipoIdentidad(),
                             "nombre", credencial.getNombre(),
                             "idOperario", credencial.getIdOperario()
