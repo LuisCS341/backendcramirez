@@ -56,6 +56,12 @@ public class ClienteController {
         return clienteService.obtenerClientesConLotes();
     }
 
+    @GetMapping("/por-operario/{idOperario}")
+    public ResponseEntity<List<ClienteConLotesDTO>> obtenerClientesPorOperario(@PathVariable int idOperario) {
+        List<ClienteConLotesDTO> clientes = clienteService.obtenerClientesConLotesPorOperario(idOperario);
+        return ResponseEntity.ok(clientes); // 200 con la lista
+    }
+
 
     @PostMapping
     public ResponseEntity<?> asignarOperario(
@@ -73,12 +79,6 @@ public class ClienteController {
         return ResponseEntity.ok(clienteGuardado);
     }
 
-
-    @GetMapping("/operario")
-    public List<ClienteDTO> obtenerClientesPorOperario(@RequestHeader("X-User-ID") int idOperario) {
-        System.out.println("ID Operario recibido: " + idOperario);
-        return clienteService.obtenerClientesPorOperario(idOperario);
-    }
 
     @GetMapping("/clientes/operario/{idOperario}/fecha/{fecha}")
     public ResponseEntity<List<ClienteDTO>> obtenerClientesPorOperarioYFecha(

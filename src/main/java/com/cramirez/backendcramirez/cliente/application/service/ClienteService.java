@@ -136,6 +136,25 @@ public class ClienteService {
         }).collect(Collectors.toList());
     }
 
+    public List<ClienteConLotesDTO> obtenerClientesConLotesPorOperario(int idOperario) {
+        List<Cliente> clientes = clienteRepository.findByIdOperario(idOperario);
+
+        return clientes.stream().map(cliente -> {
+            ClienteDTO clienteDTO = convertirA_DTO(cliente);
+
+            List<LoteDTO> lotes = cliente.getLotes().stream()
+                    .map(this::mapearLoteALoteDTO)
+                    .collect(Collectors.toList());
+
+            ClienteConLotesDTO dto = new ClienteConLotesDTO();
+            dto.setCliente(clienteDTO);
+            dto.setLotes(lotes);
+
+            return dto;
+        }).collect(Collectors.toList());
+    }
+
+
     private LoteDTO mapearLoteALoteDTO(Lote lote) {
         LoteDTO dto = new LoteDTO();
         dto.setIdLote(lote.getIdLote());
@@ -222,11 +241,14 @@ public class ClienteService {
         dto.setIdLote(cuota.getIdLote());
         dto.setCantidadCuotaExtraordinaria(cuota.getCantidadCuotaExtraordinaria());
         dto.setMontoCuotaExtraordinaria(cuota.getMontoCuotaExtraordinaria());
-        dto.setMantenimientoMensual(cuota.getMantenimientoMensual());
-        dto.setMantenimientoMensualLetras(cuota.getMantenimientoMensualLetras());
+        dto.setDiaPagoNumero(cuota.getDiaPagoNumero());
+        dto.setDiaPagoLetras(cuota.getDiaPagoLetras());
+        dto.setPagoInicial(cuota.getPagoInicial());
+        dto.setSeparacion(cuota.getSeparacion());
         dto.setEstadoCuenta(cuota.getEstadoCuenta());
         dto.setMontoDeudaLetra(cuota.getMontoDeudaLetra());
         dto.setCuotaPendientePago(cuota.getCuotaPendientePago());
+        dto.setPonerMonto(cuota.getPonerMonto());
         return dto;
     }
 
@@ -286,16 +308,7 @@ public class ClienteService {
 
 
 
-    public List<ClienteDTO> obtenerClientesPorOperario(int idOperario) {
-        System.out.println("ID Operario recibido en el backend: " + idOperario);
 
-        List<Cliente> clientes = clienteRepository.findByIdOperario(idOperario);
-        System.out.println("Número de clientes encontrados: " + clientes.size());
-
-        return clientes.stream()
-                .map(this::convertirA_DTO)
-                .collect(Collectors.toList());
-    }
 
 
 

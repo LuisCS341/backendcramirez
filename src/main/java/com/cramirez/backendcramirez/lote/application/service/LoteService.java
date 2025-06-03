@@ -211,11 +211,14 @@ public class LoteService {
         dto.setIdLote(cuota.getIdLote());
         dto.setCantidadCuotaExtraordinaria(cuota.getCantidadCuotaExtraordinaria());
         dto.setMontoCuotaExtraordinaria(cuota.getMontoCuotaExtraordinaria());
-        dto.setMantenimientoMensual(cuota.getMantenimientoMensual());
-        dto.setMantenimientoMensualLetras(cuota.getMantenimientoMensualLetras());
+        dto.setDiaPagoNumero(cuota.getDiaPagoNumero());
+        dto.setDiaPagoLetras(cuota.getDiaPagoLetras());
+        dto.setPagoInicial(cuota.getPagoInicial());
+        dto.setSeparacion(cuota.getSeparacion());
         dto.setEstadoCuenta(cuota.getEstadoCuenta());
         dto.setMontoDeudaLetra(cuota.getMontoDeudaLetra());
         dto.setCuotaPendientePago(cuota.getCuotaPendientePago());
+        dto.setPonerMonto(cuota.getPonerMonto());
         return dto;
     }
 

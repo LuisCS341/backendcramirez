@@ -26,9 +26,7 @@ import lombok.Setter;
         "operarioCopropietarios"
 })
 public class CopropietarioDTO {
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int idCopropietario;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private int idClienteCopropietarios;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int idResidenciaCopropietarios;

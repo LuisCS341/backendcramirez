@@ -1,6 +1,7 @@
 package com.cramirez.backendcramirez.auth.infrastructure.web;
 import com.cramirez.backendcramirez.auth.application.service.CredencialesService;
 import com.cramirez.backendcramirez.auth.domain.entity.Credenciales;
+import com.cramirez.backendcramirez.auth.dto.CredencialesDTO;
 import com.cramirez.backendcramirez.email.application.service.EmailService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class AuthEmailController {
     // 1️⃣ Enviar código de verificación
     @PostMapping("/send-code")
     public ResponseEntity<String> sendVerificationCode(@RequestParam String usuario, @RequestParam String email) {
-        Optional<Credenciales> credencial = credencialesService.encontrarPorUsuario(usuario);
+        Optional<CredencialesDTO> credencial = credencialesService.encontrarPorUsuario(usuario);
 
         if (credencial.isPresent() && credencial.get().getEmailUsuario().equals(email)) {
             String code = String.valueOf(new Random().nextInt(900000) + 100000); // Código de 6 dígitos
@@ -43,7 +44,7 @@ public class AuthEmailController {
     @PostMapping("/reset-password")
     public String resetPassword(@RequestParam String usuario, @RequestParam String code, @RequestParam String newPassword) {
         if (verificationCodes.containsKey(usuario) && verificationCodes.get(usuario).equals(code)) {
-            Optional<Credenciales> credencial = credencialesService.encontrarPorUsuario(usuario);
+            Optional<CredencialesDTO> credencial = credencialesService.encontrarPorUsuario(usuario);
 
             if (credencial.isPresent()) {
                 credencial.get().setContrasena(newPassword); // Se debería encriptar la contraseña

@@ -14,11 +14,14 @@ public class CuotaExtraordinariaDTO {
     private int idCuotaExtraordinaria;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int idLote;
+    private Float pagoInicial;
+    private Float separacion;
     private Float cantidadCuotaExtraordinaria;
     private Float montoCuotaExtraordinaria;
-    private Float mantenimientoMensual;
-    private String mantenimientoMensualLetras;
-    private String estadoCuenta;
     private String montoDeudaLetra;
     private Float cuotaPendientePago;
+    private String estadoCuenta;
+    private Float diaPagoNumero;
+    private Float diaPagoLetras;
+    private Float ponerMonto;
 }

@@ -43,11 +43,14 @@ public class CuotaExtraordinariaService {
         entity.setIdLote(dto.getIdLote());
         entity.setCantidadCuotaExtraordinaria(dto.getCantidadCuotaExtraordinaria());
         entity.setMontoCuotaExtraordinaria(dto.getMontoCuotaExtraordinaria());
-        entity.setMantenimientoMensual(dto.getMantenimientoMensual());
-        entity.setMantenimientoMensualLetras(dto.getMantenimientoMensualLetras());
+        entity.setDiaPagoNumero(dto.getDiaPagoNumero());
+        entity.setDiaPagoLetras(dto.getDiaPagoLetras());
+        entity.setPagoInicial(dto.getPagoInicial());
+        entity.setSeparacion(dto.getSeparacion());
         entity.setEstadoCuenta(dto.getEstadoCuenta());
         entity.setMontoDeudaLetra(dto.getMontoDeudaLetra());
         entity.setCuotaPendientePago(dto.getCuotaPendientePago());
+        entity.setPonerMonto(dto.getPonerMonto());
         return entity;
     }
 
@@ -57,11 +60,14 @@ public class CuotaExtraordinariaService {
         dto.setIdLote(entity.getIdLote());
         dto.setCantidadCuotaExtraordinaria(entity.getCantidadCuotaExtraordinaria());
         dto.setMontoCuotaExtraordinaria(entity.getMontoCuotaExtraordinaria());
-        dto.setMantenimientoMensual(entity.getMantenimientoMensual());
-        dto.setMantenimientoMensualLetras(entity.getMantenimientoMensualLetras());
+        dto.setDiaPagoNumero(entity.getDiaPagoNumero());
+        dto.setDiaPagoLetras(entity.getDiaPagoLetras());
+        dto.setPagoInicial(entity.getPagoInicial());
+        dto.setSeparacion(entity.getSeparacion());
         dto.setEstadoCuenta(entity.getEstadoCuenta());
         dto.setMontoDeudaLetra(entity.getMontoDeudaLetra());
         dto.setCuotaPendientePago(entity.getCuotaPendientePago());
-        return dto;
+        dto.setPonerMonto(entity.getPonerMonto());
+    return dto;
     }
 }

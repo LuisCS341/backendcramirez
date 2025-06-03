@@ -18,24 +18,33 @@ public class CuotaExtraordinaria {
     @Column(name = "ID_Lote")
     private int idLote;
 
+    @Column(name = "PagoInicial")
+    private Float pagoInicial;
+
+    @Column(name = "Separacion")
+    private Float separacion;
+
     @Column(name = "CantidadCuotaExtraordinaria")
     private Float cantidadCuotaExtraordinaria;
 
     @Column(name = "MontoCuotaExtraordinaria")
     private Float montoCuotaExtraordinaria;
 
-    @Column(name = "MantenimientoMensual")
-    private Float mantenimientoMensual;
-
-    @Column(name = "MantenimientoMensualLetras")
-    private String mantenimientoMensualLetras;
-
-    @Column(name = "EstadoCuenta")
-    private String estadoCuenta;
-
     @Column(name = "MontoDeudaLetra")
     private String montoDeudaLetra;
 
     @Column(name = "CuotaPendientePago")
     private Float cuotaPendientePago;
+
+    @Column(name = "EstadoCuenta")
+    private String estadoCuenta;
+
+    @Column(name = "DiaPagoNumero")
+    private Float diaPagoNumero;
+
+    @Column(name = "DiaPagoLetras")
+    private Float diaPagoLetras;
+
+    @Column(name = "PonerMonto")
+    private Float ponerMonto;
 }

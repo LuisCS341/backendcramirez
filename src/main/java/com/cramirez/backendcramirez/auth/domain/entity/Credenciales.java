@@ -28,6 +28,6 @@ public class Credenciales {
     private int idOperario;
 
     @Column(name ="EmailUsuario",nullable = false)
-    private String EmailUsuario;
+    private String emailUsuario;
 
 }
