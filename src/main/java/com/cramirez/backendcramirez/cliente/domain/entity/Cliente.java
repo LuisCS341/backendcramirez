@@ -1,6 +1,7 @@
 package com.cramirez.backendcramirez.cliente.domain.entity;
 
 import com.cramirez.backendcramirez.lote.domain.entity.Lote;
+import com.cramirez.backendcramirez.operario.domain.entity.Operario;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,13 @@ public class Cliente {
     @Column(name = "ID_Cliente",nullable = false)
     private int idCliente;
 
+    @ManyToOne
+    @JoinColumn(name = "ID_Operario")
+    private Operario operario;
+
+    @Column(name = "ID_Operario",insertable = false, updatable = false, nullable = false)
+    private int idOperario;
+
     @Column(name = "ID_Identificacion",nullable = false)
     private int idIdentificacion;
 
@@ -31,9 +39,6 @@ public class Cliente {
 
     @Column(name = "ID_Residencia",nullable = false)
     private int idResidencia;
-
-    @Column(name = "ID_Operario",nullable = false)
-    private int idOperario;
 
     @Column(name = "Nombres_Apellidos",nullable = false)
     private String nombresApellidos;

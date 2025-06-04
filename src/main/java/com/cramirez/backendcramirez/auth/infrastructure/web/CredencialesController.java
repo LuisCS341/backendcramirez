@@ -13,10 +13,12 @@
     @RequestMapping("/api/auth")
     public class CredencialesController {
 
+
         private final CredencialesService credencialesService;
 
         public CredencialesController(CredencialesService credencialesService) {
             this.credencialesService = credencialesService;
+
         }
 
         @PostMapping("/login")
@@ -29,6 +31,8 @@
             if (credencialOpt.isPresent()) {
                 CredencialesDTO credencial = credencialOpt.get();
                 if (credencial.getContrasena().equals(credenciales.getContrasena())) {
+
+
                     Map<String, Object> response = Map.of(
                             "rol", credencial.getIdTipoIdentidad(),
                             "nombre", credencial.getNombre(),

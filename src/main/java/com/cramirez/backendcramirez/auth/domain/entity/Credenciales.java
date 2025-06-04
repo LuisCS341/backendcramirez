@@ -1,4 +1,5 @@
 package com.cramirez.backendcramirez.auth.domain.entity;
+import com.cramirez.backendcramirez.operario.domain.entity.Operario;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -12,6 +13,13 @@ public class Credenciales {
     @Column(name = "ID_Credencial")
     private Long idCredencial;
 
+    @ManyToOne
+    @JoinColumn(name = "ID_Operario")
+    private Operario operario;
+
+    @Column(name = "ID_Operario",  insertable = false, updatable = false, nullable = false)
+    private int idOperario;
+
     @Column(name = "Nombre", nullable = false)
     private String nombre;
 
@@ -24,8 +32,6 @@ public class Credenciales {
     @Column(name = "ID_Tipo_Identidad", nullable = false)
     private int idTipoIdentidad;
 
-    @Column(name = "ID_Operario", nullable = false)
-    private int idOperario;
 
     @Column(name ="EmailUsuario",nullable = false)
     private String emailUsuario;

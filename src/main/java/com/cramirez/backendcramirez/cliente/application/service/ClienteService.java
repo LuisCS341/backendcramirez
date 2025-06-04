@@ -1,9 +1,12 @@
 package com.cramirez.backendcramirez.cliente.application.service;
+import com.cramirez.backendcramirez.auth.domain.entity.Credenciales;
+import com.cramirez.backendcramirez.auth.infrastructure.repository.CredencialesRepository;
 import com.cramirez.backendcramirez.cliente.domain.entity.Cliente;
 import com.cramirez.backendcramirez.cliente.domain.entity.ClienteConyuge;
 import com.cramirez.backendcramirez.cliente.dto.ClienteConLotesDTO;
 import com.cramirez.backendcramirez.cliente.dto.ClienteConyugeDTO;
 import com.cramirez.backendcramirez.cliente.dto.ClienteDTO;
+import com.cramirez.backendcramirez.cliente.dto.TransferenciaClienteDTO;
 import com.cramirez.backendcramirez.cliente.infrastructure.repository.ClienteConyugeRepository;
 import com.cramirez.backendcramirez.cliente.infrastructure.repository.ClienteRepository;
 import com.cramirez.backendcramirez.copropietario.domain.entity.Copropietario;
@@ -26,6 +29,7 @@ import com.cramirez.backendcramirez.metadata.infrastructure.repository.EstadoCiv
 import com.cramirez.backendcramirez.metadata.infrastructure.repository.NacionalidadRepository;
 import com.cramirez.backendcramirez.metadata.infrastructure.repository.PrefijotelefonicoRepository;
 import com.cramirez.backendcramirez.metadata.infrastructure.repository.TipoContratoRepository;
+import com.cramirez.backendcramirez.operario.domain.entity.Operario;
 import com.cramirez.backendcramirez.operario.infrastructure.repository.OperarioRepository;
 import com.cramirez.backendcramirez.proyecto.infrastructure.repository.TipoProyectoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +37,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -40,6 +45,7 @@ import java.util.stream.Collectors;
 public class ClienteService {
 
     private final ClienteRepository clienteRepository;
+    private final CredencialesRepository credencialesRepository;
     private final CopropietarioRepository copropietarioRepository;
     private final OperarioRepository operarioRepository;
     private final PrefijotelefonicoRepository prefijotelefonicoRepository;
@@ -60,8 +66,9 @@ public class ClienteService {
 
 
     @Autowired
-    public ClienteService(ClienteRepository clienteRepository, CopropietarioRepository copropietarioRepository, OperarioRepository operarioRepository, PrefijotelefonicoRepository prefijotelefonicoRepository, IdentificacionRepository identificacionRepository, EstadoCivilRepository estadoCivilRepository, NacionalidadRepository nacionalidadRepository, ResidenciaRepository residenciaRepository, DepartamentoRepository departamentoRepository, ProvinciaRepository provinciaRepository, DistritoRepository distritoRepository, TipoProyectoRepository tipoProyectoRepository, UbicacionRepository ubicacionRepository, TipoContratoRepository tipoContratoRepository, MatrizRepository matrizRepository, CuotaExtraordinariaRepository cuotaExtraordinariaRepository, LinderoRepository linderoRepository, ClienteConyugeRepository clienteConyugeRepository) {
+    public ClienteService(ClienteRepository clienteRepository, CredencialesRepository credencialesRepository, CopropietarioRepository copropietarioRepository, OperarioRepository operarioRepository, PrefijotelefonicoRepository prefijotelefonicoRepository, IdentificacionRepository identificacionRepository, EstadoCivilRepository estadoCivilRepository, NacionalidadRepository nacionalidadRepository, ResidenciaRepository residenciaRepository, DepartamentoRepository departamentoRepository, ProvinciaRepository provinciaRepository, DistritoRepository distritoRepository, TipoProyectoRepository tipoProyectoRepository, UbicacionRepository ubicacionRepository, TipoContratoRepository tipoContratoRepository, MatrizRepository matrizRepository, CuotaExtraordinariaRepository cuotaExtraordinariaRepository, LinderoRepository linderoRepository, ClienteConyugeRepository clienteConyugeRepository) {
         this.clienteRepository = clienteRepository;
+        this.credencialesRepository = credencialesRepository;
         this.copropietarioRepository = copropietarioRepository;
         this.operarioRepository = operarioRepository;
         this.prefijotelefonicoRepository = prefijotelefonicoRepository;
@@ -468,4 +475,26 @@ public class ClienteService {
                 .map(this::convertirA_DTO)
                 .collect(Collectors.toList());
     }
+
+
+    public void transferirCliente(int idCliente, TransferenciaClienteDTO dto) {
+        Cliente cliente = clienteRepository.findById(idCliente)
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+
+        Credenciales credencial = credencialesRepository.findByUsuario(dto.getNuevoUsuarioOperario())
+                .orElseThrow(() -> new RuntimeException("Operario no encontrado con usuario: " + dto.getNuevoUsuarioOperario()));
+
+        Operario nuevoOperario = credencial.getOperario();
+
+        if (Objects.equals(
+                cliente.getOperario() != null ? cliente.getOperario().getIdOperario() : null,
+                nuevoOperario != null ? nuevoOperario.getIdOperario() : null)) {
+            throw new RuntimeException("El cliente ya pertenece a ese operario");
+        }
+
+        cliente.setOperario(nuevoOperario);
+        clienteRepository.save(cliente);
+    }
+
+
 }

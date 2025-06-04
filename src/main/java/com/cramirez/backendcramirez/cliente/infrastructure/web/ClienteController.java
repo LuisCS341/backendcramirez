@@ -4,8 +4,10 @@ import com.cramirez.backendcramirez.cliente.domain.entity.Cliente;
 import com.cramirez.backendcramirez.cliente.dto.ClienteConLotesDTO;
 import com.cramirez.backendcramirez.cliente.dto.ClienteDTO;
 import com.cramirez.backendcramirez.cliente.application.service.ClienteService;
+import com.cramirez.backendcramirez.cliente.dto.TransferenciaClienteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,6 +56,21 @@ public class ClienteController {
     @GetMapping("/conlotes")
     public List<ClienteConLotesDTO> obtenerClientesConLotes() {
         return clienteService.obtenerClientesConLotes();
+    }
+
+    @PutMapping("/transferir/{idCliente}")
+    public ResponseEntity<String> transferirCliente(
+            @PathVariable int idCliente,
+            @RequestBody TransferenciaClienteDTO dto) {
+
+        try {
+            clienteService.transferirCliente(idCliente, dto);
+
+            return ResponseEntity.ok("Cliente transferido correctamente.");
+
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     @GetMapping("/por-operario/{idOperario}")

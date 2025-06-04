@@ -66,4 +66,5 @@ public class ClienteDTO {
 
     private List<CopropietarioDTO> copropietarios;
     private ClienteConyugeDTO conyuge;
+
 }
