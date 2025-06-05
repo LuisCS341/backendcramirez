@@ -72,7 +72,7 @@ public class Lote {
     private String empresaVende;
 
     @Column(name = "RUCVendedor", nullable = false)
-    private float rucVendedor;
+    private Long rucVendedor;
 
     @Column(name = "DireccionVendedor", nullable = false)
     private String direccionVendedor;
@@ -101,38 +101,8 @@ public class Lote {
     @Column(name = "FechaFirmaContratoDefinitivo", nullable = false)
     private String fechaFirmaContratoDefinitivo;
 
-    @Column(name = "AreaMatrizHas", nullable = false)
-    private Double areaMatrizHas;
-
-    @Column(name = "RegistroDE", nullable = false)
-    private String registroDe;
-
-    @Column(name = "PartidaMatriz", nullable = false)
-    private String partidaMatriz;
-
     @Column(name = "UbicacionLote", nullable = false)
     private String ubicacionLote;
-
-    @Column(name = "UnidadCatastralMatriz", nullable = false)
-    private String unidadCatastralMatriz;
-
-    @Column(name = "UrbanizacionMatriz", nullable = false)
-    private String urbanizacionMatriz;
-
-    @Column(name = "DistritoMatriz", nullable = false)
-    private String distritoMatriz;
-
-    @Column(name = "ProvinciaMatriz", nullable = false)
-    private String provinciaMatriz;
-
-    @Column(name = "DepartamentoMatriz", nullable = false)
-    private String departamentoMatriz;
-
-    @Column(name = "CompraVentaMatriz", nullable = false)
-    private String compraVentaMatriz;
-
-    @Column(name = "SituacionLegalMatriz", nullable = false)
-    private String situacionLegalMatriz;
 
     @Column(name = "MantenimientoMensual", nullable = false)
     private Double mantenimientoMensual;

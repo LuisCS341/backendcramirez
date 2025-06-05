@@ -43,12 +43,21 @@ public class ClienteConyugeService {
         this.distritoRepository = distritoRepository;
     }
 
-    // Guardar un nuevo ClienteConyuge
     public ClienteConyugeDTO guardarClienteConyuge(ClienteConyugeDTO clienteConyugeDTO) {
-        ClienteConyuge clienteConyuge = convertirA_Entidad(clienteConyugeDTO);
+        // Verificar si ya existe un conyuge para el cliente
+        Optional<ClienteConyuge> clienteConyugeExistente = clienteConyugeRepository.findByIdCliente(clienteConyugeDTO.getIdCliente());
+
+        if (clienteConyugeExistente.isPresent()) {
+
+            return convertirAClienteConyugeDTO(clienteConyugeExistente.get());
+        }
+
+        ClienteConyuge clienteConyuge = convertirAClienteConyugeEntidad(clienteConyugeDTO);
         ClienteConyuge clienteConyugeGuardado = clienteConyugeRepository.save(clienteConyuge);
+
         return convertirAClienteConyugeDTO(clienteConyugeGuardado);
     }
+
 
     // Obtener todos los ClienteConyuge
     public List<ClienteConyugeDTO> obtenerTodosLosClienteConyuges() {
@@ -126,7 +135,7 @@ public class ClienteConyugeService {
 
 
     // Conversión de ClienteConyugeDTO a ClienteConyuge
-    private ClienteConyuge convertirA_Entidad(ClienteConyugeDTO dto) {
+    private ClienteConyuge convertirAClienteConyugeEntidad(ClienteConyugeDTO dto) {
         ClienteConyuge clienteConyuge = new ClienteConyuge();
         actualizarEntidad(clienteConyuge, dto);
         return clienteConyuge;

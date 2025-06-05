@@ -1,5 +1,6 @@
 package com.cramirez.backendcramirez.matriz.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,10 +23,10 @@ public class MatrizDTO {
     private int idDepartamento;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int idUbicacion;
-    private Float areaMatrizHas;
+    private Double areaMatrizHas;
     private String registrosDE;
     private String partidaMatriz;
-        private String unidadCatastral;
+    private String unidadCatastral;
     private String urbanizacionMatriz;
     private String compraventaMatriz;
     private String situacionLegal;

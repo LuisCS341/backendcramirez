@@ -73,6 +73,19 @@ public class ClienteController {
         }
     }
 
+
+    @PutMapping("/editar")
+    public ResponseEntity<ClienteConLotesDTO> editarClienteYComponentes(@RequestBody ClienteConLotesDTO clienteConLotesDTO) {
+        System.out.println("Recibido: " + clienteConLotesDTO);
+        try {
+            ClienteConLotesDTO clienteConLotesDTOResult = clienteService.editarClienteYComponentes(clienteConLotesDTO);
+            return ResponseEntity.ok(clienteConLotesDTOResult);
+        } catch (Exception e) {
+            e.printStackTrace(); // Para depurar el error exacto
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
     @GetMapping("/por-operario/{idOperario}")
     public ResponseEntity<List<ClienteConLotesDTO>> obtenerClientesPorOperario(@PathVariable int idOperario) {
         List<ClienteConLotesDTO> clientes = clienteService.obtenerClientesConLotesPorOperario(idOperario);
@@ -106,11 +119,6 @@ public class ClienteController {
     }
 
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ClienteDTO> actualizarCliente(@PathVariable int id, @RequestBody ClienteDTO clienteDTO) {
-        ClienteDTO clienteActualizado = clienteService.actualizarCliente(id, clienteDTO);
-        return clienteActualizado != null ? ResponseEntity.ok(clienteActualizado) : ResponseEntity.notFound().build();
-    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarCliente(@PathVariable int id) {

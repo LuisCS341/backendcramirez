@@ -1,6 +1,7 @@
 package com.cramirez.backendcramirez.cliente.dto;
 
 import com.cramirez.backendcramirez.copropietario.dto.CopropietarioDTO;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;
@@ -40,7 +41,6 @@ public class ClienteDTO {
     private int idDistrito;
     private int idPrefijo;
     private int idEstadoCivil;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private int idCliente;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int idOperario;
@@ -66,5 +66,6 @@ public class ClienteDTO {
 
     private List<CopropietarioDTO> copropietarios;
     private ClienteConyugeDTO conyuge;
+    public ClienteDTO() {}
 
 }

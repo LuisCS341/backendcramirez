@@ -26,30 +26,30 @@ public class Matriz {
     @Column(name="ID_Ubicacion",nullable = false)
     private int idUbicacion;
 
-    @Column(name="Area_Matriz_Has",nullable = false)
-    private Float areaMatrizHas;
+    @Column(name="AreaMatrizHas",nullable = false)
+    private double areaMatrizHas;
 
-    @Column(name="Registros_DE",nullable = false)
+    @Column(name="RegistroDE",nullable = false)
     private String registrosDE;
 
-    @Column(name="Partida_Matriz",nullable = false)
+    @Column(name="PartidaMatriz",nullable = false)
     private String partidaMatriz;
 
-    @Column(name="Unidad_Catastral",nullable = false)
+    @Column(name="UnidadCatastral",nullable = false)
     private String unidadCatastral;
 
-    @Column(name="Urbanizacion_Matriz",nullable = false)
+    @Column(name="UrbanizacionMatriz",nullable = false)
     private String urbanizacionMatriz;
 
-    @Column(name="Compraventa_Matriz",nullable = false)
+    @Column(name="CompraVentaMatriz",nullable = false)
     private String compraventaMatriz;
 
-    @Column(name="Situacion_Legal",nullable = false)
+    @Column(name="SituacionLegal",nullable = false)
     private String situacionLegal;
 
     @Column(name="Alicuota",nullable = false)
     private Float alicuota;
 
-    @Column(name="Alicuota_Letras",nullable = false)
+    @Column(name="AlicuotaLetras",nullable = false)
     private String alicuotaLetras;
 }

@@ -22,6 +22,7 @@ import com.cramirez.backendcramirez.lote.domain.entity.Lote;
 import com.cramirez.backendcramirez.lote.dto.LinderoDTO;
 import com.cramirez.backendcramirez.lote.dto.LoteDTO;
 import com.cramirez.backendcramirez.lote.infrastructure.repository.LinderoRepository;
+import com.cramirez.backendcramirez.lote.infrastructure.repository.LoteRepository;
 import com.cramirez.backendcramirez.matriz.domain.entity.Matriz;
 import com.cramirez.backendcramirez.matriz.dto.MatrizDTO;
 import com.cramirez.backendcramirez.matriz.infrastructure.repository.MatrizRepository;
@@ -32,6 +33,7 @@ import com.cramirez.backendcramirez.metadata.infrastructure.repository.TipoContr
 import com.cramirez.backendcramirez.operario.domain.entity.Operario;
 import com.cramirez.backendcramirez.operario.infrastructure.repository.OperarioRepository;
 import com.cramirez.backendcramirez.proyecto.infrastructure.repository.TipoProyectoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +47,7 @@ import java.util.stream.Collectors;
 public class ClienteService {
 
     private final ClienteRepository clienteRepository;
+    private final LoteRepository loteRepository;
     private final CredencialesRepository credencialesRepository;
     private final CopropietarioRepository copropietarioRepository;
     private final OperarioRepository operarioRepository;
@@ -66,8 +69,9 @@ public class ClienteService {
 
 
     @Autowired
-    public ClienteService(ClienteRepository clienteRepository, CredencialesRepository credencialesRepository, CopropietarioRepository copropietarioRepository, OperarioRepository operarioRepository, PrefijotelefonicoRepository prefijotelefonicoRepository, IdentificacionRepository identificacionRepository, EstadoCivilRepository estadoCivilRepository, NacionalidadRepository nacionalidadRepository, ResidenciaRepository residenciaRepository, DepartamentoRepository departamentoRepository, ProvinciaRepository provinciaRepository, DistritoRepository distritoRepository, TipoProyectoRepository tipoProyectoRepository, UbicacionRepository ubicacionRepository, TipoContratoRepository tipoContratoRepository, MatrizRepository matrizRepository, CuotaExtraordinariaRepository cuotaExtraordinariaRepository, LinderoRepository linderoRepository, ClienteConyugeRepository clienteConyugeRepository) {
+    public ClienteService(ClienteRepository clienteRepository, LoteRepository loteRepository, CredencialesRepository credencialesRepository, CopropietarioRepository copropietarioRepository, OperarioRepository operarioRepository, PrefijotelefonicoRepository prefijotelefonicoRepository, IdentificacionRepository identificacionRepository, EstadoCivilRepository estadoCivilRepository, NacionalidadRepository nacionalidadRepository, ResidenciaRepository residenciaRepository, DepartamentoRepository departamentoRepository, ProvinciaRepository provinciaRepository, DistritoRepository distritoRepository, TipoProyectoRepository tipoProyectoRepository, UbicacionRepository ubicacionRepository, TipoContratoRepository tipoContratoRepository, MatrizRepository matrizRepository, CuotaExtraordinariaRepository cuotaExtraordinariaRepository, LinderoRepository linderoRepository, ClienteConyugeRepository clienteConyugeRepository) {
         this.clienteRepository = clienteRepository;
+        this.loteRepository = loteRepository;
         this.credencialesRepository = credencialesRepository;
         this.copropietarioRepository = copropietarioRepository;
         this.operarioRepository = operarioRepository;
@@ -89,28 +93,177 @@ public class ClienteService {
     }
 
 
+    public ClienteConLotesDTO editarClienteYComponentes(ClienteConLotesDTO clienteConLotesDTO) {
+        // Verificamos si el cliente existe
+        Optional<Cliente> clienteOpt = clienteRepository.findById(clienteConLotesDTO.getCliente().getIdCliente());
+        if (!clienteOpt.isPresent()) {
+            throw new EntityNotFoundException("Cliente no encontrado con ID: " + clienteConLotesDTO.getCliente().getIdCliente());
+        }
 
-    public ClienteDTO actualizarCliente(int id, ClienteDTO clienteDTO) {
-        return clienteRepository.findById(id)
-                .map(cliente -> {
-                    cliente.setIdEstadoCivil(clienteDTO.getIdEstadoCivil());
-                    cliente.setIdNacionalidad(clienteDTO.getIdNacionalidad());
-                    cliente.setIdIdentificacion(clienteDTO.getIdIdentificacion());
-                    cliente.setOcupacion(clienteDTO.getOcupacion());
-                    cliente.setIdResidencia(clienteDTO.getIdResidencia());
-                    cliente.setNombresApellidos(clienteDTO.getNombresApellidos());
-                    cliente.setDireccion(clienteDTO.getDireccion());
-                    cliente.setCorreoElectronico(clienteDTO.getCorreoElectronico());
-                    cliente.setIdPrefijo(clienteDTO.getIdPrefijo());
-                    cliente.setCelularCliente(clienteDTO.getCelularCliente());
-                    cliente.setNumeroIdentificacion(clienteDTO.getNumeroIdentificacion());
-                    cliente.setIdDepartamento(clienteDTO.getIdDepartamento());
-                    cliente.setIdProvincia(clienteDTO.getIdProvincia());
-                    cliente.setIdDistrito(clienteDTO.getIdDistrito());
-                    cliente.setIdOperario(clienteDTO.getIdOperario());
-                    return convertirA_DTO(clienteRepository.save(cliente));
-                })
-                .orElse(null);
+        Cliente cliente = clienteOpt.get();
+        actualizarCliente(cliente, clienteConLotesDTO.getCliente());
+
+        // Si el cliente tiene cónyuge, lo actualizamos
+        if (clienteConLotesDTO.getCliente().getConyuge() != null) {
+            editarConyuge(clienteConLotesDTO.getCliente().getConyuge(), cliente);
+        }
+
+        // Actualizamos los copropietarios si vienen en el DTO
+        if (clienteConLotesDTO.getCliente().getCopropietarios() != null) {
+            for (CopropietarioDTO copropietarioDTO : clienteConLotesDTO.getCliente().getCopropietarios()) {
+                editarCopropietario(copropietarioDTO);
+            }
+        }
+
+        // Actualizamos los lotes si vienen en el DTO
+        if (clienteConLotesDTO.getLotes() != null) {
+            for (LoteDTO loteDTO : clienteConLotesDTO.getLotes()) {
+                editarLote(loteDTO);
+            }
+        }
+
+        // Convertir los lotes a DTO para devolverlos
+        List<LoteDTO> lotes = cliente.getLotes().stream()
+                .map(this::mapearLoteALoteDTO)
+                .collect(Collectors.toList());
+
+        // Crear el DTO final con el cliente actualizado y los lotes
+        ClienteConLotesDTO clienteConLotesDTOResult = new ClienteConLotesDTO();
+        clienteConLotesDTOResult.setCliente(convertirAClienteDTO(cliente));
+        clienteConLotesDTOResult.setLotes(lotes);
+
+        return clienteConLotesDTOResult;
+    }
+
+
+    private void actualizarCliente(Cliente cliente, ClienteDTO clienteDTO) {
+        cliente.setIdEstadoCivil(clienteDTO.getIdEstadoCivil());
+        cliente.setIdNacionalidad(clienteDTO.getIdNacionalidad());
+        cliente.setIdIdentificacion(clienteDTO.getIdIdentificacion());
+        cliente.setIdResidencia(clienteDTO.getIdResidencia());
+        cliente.setOcupacion(clienteDTO.getOcupacion());
+        cliente.setNombresApellidos(clienteDTO.getNombresApellidos());
+        cliente.setDireccion(clienteDTO.getDireccion());
+        cliente.setIdPrefijo(clienteDTO.getIdPrefijo());
+        cliente.setIdOperario(clienteDTO.getIdOperario());
+        cliente.setCorreoElectronico(clienteDTO.getCorreoElectronico());
+        cliente.setCelularCliente(clienteDTO.getCelularCliente());
+        cliente.setNumeroIdentificacion(clienteDTO.getNumeroIdentificacion());
+        cliente.setIdDepartamento(clienteDTO.getIdDepartamento());
+        cliente.setIdProvincia(clienteDTO.getIdProvincia());
+        cliente.setIdDistrito(clienteDTO.getIdDistrito());
+
+        clienteRepository.save(cliente);
+    }
+
+    // Editar cónyuge
+    private void editarConyuge(ClienteConyugeDTO conyugeDTO, Cliente cliente) {
+        Optional<ClienteConyuge> conyugeOpt = clienteConyugeRepository.findById(cliente.getIdCliente());
+        if (conyugeOpt.isPresent()) {
+            ClienteConyuge conyuge = conyugeOpt.get();
+            conyuge.setNombresApellidosConyuge(conyugeDTO.getNombresApellidosConyuge());
+            conyuge.setOcupacionConyuge(conyugeDTO.getOcupacionConyuge());
+            conyuge.setCorreoElectronicoConyuge(conyugeDTO.getCorreoElectronicoConyuge());
+            clienteConyugeRepository.save(conyuge);
+        }
+    }
+
+    // Editar copropietarios
+    private void editarCopropietario(CopropietarioDTO copropietarioDTO) {
+        Optional<Copropietario> copropietarioOpt = copropietarioRepository.findById(copropietarioDTO.getIdCopropietario());
+        if (copropietarioOpt.isPresent()) {
+            Copropietario copropietario = copropietarioOpt.get();
+            copropietario.setNombresApellidosCopropietarios(copropietarioDTO.getNombresApellidosCopropietarios());
+            copropietarioRepository.save(copropietario);
+        }
+    }
+
+
+    // Editar lotes
+    private void editarLote(LoteDTO loteDTO) {
+        Optional<Lote> loteOpt = loteRepository.findById(loteDTO.getIdLote());
+        if (loteOpt.isPresent()) {
+            Lote lote = loteOpt.get();
+            lote.setManzana(loteDTO.getManzana());
+            lote.setNumeroLote(loteDTO.getNumeroLote());
+            // Otros campos del lote se actualizan aquí
+            loteRepository.save(lote);
+
+            // Editamos el lindero, cuotas extraordinarias y matriz, si se incluyen
+            if (loteDTO.getLindero() != null) {
+                editarLindero(loteDTO.getLindero());
+            }
+
+            if (loteDTO.getCuotasExtraordinarias() != null) {
+                for (CuotaExtraordinariaDTO cuotaDTO : loteDTO.getCuotasExtraordinarias()) {
+                    editarCuotaExtraordinaria(cuotaDTO);
+                }
+            }
+
+            if (loteDTO.getMatriz() != null) {
+                for (MatrizDTO matrizDTO : loteDTO.getMatriz()) {
+                    editarMatriz(matrizDTO);
+                }
+            }
+        }
+    }
+
+    // Editar lindero
+    private void editarLindero(LinderoDTO linderoDTO) {
+        Optional<Lindero> linderoOpt = linderoRepository.findById(linderoDTO.getIdLindero());
+        if (linderoOpt.isPresent()) {
+            Lindero lindero = linderoOpt.get();
+            lindero.setIdLote(linderoDTO.getIdLote());
+            lindero.setPorLaDerecha(linderoDTO.getPorLaDerecha());
+            lindero.setPorLaIzquierda(linderoDTO.getPorLaIzquierda());
+            lindero.setPorElFrente(linderoDTO.getPorElFrente());
+            lindero.setPorElFondo(linderoDTO.getPorElFondo());
+            linderoRepository.save(lindero);
+        }
+    }
+
+    // Editar cuota extraordinaria
+    private void editarCuotaExtraordinaria(CuotaExtraordinariaDTO cuotaDTO) {
+        Optional<CuotaExtraordinaria> cuotaOpt = cuotaExtraordinariaRepository.findById(cuotaDTO.getIdCuotaExtraordinaria());
+        if (cuotaOpt.isPresent()) {
+            CuotaExtraordinaria cuota = cuotaOpt.get();
+            cuota.setIdCuotaExtraordinaria(cuotaDTO.getIdCuotaExtraordinaria());
+            cuota.setIdLote(cuotaDTO.getIdLote());
+            cuota.setCantidadCuotaExtraordinaria(cuotaDTO.getCantidadCuotaExtraordinaria());
+            cuota.setMontoCuotaExtraordinaria(cuotaDTO.getMontoCuotaExtraordinaria());
+            cuota.setDiaPagoNumero(cuotaDTO.getDiaPagoNumero());
+            cuota.setDiaPagoLetras(cuotaDTO.getDiaPagoLetras());
+            cuota.setPagoInicial(cuotaDTO.getPagoInicial());
+            cuota.setSeparacion(cuotaDTO.getSeparacion());
+            cuota.setEstadoCuenta(cuotaDTO.getEstadoCuenta());
+            cuota.setMontoDeudaLetra(cuotaDTO.getMontoDeudaLetra());
+            cuota.setCuotaPendientePago(cuotaDTO.getCuotaPendientePago());
+            cuota.setPonerMonto(cuotaDTO.getPonerMonto());
+            cuotaExtraordinariaRepository.save(cuota);
+        }
+    }
+
+    // Editar matriz
+    private void editarMatriz(MatrizDTO matrizDTO) {
+        Optional<Matriz> matrizOpt = matrizRepository.findById(matrizDTO.getIdMatriz());
+        if (matrizOpt.isPresent()) {
+            Matriz matriz = matrizOpt.get();
+            matriz.setIdLote(matrizDTO.getIdLote());
+            matriz.setIdDistrito(matrizDTO.getIdDistrito());
+            matriz.setIdProvincia(matrizDTO.getIdProvincia());
+            matriz.setIdDepartamento(matrizDTO.getIdDepartamento());
+            matriz.setIdUbicacion(matrizDTO.getIdUbicacion());
+            matriz.setAreaMatrizHas(matrizDTO.getAreaMatrizHas());
+            matriz.setRegistrosDE(matrizDTO.getRegistrosDE());
+            matriz.setPartidaMatriz(matrizDTO.getPartidaMatriz());
+            matriz.setUnidadCatastral(matrizDTO.getUnidadCatastral());
+            matriz.setUrbanizacionMatriz(matrizDTO.getUrbanizacionMatriz());
+            matriz.setCompraventaMatriz(matrizDTO.getCompraventaMatriz());
+            matriz.setSituacionLegal(matrizDTO.getSituacionLegal());
+            matriz.setAlicuota(matrizDTO.getAlicuota());
+            matriz.setAlicuotaLetras(matrizDTO.getAlicuotaLetras());
+            matrizRepository.save(matriz);
+        }
     }
 
     public boolean existeClientePorNumeroIdentificacion(String numeroIdentificacion) {
@@ -119,7 +272,7 @@ public class ClienteService {
 
     public Optional<ClienteDTO> obtenerClienteDTOporNumeroIdentificacion(String numeroIdentificacion) {
         return clienteRepository.findByNumeroIdentificacion(numeroIdentificacion)
-                .map(this::convertirA_DTO);
+                .map(this::convertirAClienteDTO);
     }
 
 
@@ -129,7 +282,7 @@ public class ClienteService {
         List<Cliente> clientes = clienteRepository.findAll();
 
         return clientes.stream().map(cliente -> {
-            ClienteDTO clienteDTO = convertirA_DTO(cliente);
+            ClienteDTO clienteDTO = convertirAClienteDTO(cliente);
 
             List<LoteDTO> lotes = cliente.getLotes().stream()
                     .map(this::mapearLoteALoteDTO)
@@ -143,11 +296,12 @@ public class ClienteService {
         }).collect(Collectors.toList());
     }
 
+
     public List<ClienteConLotesDTO> obtenerClientesConLotesPorOperario(int idOperario) {
         List<Cliente> clientes = clienteRepository.findByIdOperario(idOperario);
 
         return clientes.stream().map(cliente -> {
-            ClienteDTO clienteDTO = convertirA_DTO(cliente);
+            ClienteDTO clienteDTO = convertirAClienteDTO(cliente);
 
             List<LoteDTO> lotes = cliente.getLotes().stream()
                     .map(this::mapearLoteALoteDTO)
@@ -189,17 +343,7 @@ public class ClienteService {
         dto.setCci(lote.getCci());
         dto.setFechaSale(lote.getFechaSale());
         dto.setFechaFirmaContratoDefinitivo(lote.getFechaFirmaContratoDefinitivo());
-        dto.setAreaMatrizHas(lote.getAreaMatrizHas());
-        dto.setRegistroDe(lote.getRegistroDe());
-        dto.setPartidaMatriz(lote.getPartidaMatriz());
         dto.setUbicacionLote(lote.getUbicacionLote());
-        dto.setUnidadCatastralMatriz(lote.getUnidadCatastralMatriz());
-        dto.setUrbanizacionMatriz(lote.getUrbanizacionMatriz());
-        dto.setDistritoMatriz(lote.getDistritoMatriz());
-        dto.setProvinciaMatriz(lote.getProvinciaMatriz());
-        dto.setDepartamentoMatriz(lote.getDepartamentoMatriz());
-        dto.setCompraVentaMatriz(lote.getCompraVentaMatriz());
-        dto.setSituacionLegalMatriz(lote.getSituacionLegalMatriz());
         dto.setMantenimientoMensual(lote.getMantenimientoMensual());
         dto.setMantenimientoMensualLetras(lote.getMantenimientoMensualLetras());
         dto.setMantenimientoMensual(lote.getMantenimientoMensual());
@@ -290,26 +434,26 @@ public class ClienteService {
 
         if (clienteExistente.isPresent()) {
 
-            return convertirA_DTO(clienteExistente.get());
+            return convertirAClienteDTO(clienteExistente.get());
         }
 
-        Cliente cliente = convertirA_Entidad(clienteDTO);
+        Cliente cliente = convertirAClienteEntidad(clienteDTO);
         Cliente clienteGuardado = clienteRepository.save(cliente);
-        return convertirA_DTO(clienteGuardado);
+        return convertirAClienteDTO(clienteGuardado);
     }
 
 
     public List<ClienteDTO> obtenerTodosLosClientes() {
         return clienteRepository.findAll()
                 .stream()
-                .map(this::convertirA_DTO)
+                .map(this::convertirAClienteDTO)
                 .collect(Collectors.toList());
     }
 
 
     public ClienteDTO obtenerClientePorId(int id) {
         return clienteRepository.findById(id)
-                .map(this::convertirA_DTO)
+                .map(this::convertirAClienteDTO)
                 .orElse(null);
     }
 
@@ -323,7 +467,7 @@ public class ClienteService {
         clienteRepository.deleteById(id);
     }
 
-    private ClienteDTO convertirA_DTO(Cliente cliente) {
+    private ClienteDTO convertirAClienteDTO(Cliente cliente) {
         ClienteDTO dto = new ClienteDTO();
         dto.setIdCliente(cliente.getIdCliente());
         dto.setIdEstadoCivil(cliente.getIdEstadoCivil());
@@ -438,7 +582,7 @@ public class ClienteService {
 
 
 
-    private Cliente convertirA_Entidad(ClienteDTO dto) {
+    private Cliente convertirAClienteEntidad(ClienteDTO dto) {
         Cliente cliente = new Cliente();
         cliente.setIdEstadoCivil(dto.getIdEstadoCivil());
         cliente.setIdNacionalidad(dto.getIdNacionalidad());
@@ -472,7 +616,7 @@ public class ClienteService {
     public List<ClienteDTO> obtenerClientesPorOperarioYFecha(int idOperario, LocalDate fecha) {
         return clienteRepository.findByIdOperarioAndFechaRegistro(idOperario, fecha)
                 .stream()
-                .map(this::convertirA_DTO)
+                .map(this::convertirAClienteDTO)
                 .collect(Collectors.toList());
     }
 

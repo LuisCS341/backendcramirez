@@ -31,17 +31,7 @@ import java.util.List;
         "cci",
         "fechaSale",
         "fechaFirmaContratoDefinitivo",
-        "areaMatrizHas",
-        "registroDe",
-        "partidaMatriz",
         "ubicacionLote",
-        "unidadCatastralMatriz",
-        "urbanizacionMatriz",
-        "distritoMatriz",
-        "provinciaMatriz",
-        "departamentoMatriz",
-        "compraVentaMatriz",
-        "situacionLegalMatriz",
         "manzana",
         "numeroLote",
         "contrato",
@@ -54,7 +44,6 @@ import java.util.List;
         "cantidadCuotas"
 })
 public class LoteDTO {
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private int idLote;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int idOperario;
@@ -63,11 +52,11 @@ public class LoteDTO {
 //-----------------------------------
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int idTipoProyecto;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private int idTipoContrato;
     private int idUbicacion;
     private String manzana;
     private int numeroLote;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private int idTipoContrato;
     private Float areaLote;
     private String areaLoteLetras;
     private Float costoLote;
@@ -78,7 +67,7 @@ public class LoteDTO {
     private int cantidadCuotas;
     private String empresa;
     private String empresaVende;
-    private float rucVendedor;
+    private Long rucVendedor;
     private String direccionVendedor;
     private String representanteLegalVendedor;
     private Long dniVendedor;
@@ -88,22 +77,13 @@ public class LoteDTO {
     private String cci;
     private String fechaSale;
     private String fechaFirmaContratoDefinitivo;
-    private Double areaMatrizHas;
-    private String registroDe;
-    private String partidaMatriz;
     private String ubicacionLote;
-    private String unidadCatastralMatriz;
-    private String urbanizacionMatriz;
-    private String distritoMatriz;
-    private String provinciaMatriz;
-    private String departamentoMatriz;
-    private String compraVentaMatriz;
-    private String situacionLegalMatriz;
     private Double mantenimientoMensual;
     private String mantenimientoMensualLetras;
     private String fechaInicioContrato;
     private String fechaCancelacionContrato;
-//-----------------------------------
+
+    //-----------------------------------
     private String tipoProyecto;
     private String ubicacion;
     private String contrato;
@@ -111,5 +91,6 @@ public class LoteDTO {
     private LinderoDTO lindero;
     private List<CuotaExtraordinariaDTO> cuotasExtraordinarias;
     private List<MatrizDTO> matriz;
+    public LoteDTO() {}
 
 }
