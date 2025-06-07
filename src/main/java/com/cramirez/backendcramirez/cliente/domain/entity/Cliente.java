@@ -58,13 +58,13 @@ public class Cliente {
     @Column(name = "NumeroIdentificacion",nullable = false,unique = true)
     private String numeroIdentificacion;
 
-    @Column(name = "ID_Departamento",nullable = false)
+    @Column(name = "ID_Departamento")
     private int idDepartamento;
 
-    @Column(name = "ID_Provincia",nullable = false)
+    @Column(name = "ID_Provincia")
     private int idProvincia;
 
-    @Column(name = "ID_Distrito",nullable = false)
+    @Column(name = "ID_Distrito")
     private int idDistrito;
 
     @Column(name = "ID_Prefijo",nullable = false)
