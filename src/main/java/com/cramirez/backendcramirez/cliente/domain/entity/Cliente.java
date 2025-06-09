@@ -22,7 +22,7 @@ public class Cliente {
     private int idCliente;
 
     @ManyToOne
-    @JoinColumn(name = "ID_Operario", referencedColumnName = "ID_Operario", insertable = false, updatable = false)
+    @JoinColumn(name = "ID_Operario", referencedColumnName = "ID_Operario", insertable = false)
     private Operario operario;
 
     @Column(name = "ID_Operario", updatable = false, nullable = false)
