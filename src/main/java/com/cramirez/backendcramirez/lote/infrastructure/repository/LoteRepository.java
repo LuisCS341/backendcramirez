@@ -8,6 +8,9 @@ import java.util.Optional;
 
 @Repository
 public interface LoteRepository extends JpaRepository<Lote, Integer> {
+    int countByClienteIdCliente(int idCliente);
+
 
     Optional<Lote> findTopByOrderByIdLoteDesc();
+
 }

@@ -53,10 +53,23 @@ public class LoteService {
     }
 
     public LoteDTO saveLote(LoteDTO loteDTO) {
+
+        int cantidadLotes = loteRepository.countByClienteIdCliente(loteDTO.getIdClienteLote());
+
+
+        int siguienteNumero = cantidadLotes + 1;
+
+
+        String codigo = loteDTO.getIdClienteLote() + "-" + siguienteNumero;
+        loteDTO.setCodigoLoteCliente(codigo);
+
         Lote lote = convertToEntity(loteDTO);
+
         Lote savedLote = loteRepository.save(lote);
+
         return convertToDTO(savedLote);
     }
+
 
 
 
@@ -80,6 +93,7 @@ public class LoteService {
         Lote lote = new Lote();
         lote.setIdOperario(dto.getIdOperario());
         lote.setIdClienteLote(dto.getIdClienteLote());
+        lote.setCodigoLoteCliente(dto.getCodigoLoteCliente());
         lote.setIdTipoProyecto(dto.getIdTipoProyecto());
         lote.setIdUbicacion(dto.getIdUbicacion());
         lote.setManzana(dto.getManzana());
@@ -118,6 +132,7 @@ public class LoteService {
         dto.setIdLote(lote.getIdLote());
         dto.setIdClienteLote(lote.getIdClienteLote());
         dto.setIdOperario(lote.getIdOperario());
+        dto.setCodigoLoteCliente(lote.getCodigoLoteCliente());
         dto.setIdTipoProyecto(lote.getIdTipoProyecto());
         dto.setIdUbicacion(lote.getIdUbicacion());
         dto.setManzana(lote.getManzana());

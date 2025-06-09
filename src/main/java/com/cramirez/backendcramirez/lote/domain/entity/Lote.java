@@ -20,6 +20,9 @@ public class Lote {
     @Column(name = "ID_Cliente", nullable = false   , updatable = false)
     private int idClienteLote;
 
+    @Column(name = "CodigoLoteCliente", nullable = false )
+    private String codigoLoteCliente;
+
     @ManyToOne
     @JoinColumn(name = "ID_Cliente", referencedColumnName = "ID_Cliente", insertable = false, updatable = false)
     private Cliente cliente;

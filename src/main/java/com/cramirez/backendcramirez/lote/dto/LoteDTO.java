@@ -49,6 +49,7 @@ public class LoteDTO {
     private int idOperario;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int idClienteLote;
+    private String codigoLoteCliente;
 //-----------------------------------
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int idTipoProyecto;
