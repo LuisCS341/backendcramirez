@@ -36,7 +36,6 @@ import java.util.List;
         "costoLote",
         "montoLetras",
         "pagoInicial",
-        "separacion",
         "montoCuotas",
         "cantidadCuotas"
 })
@@ -60,7 +59,6 @@ public class LoteDTO {
     private Float costoLote;
     private String montoLetras;
     private Float pagoInicial;
-    private String separacion;
     private Float montoCuotas;
     private String montoCuotaLetras;
     private int cantidadCuotas;

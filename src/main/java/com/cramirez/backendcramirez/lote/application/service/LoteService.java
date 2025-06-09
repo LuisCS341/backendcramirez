@@ -104,7 +104,6 @@ public class LoteService {
         lote.setCostoLote(dto.getCostoLote());
         lote.setMontoLetras(dto.getMontoLetras());
         lote.setPagoInicial(dto.getPagoInicial());
-        lote.setSeparacion(dto.getSeparacion());
         lote.setMontoCuotas(dto.getMontoCuotas());
         lote.setMontoCuotaLetras(dto.getMontoCuotaLetras());
         lote.setCantidadCuotas(dto.getCantidadCuotas());
@@ -154,7 +153,6 @@ public class LoteService {
         dto.setCostoLote(lote.getCostoLote());
         dto.setMontoLetras(lote.getMontoLetras());
         dto.setPagoInicial(lote.getPagoInicial());
-        dto.setSeparacion(lote.getSeparacion());
         dto.setMontoCuotas(lote.getMontoCuotas());
         dto.setMontoCuotaLetras(lote.getMontoCuotaLetras());
         dto.setCantidadCuotas(lote.getCantidadCuotas());

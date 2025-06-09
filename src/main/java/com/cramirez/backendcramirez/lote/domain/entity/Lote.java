@@ -55,9 +55,6 @@ public class Lote {
     @Column(name="PagoInicial",nullable = false)
     private Float pagoInicial;
 
-    @Column(name="Separacion",nullable = false)
-    private String separacion;
-
     @Column(name="MontoCuotas",nullable = false)
     private Float montoCuotas;
 
