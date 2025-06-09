@@ -1,6 +1,5 @@
 package com.cramirez.backendcramirez.cliente.dto;
 import com.cramirez.backendcramirez.lote.dto.LoteDTO;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 

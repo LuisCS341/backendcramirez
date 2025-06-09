@@ -94,7 +94,6 @@ public class ClienteService {
 
 
     public ClienteConLotesDTO editarClienteYComponentes(ClienteConLotesDTO clienteConLotesDTO) {
-        // Verificamos si el cliente existe
         Optional<Cliente> clienteOpt = clienteRepository.findById(clienteConLotesDTO.getCliente().getIdCliente());
         if (!clienteOpt.isPresent()) {
             throw new EntityNotFoundException("Cliente no encontrado con ID: " + clienteConLotesDTO.getCliente().getIdCliente());
@@ -103,31 +102,26 @@ public class ClienteService {
         Cliente cliente = clienteOpt.get();
         actualizarCliente(cliente, clienteConLotesDTO.getCliente());
 
-        // Si el cliente tiene cónyuge, lo actualizamos
         if (clienteConLotesDTO.getCliente().getConyuge() != null) {
             editarConyuge(clienteConLotesDTO.getCliente().getConyuge(), cliente);
         }
 
-        // Actualizamos los copropietarios si vienen en el DTO
         if (clienteConLotesDTO.getCliente().getCopropietarios() != null) {
             for (CopropietarioDTO copropietarioDTO : clienteConLotesDTO.getCliente().getCopropietarios()) {
                 editarCopropietario(copropietarioDTO);
             }
         }
 
-        // Actualizamos los lotes si vienen en el DTO
         if (clienteConLotesDTO.getLotes() != null) {
             for (LoteDTO loteDTO : clienteConLotesDTO.getLotes()) {
                 editarLote(loteDTO);
             }
         }
 
-        // Convertir los lotes a DTO para devolverlos
         List<LoteDTO> lotes = cliente.getLotes().stream()
                 .map(this::mapearLoteALoteDTO)
                 .collect(Collectors.toList());
 
-        // Crear el DTO final con el cliente actualizado y los lotes
         ClienteConLotesDTO clienteConLotesDTOResult = new ClienteConLotesDTO();
         clienteConLotesDTOResult.setCliente(convertirAClienteDTO(cliente));
         clienteConLotesDTOResult.setLotes(lotes);
@@ -320,6 +314,7 @@ public class ClienteService {
         LoteDTO dto = new LoteDTO();
         dto.setIdLote(lote.getIdLote());
         dto.setIdUbicacion(lote.getIdUbicacion());
+        dto.setCodigoLoteCliente(lote.getCodigoLoteCliente());
         dto.setManzana(lote.getManzana());
         dto.setNumeroLote(lote.getNumeroLote());
         dto.setIdTipoContrato(lote.getIdTipoContrato());
@@ -636,7 +631,7 @@ public class ClienteService {
             throw new RuntimeException("El cliente ya pertenece a ese operario");
         }
 
-        cliente.setOperario(nuevoOperario);
+        cliente.setIdOperario(nuevoOperario.getIdOperario());
         clienteRepository.save(cliente);
     }
 

@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -21,12 +20,13 @@ public class Cliente {
     @Column(name = "ID_Cliente",nullable = false)
     private int idCliente;
 
+    @Column(name = "ID_Operario")
+    private int idOperario;
+
     @ManyToOne
-    @JoinColumn(name = "ID_Operario", referencedColumnName = "ID_Operario", insertable = false)
+    @JoinColumn(name = "ID_Operario", referencedColumnName = "ID_Operario", insertable = false, updatable = false)
     private Operario operario;
 
-    @Column(name = "ID_Operario", updatable = false, nullable = false)
-    private int idOperario;
 
     @Column(name = "ID_Identificacion",nullable = false)
     private int idIdentificacion;
