@@ -225,14 +225,25 @@ public class ClienteService {
             cuota.setIdLote(cuotaDTO.getIdLote());
             cuota.setCantidadCuotaExtraordinaria(cuotaDTO.getCantidadCuotaExtraordinaria());
             cuota.setMontoCuotaExtraordinaria(cuotaDTO.getMontoCuotaExtraordinaria());
-            cuota.setDiaPagoNumero(cuotaDTO.getDiaPagoNumero());
-            cuota.setDiaPagoLetras(cuotaDTO.getDiaPagoLetras());
-            cuota.setPagoInicial(cuotaDTO.getPagoInicial());
-            cuota.setSeparacion(cuotaDTO.getSeparacion());
+            cuota.setMantenimientoMensual(cuotaDTO.getMantenimientoMensual());
+            cuota.setMantenimientoMensualLetras(cuotaDTO.getMantenimientoMensualLetras());
             cuota.setEstadoCuenta(cuotaDTO.getEstadoCuenta());
             cuota.setMontoDeudaLetra(cuotaDTO.getMontoDeudaLetra());
             cuota.setCuotaPendientePago(cuotaDTO.getCuotaPendientePago());
-            cuota.setPonerMonto(cuotaDTO.getPonerMonto());
+            cuota.setLetrasPendientePago(cuotaDTO.getLetrasPendientePago());
+            cuota.setFechaEntrega(cuotaDTO.getFechaEntrega());
+            cuota.setCartaNoAdeudo(cuotaDTO.getCartaNoAdeudo());
+            cuota.setCertificadoLote(cuotaDTO.getCertificadoLote());
+            cuota.setMediosPago(cuotaDTO.getMediosPago());
+            cuota.setPlano1(cuotaDTO.getPlano1());
+            cuota.setPlano2(cuotaDTO.getPlano2());
+            cuota.setEnvioMinuta(cuotaDTO.getEnvioMinuta());
+            cuota.setFechaCita(cuotaDTO.getFechaCita());
+            cuota.setHoraCita(cuotaDTO.getHoraCita());
+            cuota.setModificarMinuta(cuotaDTO.getModificarMinuta());
+            cuota.setMinutaEscaneada(cuotaDTO.getMinutaEscaneada());
+            cuota.setExpNotaria(cuotaDTO.getExpNotaria());
+
             cuotaExtraordinariaRepository.save(cuota);
         }
     }
@@ -345,6 +356,7 @@ public class ClienteService {
         dto.setMantenimientoMensualLetras(lote.getMantenimientoMensualLetras());
         dto.setFechaInicioContrato(lote.getFechaInicioContrato());
         dto.setFechaCancelacionContrato(lote.getFechaCancelacionContrato());
+        dto.setCantidadCuotaCuentaRecaudadora(lote.getCantidadCuotaCuentaRecaudadora());
 
 
         dto.setTipoProyecto(obtenerTexto(tipoProyectoRepository.findById(lote.getIdTipoProyecto()), "TipoProyecto"));
@@ -387,14 +399,24 @@ public class ClienteService {
         dto.setIdLote(cuota.getIdLote());
         dto.setCantidadCuotaExtraordinaria(cuota.getCantidadCuotaExtraordinaria());
         dto.setMontoCuotaExtraordinaria(cuota.getMontoCuotaExtraordinaria());
-        dto.setDiaPagoNumero(cuota.getDiaPagoNumero());
-        dto.setDiaPagoLetras(cuota.getDiaPagoLetras());
-        dto.setPagoInicial(cuota.getPagoInicial());
-        dto.setSeparacion(cuota.getSeparacion());
+        dto.setMantenimientoMensual(cuota.getMantenimientoMensual());
+        dto.setMantenimientoMensualLetras(cuota.getMantenimientoMensualLetras());
         dto.setEstadoCuenta(cuota.getEstadoCuenta());
         dto.setMontoDeudaLetra(cuota.getMontoDeudaLetra());
         dto.setCuotaPendientePago(cuota.getCuotaPendientePago());
-        dto.setPonerMonto(cuota.getPonerMonto());
+        dto.setLetrasPendientePago(cuota.getLetrasPendientePago());
+        dto.setFechaEntrega(cuota.getFechaEntrega());
+        dto.setCartaNoAdeudo(cuota.getCartaNoAdeudo());
+        dto.setCertificadoLote(cuota.getCertificadoLote());
+        dto.setMediosPago(cuota.getMediosPago());
+        dto.setPlano1(cuota.getPlano1());
+        dto.setPlano2(cuota.getPlano2());
+        dto.setEnvioMinuta(cuota.getEnvioMinuta());
+        dto.setFechaCita(cuota.getFechaCita());
+        dto.setHoraCita(cuota.getHoraCita());
+        dto.setModificarMinuta(cuota.getModificarMinuta());
+        dto.setMinutaEscaneada(cuota.getMinutaEscaneada());
+        dto.setExpNotaria(cuota.getExpNotaria());
         return dto;
     }
 

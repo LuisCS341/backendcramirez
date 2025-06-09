@@ -95,10 +95,10 @@ public class LoteService {
         lote.setIdClienteLote(dto.getIdClienteLote());
         lote.setCodigoLoteCliente(dto.getCodigoLoteCliente());
         lote.setIdTipoProyecto(dto.getIdTipoProyecto());
+        lote.setIdTipoContrato(dto.getIdTipoContrato());
         lote.setIdUbicacion(dto.getIdUbicacion());
         lote.setManzana(dto.getManzana());
         lote.setNumeroLote(dto.getNumeroLote());
-        lote.setIdTipoContrato(dto.getIdTipoContrato());
         lote.setAreaLote(dto.getAreaLote());
         lote.setAreaLoteLetras(dto.getAreaLoteLetras());
         lote.setCostoLote(dto.getCostoLote());
@@ -106,7 +106,9 @@ public class LoteService {
         lote.setPagoInicial(dto.getPagoInicial());
         lote.setSeparacion(dto.getSeparacion());
         lote.setMontoCuotas(dto.getMontoCuotas());
+        lote.setMontoCuotaLetras(dto.getMontoCuotaLetras());
         lote.setCantidadCuotas(dto.getCantidadCuotas());
+        lote.setCantidadCuotaLetras(dto.getCantidadCuotaLetras());
         lote.setEmpresa(dto.getEmpresa());
         lote.setEmpresaVende(dto.getEmpresaVende());
         lote.setRucVendedor(dto.getRucVendedor());
@@ -124,20 +126,31 @@ public class LoteService {
         lote.setMantenimientoMensualLetras(dto.getMantenimientoMensualLetras());
         lote.setFechaInicioContrato(dto.getFechaInicioContrato());
         lote.setFechaCancelacionContrato(dto.getFechaCancelacionContrato());
+        lote.setCantidadCuotaCuentaRecaudadora(dto.getCantidadCuotaCuentaRecaudadora());
+        lote.setSaldoLote(dto.getSaldoLote());
+        lote.setSaldoLoteLetras(dto.getSaldoLoteLetras());
+        lote.setCuentaRecaudadora(dto.getCuentaRecaudadora());
+        lote.setCuotaInicialBanco(dto.getCuotaInicialBanco());
+        lote.setCantidadCuotaBanco(dto.getCantidadCuotaBanco());
+        lote.setFechaPago(dto.getFechaPago());
+        lote.setCuotaInicialIncluyeSeparacion(dto.getCuotaInicialIncluyeSeparacion());
+        lote.setCuotaInicialIncluyeSeparacionLetras(dto.getCuotaInicialIncluyeSeparacionLetras());
+        lote.setPrecioMetroCuadrado(dto.getPrecioMetroCuadrado());
+        lote.setPrecioMetroCuadradoLetras(dto.getPrecioMetroCuadradoLetras());
         return lote;
     }
 
     private LoteDTO convertToDTO(Lote lote) {
         LoteDTO dto = new LoteDTO();
         dto.setIdLote(lote.getIdLote());
-        dto.setIdClienteLote(lote.getIdClienteLote());
         dto.setIdOperario(lote.getIdOperario());
+        dto.setIdClienteLote(lote.getIdClienteLote());
         dto.setCodigoLoteCliente(lote.getCodigoLoteCliente());
         dto.setIdTipoProyecto(lote.getIdTipoProyecto());
+        dto.setIdTipoContrato(lote.getIdTipoContrato());
         dto.setIdUbicacion(lote.getIdUbicacion());
         dto.setManzana(lote.getManzana());
         dto.setNumeroLote(lote.getNumeroLote());
-        dto.setIdTipoContrato(lote.getIdTipoContrato());
         dto.setAreaLote(lote.getAreaLote());
         dto.setAreaLoteLetras(lote.getAreaLoteLetras());
         dto.setCostoLote(lote.getCostoLote());
@@ -145,7 +158,9 @@ public class LoteService {
         dto.setPagoInicial(lote.getPagoInicial());
         dto.setSeparacion(lote.getSeparacion());
         dto.setMontoCuotas(lote.getMontoCuotas());
+        dto.setMontoCuotaLetras(lote.getMontoCuotaLetras());
         dto.setCantidadCuotas(lote.getCantidadCuotas());
+        dto.setCantidadCuotaLetras(lote.getCantidadCuotaLetras());
         dto.setEmpresa(lote.getEmpresa());
         dto.setEmpresaVende(lote.getEmpresaVende());
         dto.setRucVendedor(lote.getRucVendedor());
@@ -163,7 +178,17 @@ public class LoteService {
         dto.setMantenimientoMensualLetras(lote.getMantenimientoMensualLetras());
         dto.setFechaInicioContrato(lote.getFechaInicioContrato());
         dto.setFechaCancelacionContrato(lote.getFechaCancelacionContrato());
-
+        dto.setSaldoLote(lote.getSaldoLote());
+        dto.setSaldoLoteLetras(lote.getSaldoLoteLetras());
+        dto.setCuentaRecaudadora(lote.getCuentaRecaudadora());
+        dto.setCuotaInicialBanco(lote.getCuotaInicialBanco());
+        dto.setCantidadCuotaBanco(lote.getCantidadCuotaBanco());
+        dto.setCantidadCuotaCuentaRecaudadora(lote.getCantidadCuotaCuentaRecaudadora());
+        dto.setFechaPago(lote.getFechaPago());
+        dto.setCuotaInicialIncluyeSeparacion(lote.getCuotaInicialIncluyeSeparacion());
+        dto.setCuotaInicialIncluyeSeparacionLetras(lote.getCuotaInicialIncluyeSeparacionLetras());
+        dto.setPrecioMetroCuadrado(lote.getPrecioMetroCuadrado());
+        dto.setPrecioMetroCuadradoLetras(lote.getPrecioMetroCuadradoLetras());
 
         dto.setTipoProyecto(obtenerTexto(tipoProyectoRepository.findById(lote.getIdTipoProyecto()), "TipoProyecto"));
         dto.setUbicacion(obtenerTexto(ubicacionRepository.findById(lote.getIdUbicacion()), "Ubicacion"));
@@ -206,14 +231,24 @@ public class LoteService {
         dto.setIdLote(cuota.getIdLote());
         dto.setCantidadCuotaExtraordinaria(cuota.getCantidadCuotaExtraordinaria());
         dto.setMontoCuotaExtraordinaria(cuota.getMontoCuotaExtraordinaria());
-        dto.setDiaPagoNumero(cuota.getDiaPagoNumero());
-        dto.setDiaPagoLetras(cuota.getDiaPagoLetras());
-        dto.setPagoInicial(cuota.getPagoInicial());
-        dto.setSeparacion(cuota.getSeparacion());
+        dto.setMantenimientoMensual(cuota.getMantenimientoMensual());
+        dto.setMantenimientoMensualLetras(cuota.getMantenimientoMensualLetras());
         dto.setEstadoCuenta(cuota.getEstadoCuenta());
         dto.setMontoDeudaLetra(cuota.getMontoDeudaLetra());
         dto.setCuotaPendientePago(cuota.getCuotaPendientePago());
-        dto.setPonerMonto(cuota.getPonerMonto());
+        dto.setLetrasPendientePago(cuota.getLetrasPendientePago());
+        dto.setFechaEntrega(cuota.getFechaEntrega());
+        dto.setCartaNoAdeudo(cuota.getCartaNoAdeudo());
+        dto.setCertificadoLote(cuota.getCertificadoLote());
+        dto.setMediosPago(cuota.getMediosPago());
+        dto.setPlano1(cuota.getPlano1());
+        dto.setPlano2(cuota.getPlano2());
+        dto.setEnvioMinuta(cuota.getEnvioMinuta());
+        dto.setFechaCita(cuota.getFechaCita());
+        dto.setHoraCita(cuota.getHoraCita());
+        dto.setModificarMinuta(cuota.getModificarMinuta());
+        dto.setMinutaEscaneada(cuota.getMinutaEscaneada());
+        dto.setExpNotaria(cuota.getExpNotaria());
         return dto;
     }
 

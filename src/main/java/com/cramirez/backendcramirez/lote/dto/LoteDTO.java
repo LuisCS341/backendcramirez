@@ -65,7 +65,10 @@ public class LoteDTO {
     private Float pagoInicial;
     private String separacion;
     private Float montoCuotas;
+    private String montoCuotaLetras;
     private int cantidadCuotas;
+    private String cantidadCuotaLetras;
+    private String cantidadCuotaCuentaRecaudadora;
     private String empresa;
     private String empresaVende;
     private Long rucVendedor;
@@ -83,6 +86,16 @@ public class LoteDTO {
     private String mantenimientoMensualLetras;
     private String fechaInicioContrato;
     private String fechaCancelacionContrato;
+    private Float saldoLote;
+    private String saldoLoteLetras;
+    private String cuentaRecaudadora;
+    private String cuotaInicialBanco;
+    private Float cantidadCuotaBanco;
+    private String fechaPago;
+    private Float cuotaInicialIncluyeSeparacion;
+    private String cuotaInicialIncluyeSeparacionLetras;
+    private Float precioMetroCuadrado;
+    private String precioMetroCuadradoLetras;
 
     //-----------------------------------
     private String tipoProyecto;

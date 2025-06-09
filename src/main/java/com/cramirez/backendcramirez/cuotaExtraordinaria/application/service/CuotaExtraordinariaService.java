@@ -43,14 +43,24 @@ public class CuotaExtraordinariaService {
         entity.setIdLote(dto.getIdLote());
         entity.setCantidadCuotaExtraordinaria(dto.getCantidadCuotaExtraordinaria());
         entity.setMontoCuotaExtraordinaria(dto.getMontoCuotaExtraordinaria());
-        entity.setDiaPagoNumero(dto.getDiaPagoNumero());
-        entity.setDiaPagoLetras(dto.getDiaPagoLetras());
-        entity.setPagoInicial(dto.getPagoInicial());
-        entity.setSeparacion(dto.getSeparacion());
+        entity.setMantenimientoMensual(dto.getMantenimientoMensual());
+        entity.setMantenimientoMensualLetras(dto.getMantenimientoMensualLetras());
         entity.setEstadoCuenta(dto.getEstadoCuenta());
         entity.setMontoDeudaLetra(dto.getMontoDeudaLetra());
         entity.setCuotaPendientePago(dto.getCuotaPendientePago());
-        entity.setPonerMonto(dto.getPonerMonto());
+        entity.setLetrasPendientePago(dto.getLetrasPendientePago());
+        entity.setFechaEntrega(dto.getFechaEntrega());
+        entity.setCartaNoAdeudo(dto.getCartaNoAdeudo());
+        entity.setCertificadoLote(dto.getCertificadoLote());
+        entity.setMediosPago(dto.getMediosPago());
+        entity.setPlano1(dto.getPlano1());
+        entity.setPlano2(dto.getPlano2());
+        entity.setEnvioMinuta(dto.getEnvioMinuta());
+        entity.setFechaCita(dto.getFechaCita());
+        entity.setHoraCita(dto.getHoraCita());
+        entity.setModificarMinuta(dto.getModificarMinuta());
+        entity.setMinutaEscaneada(dto.getMinutaEscaneada());
+        entity.setExpNotaria(dto.getExpNotaria());
         return entity;
     }
 
@@ -60,14 +70,24 @@ public class CuotaExtraordinariaService {
         dto.setIdLote(entity.getIdLote());
         dto.setCantidadCuotaExtraordinaria(entity.getCantidadCuotaExtraordinaria());
         dto.setMontoCuotaExtraordinaria(entity.getMontoCuotaExtraordinaria());
-        dto.setDiaPagoNumero(entity.getDiaPagoNumero());
-        dto.setDiaPagoLetras(entity.getDiaPagoLetras());
-        dto.setPagoInicial(entity.getPagoInicial());
-        dto.setSeparacion(entity.getSeparacion());
+        dto.setMantenimientoMensual(entity.getMantenimientoMensual());
+        dto.setMantenimientoMensualLetras(entity.getMantenimientoMensualLetras());
         dto.setEstadoCuenta(entity.getEstadoCuenta());
         dto.setMontoDeudaLetra(entity.getMontoDeudaLetra());
         dto.setCuotaPendientePago(entity.getCuotaPendientePago());
-        dto.setPonerMonto(entity.getPonerMonto());
-    return dto;
+        dto.setLetrasPendientePago(entity.getLetrasPendientePago());
+        dto.setFechaEntrega(entity.getFechaEntrega());
+        dto.setCartaNoAdeudo(entity.getCartaNoAdeudo());
+        dto.setCertificadoLote(entity.getCertificadoLote());
+        dto.setMediosPago(entity.getMediosPago());
+        dto.setPlano1(entity.getPlano1());
+        dto.setPlano2(entity.getPlano2());
+        dto.setEnvioMinuta(entity.getEnvioMinuta());
+        dto.setFechaCita(entity.getFechaCita());
+        dto.setHoraCita(entity.getHoraCita());
+        dto.setModificarMinuta(entity.getModificarMinuta());
+        dto.setMinutaEscaneada(entity.getMinutaEscaneada());
+        dto.setExpNotaria(entity.getExpNotaria());
+        return dto;
     }
 }
