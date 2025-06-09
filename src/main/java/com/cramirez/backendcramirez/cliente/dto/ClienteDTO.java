@@ -41,7 +41,6 @@ public class ClienteDTO {
     private int idPrefijo;
     private int idEstadoCivil;
     private int idCliente;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int idOperario;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime fechaRegistro;
