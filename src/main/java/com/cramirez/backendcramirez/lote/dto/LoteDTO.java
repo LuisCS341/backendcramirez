@@ -4,13 +4,10 @@ import com.cramirez.backendcramirez.cuotaExtraordinaria.dto.CuotaExtraordinariaD
 import com.cramirez.backendcramirez.matriz.dto.MatrizDTO;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import jakarta.persistence.Column;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-
-import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -82,8 +79,6 @@ public class LoteDTO {
     private String fechaSale;
     private String fechaFirmaContratoDefinitivo;
     private String ubicacionLote;
-    private Double mantenimientoMensual;
-    private String mantenimientoMensualLetras;
     private String fechaInicioContrato;
     private String fechaCancelacionContrato;
     private Float saldoLote;

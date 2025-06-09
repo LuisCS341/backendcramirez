@@ -122,8 +122,6 @@ public class LoteService {
         lote.setFechaSale(dto.getFechaSale());
         lote.setFechaFirmaContratoDefinitivo(dto.getFechaFirmaContratoDefinitivo());
         lote.setUbicacionLote(dto.getUbicacionLote());
-        lote.setMantenimientoMensual(dto.getMantenimientoMensual());
-        lote.setMantenimientoMensualLetras(dto.getMantenimientoMensualLetras());
         lote.setFechaInicioContrato(dto.getFechaInicioContrato());
         lote.setFechaCancelacionContrato(dto.getFechaCancelacionContrato());
         lote.setCantidadCuotaCuentaRecaudadora(dto.getCantidadCuotaCuentaRecaudadora());
@@ -174,8 +172,6 @@ public class LoteService {
         dto.setFechaSale(lote.getFechaSale());
         dto.setFechaFirmaContratoDefinitivo(lote.getFechaFirmaContratoDefinitivo());
         dto.setUbicacionLote(lote.getUbicacionLote());
-        dto.setMantenimientoMensual(lote.getMantenimientoMensual());
-        dto.setMantenimientoMensualLetras(lote.getMantenimientoMensualLetras());
         dto.setFechaInicioContrato(lote.getFechaInicioContrato());
         dto.setFechaCancelacionContrato(lote.getFechaCancelacionContrato());
         dto.setSaldoLote(lote.getSaldoLote());

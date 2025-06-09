@@ -3,9 +3,6 @@ package com.cramirez.backendcramirez.lote.domain.entity;
 import com.cramirez.backendcramirez.cliente.domain.entity.Cliente;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "Lote")
@@ -114,12 +111,6 @@ public class Lote {
 
     @Column(name = "UbicacionLote", nullable = false)
     private String ubicacionLote;
-
-    @Column(name = "MantenimientoMensual", nullable = false)
-    private Double mantenimientoMensual;
-
-    @Column(name = "MantenimientoMensualLetras", nullable = false)
-    private String mantenimientoMensualLetras;
 
     @Column(name = "FechaInicioContrato", nullable = false)
     private String fechaInicioContrato;
