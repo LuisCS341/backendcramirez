@@ -180,10 +180,9 @@ public class ClienteService {
             Lote lote = loteOpt.get();
             lote.setManzana(loteDTO.getManzana());
             lote.setNumeroLote(loteDTO.getNumeroLote());
-            // Otros campos del lote se actualizan aquí
+
             loteRepository.save(lote);
 
-            // Editamos el lindero, cuotas extraordinarias y matriz, si se incluyen
             if (loteDTO.getLindero() != null) {
                 editarLindero(loteDTO.getLindero());
             }
@@ -332,8 +331,6 @@ public class ClienteService {
         dto.setAreaLote(lote.getAreaLote());
         dto.setAreaLoteLetras(lote.getAreaLoteLetras());
         dto.setCostoLote(lote.getCostoLote());
-        dto.setMontoLetras(lote.getMontoLetras());
-        dto.setPagoInicial(lote.getPagoInicial());
         dto.setMontoCuotas(lote.getMontoCuotas());
         dto.setCantidadCuotas(lote.getCantidadCuotas());
         dto.setEmpresa(lote.getEmpresa());

@@ -3,6 +3,9 @@ package com.cramirez.backendcramirez.lote.domain.entity;
 import com.cramirez.backendcramirez.cliente.domain.entity.Cliente;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Lote")
@@ -49,11 +52,6 @@ public class Lote {
     @Column(name="CostoLote",nullable = false)
     private Float costoLote;
 
-    @Column(name="MontoLetras",nullable = false)
-    private String montoLetras;
-
-    @Column(name="PagoInicial",nullable = false)
-    private Float pagoInicial;
 
     @Column(name="MontoCuotas",nullable = false)
     private Float montoCuotas;

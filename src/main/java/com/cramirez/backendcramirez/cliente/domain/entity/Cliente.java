@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -21,7 +22,7 @@ public class Cliente {
     private int idCliente;
 
     @Column(name = "ID_Operario")
-    private int idOperario;
+    private Integer  idOperario;
 
     @ManyToOne
     @JoinColumn(name = "ID_Operario", referencedColumnName = "ID_Operario", insertable = false, updatable = false)
