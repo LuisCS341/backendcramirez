@@ -60,6 +60,7 @@ public class LoteDTO {
     private Float areaLote;
     private String areaLoteLetras;
     private Float costoLote;
+    private String costoLoteLetras;
     private Float montoCuotas;
     private String montoCuotaLetras;
     private int cantidadCuotas;

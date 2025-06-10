@@ -331,6 +331,7 @@ public class ClienteService {
         dto.setAreaLote(lote.getAreaLote());
         dto.setAreaLoteLetras(lote.getAreaLoteLetras());
         dto.setCostoLote(lote.getCostoLote());
+        dto.setCostoLoteLetras(lote.getCostoLoteLetras());
         dto.setMontoCuotas(lote.getMontoCuotas());
         dto.setCantidadCuotas(lote.getCantidadCuotas());
         dto.setEmpresa(lote.getEmpresa());

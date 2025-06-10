@@ -52,6 +52,9 @@ public class Lote {
     @Column(name="CostoLote",nullable = false)
     private Float costoLote;
 
+     @Column(name="CostoLoteLetras",nullable = false)
+     private String costoLoteLetras;
+
 
     @Column(name="MontoCuotas",nullable = false)
     private Float montoCuotas;
