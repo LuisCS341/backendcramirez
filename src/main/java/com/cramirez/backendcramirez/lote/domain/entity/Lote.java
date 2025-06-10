@@ -146,4 +146,7 @@ public class Lote {
     @Column(name = "PrecioMetroCuadradoLetras", nullable = false)
     private String precioMetroCuadradoLetras;
 
+    @Column(name = "TipoRepresentante", nullable = false)
+    private String tipoRepresentante;
+
 }

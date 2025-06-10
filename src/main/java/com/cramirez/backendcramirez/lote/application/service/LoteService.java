@@ -133,6 +133,7 @@ public class LoteService {
         lote.setCuotaInicialIncluyeSeparacionLetras(dto.getCuotaInicialIncluyeSeparacionLetras());
         lote.setPrecioMetroCuadrado(dto.getPrecioMetroCuadrado());
         lote.setPrecioMetroCuadradoLetras(dto.getPrecioMetroCuadradoLetras());
+        lote.setTipoRepresentante(dto.getTipoRepresentante());
         return lote;
     }
 
@@ -181,6 +182,7 @@ public class LoteService {
         dto.setCuotaInicialIncluyeSeparacionLetras(lote.getCuotaInicialIncluyeSeparacionLetras());
         dto.setPrecioMetroCuadrado(lote.getPrecioMetroCuadrado());
         dto.setPrecioMetroCuadradoLetras(lote.getPrecioMetroCuadradoLetras());
+        dto.setTipoRepresentante(lote.getTipoRepresentante());
 
         dto.setTipoProyecto(obtenerTexto(tipoProyectoRepository.findById(lote.getIdTipoProyecto()), "TipoProyecto"));
         dto.setUbicacion(obtenerTexto(ubicacionRepository.findById(lote.getIdUbicacion()), "Ubicacion"));

@@ -249,6 +249,7 @@ public class ClienteService {
             lote.setCuotaInicialIncluyeSeparacionLetras(loteDTO.getCuotaInicialIncluyeSeparacionLetras());
             lote.setPrecioMetroCuadrado(loteDTO.getPrecioMetroCuadrado());
             lote.setPrecioMetroCuadradoLetras(loteDTO.getPrecioMetroCuadradoLetras());
+            lote.setTipoRepresentante(loteDTO.getTipoRepresentante());
 
             loteRepository.save(lote);
 
@@ -430,6 +431,7 @@ public class ClienteService {
         dto.setFechaInicioContrato(lote.getFechaInicioContrato());
         dto.setFechaCancelacionContrato(lote.getFechaCancelacionContrato());
         dto.setCantidadCuotaCuentaRecaudadora(lote.getCantidadCuotaCuentaRecaudadora());
+        dto.setTipoRepresentante(lote.getTipoRepresentante());
 
 
         dto.setTipoProyecto(obtenerTexto(tipoProyectoRepository.findById(lote.getIdTipoProyecto()), "TipoProyecto"));

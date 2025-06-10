@@ -87,6 +87,7 @@ public class LoteDTO {
     private String cuotaInicialIncluyeSeparacionLetras;
     private Float precioMetroCuadrado;
     private String precioMetroCuadradoLetras;
+    private String tipoRepresentante;
 
     //-----------------------------------
     private String tipoProyecto;
