@@ -1,9 +1,4 @@
-package com.cramirez.backendcramirez.cuotaExtraordinaria.dto;
-
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
+package com.cramirez.backendcramirez.lote.dto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,9 +6,7 @@ import lombok.Setter;
 @Setter
 public class CuotaExtraordinariaDTO {
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int idCuotaExtraordinaria;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int idLote;
     private Float cantidadCuotaExtraordinaria;
     private Float montoCuotaExtraordinaria;

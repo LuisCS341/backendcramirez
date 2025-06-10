@@ -1,7 +1,7 @@
-package com.cramirez.backendcramirez.cuotaExtraordinaria.application.service;
-import com.cramirez.backendcramirez.cuotaExtraordinaria.domain.entity.CuotaExtraordinaria;
-import com.cramirez.backendcramirez.cuotaExtraordinaria.dto.CuotaExtraordinariaDTO;
-import com.cramirez.backendcramirez.cuotaExtraordinaria.infrastructure.repository.CuotaExtraordinariaRepository;
+package com.cramirez.backendcramirez.lote.application.service;
+import com.cramirez.backendcramirez.lote.domain.entity.CuotaExtraordinaria;
+import com.cramirez.backendcramirez.lote.dto.CuotaExtraordinariaDTO;
+import com.cramirez.backendcramirez.lote.infrastructure.repository.CuotaExtraordinariaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,31 +37,31 @@ public class CuotaExtraordinariaService {
     }
 
 
-    private CuotaExtraordinaria convertToEntity(CuotaExtraordinariaDTO dto) {
-        CuotaExtraordinaria entity = new CuotaExtraordinaria();
-        entity.setIdCuotaExtraordinaria(dto.getIdCuotaExtraordinaria());
-        entity.setIdLote(dto.getIdLote());
-        entity.setCantidadCuotaExtraordinaria(dto.getCantidadCuotaExtraordinaria());
-        entity.setMontoCuotaExtraordinaria(dto.getMontoCuotaExtraordinaria());
-        entity.setMantenimientoMensual(dto.getMantenimientoMensual());
-        entity.setMantenimientoMensualLetras(dto.getMantenimientoMensualLetras());
-        entity.setEstadoCuenta(dto.getEstadoCuenta());
-        entity.setMontoDeudaLetra(dto.getMontoDeudaLetra());
-        entity.setCuotaPendientePago(dto.getCuotaPendientePago());
-        entity.setLetrasPendientePago(dto.getLetrasPendientePago());
-        entity.setFechaEntrega(dto.getFechaEntrega());
-        entity.setCartaNoAdeudo(dto.getCartaNoAdeudo());
-        entity.setCertificadoLote(dto.getCertificadoLote());
-        entity.setMediosPago(dto.getMediosPago());
-        entity.setPlano1(dto.getPlano1());
-        entity.setPlano2(dto.getPlano2());
-        entity.setEnvioMinuta(dto.getEnvioMinuta());
-        entity.setFechaCita(dto.getFechaCita());
-        entity.setHoraCita(dto.getHoraCita());
-        entity.setModificarMinuta(dto.getModificarMinuta());
-        entity.setMinutaEscaneada(dto.getMinutaEscaneada());
-        entity.setExpNotaria(dto.getExpNotaria());
-        return entity;
+    private CuotaExtraordinaria convertToEntity(CuotaExtraordinariaDTO cuotaDTO) {
+        CuotaExtraordinaria cuota = new CuotaExtraordinaria();
+        cuota.setIdCuotaExtraordinaria(cuotaDTO.getIdCuotaExtraordinaria());
+        cuota.setIdLote(cuotaDTO.getIdLote());
+        cuota.setCantidadCuotaExtraordinaria(cuotaDTO.getCantidadCuotaExtraordinaria());
+        cuota.setMontoCuotaExtraordinaria(cuotaDTO.getMontoCuotaExtraordinaria());
+        cuota.setMantenimientoMensual(cuotaDTO.getMantenimientoMensual());
+        cuota.setMantenimientoMensualLetras(cuotaDTO.getMantenimientoMensualLetras());
+        cuota.setEstadoCuenta(cuotaDTO.getEstadoCuenta());
+        cuota.setMontoDeudaLetra(cuotaDTO.getMontoDeudaLetra());
+        cuota.setCuotaPendientePago(cuotaDTO.getCuotaPendientePago());
+        cuota.setLetrasPendientePago(cuotaDTO.getLetrasPendientePago());
+        cuota.setFechaEntrega(cuotaDTO.getFechaEntrega());
+        cuota.setCartaNoAdeudo(cuotaDTO.getCartaNoAdeudo());
+        cuota.setCertificadoLote(cuotaDTO.getCertificadoLote());
+        cuota.setMediosPago(cuotaDTO.getMediosPago());
+        cuota.setPlano1(cuotaDTO.getPlano1());
+        cuota.setPlano2(cuotaDTO.getPlano2());
+        cuota.setEnvioMinuta(cuotaDTO.getEnvioMinuta());
+        cuota.setFechaCita(cuotaDTO.getFechaCita());
+        cuota.setHoraCita(cuotaDTO.getHoraCita());
+        cuota.setModificarMinuta(cuotaDTO.getModificarMinuta());
+        cuota.setMinutaEscaneada(cuotaDTO.getMinutaEscaneada());
+        cuota.setExpNotaria(cuotaDTO.getExpNotaria());
+        return cuota;
     }
 
     private CuotaExtraordinariaDTO convertirACuotaDTO(CuotaExtraordinaria entity) {

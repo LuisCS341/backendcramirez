@@ -1,7 +1,6 @@
-package com.cramirez.backendcramirez.cuotaExtraordinaria.infrastructure.repository;
+package com.cramirez.backendcramirez.lote.infrastructure.repository;
 
-import com.cramirez.backendcramirez.cuotaExtraordinaria.domain.entity.CuotaExtraordinaria;
-import com.cramirez.backendcramirez.cuotaExtraordinaria.dto.CuotaExtraordinariaDTO;
+import com.cramirez.backendcramirez.lote.domain.entity.CuotaExtraordinaria;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

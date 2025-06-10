@@ -1,11 +1,11 @@
-package com.cramirez.backendcramirez.matriz.application.service;
+package com.cramirez.backendcramirez.lote.application.service;
 import com.cramirez.backendcramirez.localizacion.infrastructure.repository.DepartamentoRepository;
 import com.cramirez.backendcramirez.localizacion.infrastructure.repository.DistritoRepository;
 import com.cramirez.backendcramirez.localizacion.infrastructure.repository.ProvinciaRepository;
 import com.cramirez.backendcramirez.localizacion.infrastructure.repository.UbicacionRepository;
-import com.cramirez.backendcramirez.matriz.domain.entity.Matriz;
-import com.cramirez.backendcramirez.matriz.dto.MatrizDTO;
-import com.cramirez.backendcramirez.matriz.infrastructure.repository.MatrizRepository;
+import com.cramirez.backendcramirez.lote.domain.entity.Matriz;
+import com.cramirez.backendcramirez.lote.dto.MatrizDTO;
+import com.cramirez.backendcramirez.lote.infrastructure.repository.MatrizRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -76,22 +76,22 @@ public class MatrizService {
         return dto;
     }
 
-    private Matriz convertToEntity(MatrizDTO dto) {
+    private Matriz convertToEntity(MatrizDTO matrizDTO) {
         Matriz matriz = new Matriz();
-        matriz.setIdLote(dto.getIdLote());
-        matriz.setIdDistrito(dto.getIdDistrito());
-        matriz.setIdProvincia(dto.getIdProvincia());
-        matriz.setIdDepartamento(dto.getIdDepartamento());
-        matriz.setIdUbicacion(dto.getIdUbicacion());
-        matriz.setAreaMatrizHas(dto.getAreaMatrizHas());
-        matriz.setRegistrosDE(dto.getRegistrosDE());
-        matriz.setPartidaMatriz(dto.getPartidaMatriz());
-        matriz.setUnidadCatastral(dto.getUnidadCatastral());
-        matriz.setUrbanizacionMatriz(dto.getUrbanizacionMatriz());
-        matriz.setCompraventaMatriz(dto.getCompraventaMatriz());
-        matriz.setSituacionLegal(dto.getSituacionLegal());
-        matriz.setAlicuota(dto.getAlicuota());
-        matriz.setAlicuotaLetras(dto.getAlicuotaLetras());
+        matriz.setIdLote(matrizDTO.getIdLote());
+        matriz.setIdDistrito(matrizDTO.getIdDistrito());
+        matriz.setIdProvincia(matrizDTO.getIdProvincia());
+        matriz.setIdDepartamento(matrizDTO.getIdDepartamento());
+        matriz.setIdUbicacion(matrizDTO.getIdUbicacion());
+        matriz.setAreaMatrizHas(matrizDTO.getAreaMatrizHas());
+        matriz.setRegistrosDE(matrizDTO.getRegistrosDE());
+        matriz.setPartidaMatriz(matrizDTO.getPartidaMatriz());
+        matriz.setUnidadCatastral(matrizDTO.getUnidadCatastral());
+        matriz.setUrbanizacionMatriz(matrizDTO.getUrbanizacionMatriz());
+        matriz.setCompraventaMatriz(matrizDTO.getCompraventaMatriz());
+        matriz.setSituacionLegal(matrizDTO.getSituacionLegal());
+        matriz.setAlicuota(matrizDTO.getAlicuota());
+        matriz.setAlicuotaLetras(matrizDTO.getAlicuotaLetras());
         return matriz;
     }
 

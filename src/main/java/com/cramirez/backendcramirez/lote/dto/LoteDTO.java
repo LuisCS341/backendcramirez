@@ -1,16 +1,12 @@
 package com.cramirez.backendcramirez.lote.dto;
 
-import com.cramirez.backendcramirez.cuotaExtraordinaria.dto.CuotaExtraordinariaDTO;
-import com.cramirez.backendcramirez.matriz.dto.MatrizDTO;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import jakarta.persistence.Column;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Getter

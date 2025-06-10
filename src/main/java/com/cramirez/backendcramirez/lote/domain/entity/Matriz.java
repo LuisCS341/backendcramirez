@@ -1,4 +1,4 @@
-package com.cramirez.backendcramirez.matriz.domain.entity;
+package com.cramirez.backendcramirez.lote.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

@@ -1,6 +1,6 @@
-package com.cramirez.backendcramirez.matriz.infrastructure.web;
-import com.cramirez.backendcramirez.matriz.application.service.MatrizService;
-import com.cramirez.backendcramirez.matriz.dto.MatrizDTO;
+package com.cramirez.backendcramirez.lote.infrastructure.web;
+import com.cramirez.backendcramirez.lote.application.service.MatrizService;
+import com.cramirez.backendcramirez.lote.dto.MatrizDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

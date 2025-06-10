@@ -1,7 +1,7 @@
-package com.cramirez.backendcramirez.cuotaExtraordinaria.infrastructure.web;
+package com.cramirez.backendcramirez.lote.infrastructure.web;
 
-import com.cramirez.backendcramirez.cuotaExtraordinaria.application.service.CuotaExtraordinariaService;
-import com.cramirez.backendcramirez.cuotaExtraordinaria.dto.CuotaExtraordinariaDTO;
+import com.cramirez.backendcramirez.lote.application.service.CuotaExtraordinariaService;
+import com.cramirez.backendcramirez.lote.dto.CuotaExtraordinariaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
