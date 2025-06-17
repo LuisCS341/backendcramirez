@@ -68,9 +68,9 @@ public class MatrizService {
         dto.setAlicuota(matriz.getAlicuota());
         dto.setAlicuotaLetras(matriz.getAlicuotaLetras());
 
-        dto.setDepartamento(obtenerTexto(departamentoRepository.findById(matriz.getIdDepartamento()), "NombreDepartamento"));
-        dto.setProvincia(obtenerTexto(provinciaRepository.findById(matriz.getIdProvincia()), "NombreProvincia"));
-        dto.setDistrito(obtenerTexto(distritoRepository.findById(matriz.getIdDistrito()), "NombreDistrito"));
+        dto.setDepartamentoMatriz(obtenerTexto(departamentoRepository.findById(matriz.getIdDepartamento()), "NombreDepartamento"));
+        dto.setProvinciaMatriz(obtenerTexto(provinciaRepository.findById(matriz.getIdProvincia()), "NombreProvincia"));
+        dto.setDistritoMatriz(obtenerTexto(distritoRepository.findById(matriz.getIdDistrito()), "NombreDistrito"));
         dto.setUbicacion(obtenerTexto(ubicacionRepository.findById(matriz.getIdUbicacion()), "Ubicacion"));
 
         return dto;

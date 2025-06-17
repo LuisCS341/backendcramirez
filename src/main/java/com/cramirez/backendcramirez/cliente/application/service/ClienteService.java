@@ -3,10 +3,7 @@ import com.cramirez.backendcramirez.auth.domain.entity.Credenciales;
 import com.cramirez.backendcramirez.auth.infrastructure.repository.CredencialesRepository;
 import com.cramirez.backendcramirez.cliente.domain.entity.Cliente;
 import com.cramirez.backendcramirez.cliente.domain.entity.ClienteConyuge;
-import com.cramirez.backendcramirez.cliente.dto.ClienteConLotesDTO;
-import com.cramirez.backendcramirez.cliente.dto.ClienteConyugeDTO;
-import com.cramirez.backendcramirez.cliente.dto.ClienteDTO;
-import com.cramirez.backendcramirez.cliente.dto.TransferenciaClienteDTO;
+import com.cramirez.backendcramirez.cliente.dto.*;
 import com.cramirez.backendcramirez.cliente.infrastructure.repository.ClienteConyugeRepository;
 import com.cramirez.backendcramirez.cliente.infrastructure.repository.ClienteRepository;
 import com.cramirez.backendcramirez.copropietario.domain.entity.Copropietario;
@@ -37,10 +34,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -92,42 +86,37 @@ public class ClienteService {
         this.clienteConyugeRepository = clienteConyugeRepository;
     }
 
-
-    public ClienteConLotesDTO editarClienteYComponentes(ClienteConLotesDTO clienteConLotesDTO) {
-        Optional<Cliente> clienteOpt = clienteRepository.findById(clienteConLotesDTO.getCliente().getIdCliente());
+    public LoteConClienteCompletoDTO editarClienteYComponentes(LoteConClienteCompletoDTO loteConClienteCompletoDTO) {
+        Optional<Cliente> clienteOpt = clienteRepository.findById(loteConClienteCompletoDTO.getCliente().getIdCliente());
         if (!clienteOpt.isPresent()) {
-            throw new EntityNotFoundException("Cliente no encontrado con ID: " + clienteConLotesDTO.getCliente().getIdCliente());
+            throw new EntityNotFoundException("Cliente no encontrado con ID: " + loteConClienteCompletoDTO.getCliente().getIdCliente());
         }
 
         Cliente cliente = clienteOpt.get();
-        actualizarCliente(cliente, clienteConLotesDTO.getCliente());
 
-        if (clienteConLotesDTO.getCliente().getConyuge() != null) {
-            editarConyuge(clienteConLotesDTO.getCliente().getConyuge(), cliente);
+        actualizarCliente(cliente, loteConClienteCompletoDTO.getCliente());
+
+        if (loteConClienteCompletoDTO.getCliente().getConyuge() != null) {
+            editarClienteConyuge(loteConClienteCompletoDTO.getCliente().getConyuge(), cliente);
         }
 
-        if (clienteConLotesDTO.getCliente().getCopropietarios() != null) {
-            for (CopropietarioDTO copropietarioDTO : clienteConLotesDTO.getCliente().getCopropietarios()) {
+        if (loteConClienteCompletoDTO.getCliente().getCopropietarios() != null) {
+            for (CopropietarioDTO copropietarioDTO : loteConClienteCompletoDTO.getCliente().getCopropietarios()) {
                 editarCopropietario(copropietarioDTO);
             }
         }
 
-        if (clienteConLotesDTO.getLotes() != null) {
-            for (LoteDTO loteDTO : clienteConLotesDTO.getLotes()) {
-                editarLote(loteDTO);
-            }
+        if (loteConClienteCompletoDTO.getLote() != null) {
+            editarLote(loteConClienteCompletoDTO.getLote());
         }
 
-        List<LoteDTO> lotes = cliente.getLotes().stream()
-                .map(this::mapearLoteALoteDTO)
-                .collect(Collectors.toList());
+        LoteConClienteCompletoDTO loteConClienteCompletoDTOResult = new LoteConClienteCompletoDTO();
+        loteConClienteCompletoDTOResult.setCliente(convertirAClienteDTO(cliente));
+        loteConClienteCompletoDTOResult.setLote(loteConClienteCompletoDTO.getLote());
 
-        ClienteConLotesDTO clienteConLotesDTOResult = new ClienteConLotesDTO();
-        clienteConLotesDTOResult.setCliente(convertirAClienteDTO(cliente));
-        clienteConLotesDTOResult.setLotes(lotes);
-
-        return clienteConLotesDTOResult;
+        return loteConClienteCompletoDTOResult;
     }
+
 
 
     private void actualizarCliente(Cliente cliente, ClienteDTO clienteDTO) {
@@ -144,6 +133,7 @@ public class ClienteService {
         cliente.setCorreoElectronico(clienteDTO.getCorreoElectronico());
         cliente.setCelularCliente(clienteDTO.getCelularCliente());
         cliente.setNumeroIdentificacion(clienteDTO.getNumeroIdentificacion());
+        cliente.setDescripcionEstadoCivil(clienteDTO.getDescripcionEstadoCivil());
        // cliente.setIdDepartamento(clienteDTO.getIdDepartamento());
        // cliente.setIdProvincia(clienteDTO.getIdProvincia());
        // cliente.setIdDistrito(clienteDTO.getIdDistrito());
@@ -151,9 +141,9 @@ public class ClienteService {
         clienteRepository.save(cliente);
     }
 
-    // Editar cónyuge
-    private void editarConyuge(ClienteConyugeDTO conyugeDTO, Cliente cliente) {
-        Optional<ClienteConyuge> conyugeOpt = clienteConyugeRepository.findById(cliente.getIdCliente());
+    // Editar ClienteConyuge
+    private void editarClienteConyuge(ClienteConyugeDTO conyugeDTO, Cliente cliente) {
+        Optional<ClienteConyuge> conyugeOpt = clienteConyugeRepository.findById(conyugeDTO.getIdClienteConyuge());
         if (conyugeOpt.isPresent()) {
             ClienteConyuge conyuge = conyugeOpt.get();
           //  conyuge.setIdCliente(conyugeDTO.getIdCliente());
@@ -344,116 +334,124 @@ public class ClienteService {
     }
 
     public Optional<ClienteDTO> obtenerClienteDTOporNumeroIdentificacion(String numeroIdentificacion) {
-        return clienteRepository.findByNumeroIdentificacion(numeroIdentificacion)
-                .map(this::convertirAClienteDTO);
+        List<Cliente> clientes = clienteRepository.findByNumeroIdentificacion(numeroIdentificacion);
+
+        if (clientes.isEmpty()) {
+            return Optional.empty();
+        }
+
+        return Optional.of(convertirAClienteDTO(clientes.get(0)));
     }
 
 
 
 
-    public List<ClienteConLotesDTO> obtenerClientesConLotes() {
+
+    public List<LoteConClienteCompletoDTO> obtenerClientesConLotes() {
         List<Cliente> clientes = clienteRepository.findAll();
 
-        return clientes.stream().map(cliente -> {
-            ClienteDTO clienteDTO = convertirAClienteDTO(cliente);
+        List<LoteConClienteCompletoDTO> resultado = new ArrayList<>();
 
-            List<LoteDTO> lotes = cliente.getLotes().stream()
-                    .map(this::mapearLoteALoteDTO)
-                    .collect(Collectors.toList());
+        for (Cliente cliente : clientes) {
+            for (Lote lote : cliente.getLotes()) {
+                LoteConClienteCompletoDTO dto = new LoteConClienteCompletoDTO();
+                dto.setCliente(convertirAClienteDTO(cliente));
+                dto.setLote(mapearLoteALoteDTO(lote));
 
-            ClienteConLotesDTO dto = new ClienteConLotesDTO();
-            dto.setCliente(clienteDTO);
-            dto.setLotes(lotes);
+                resultado.add(dto);
+            }
+        }
 
-            return dto;
-        }).collect(Collectors.toList());
+        return resultado;
     }
 
 
-    public List<ClienteConLotesDTO> obtenerClientesConLotesPorOperario(int idOperario) {
-        List<Cliente> clientes = clienteRepository.findByIdOperario(idOperario);
+    public List<LoteConClienteCompletoDTO> obtenerClientesConLotesPorOperario(int idOperario) {
+            List<Cliente> clientes = clienteRepository.findByIdOperario(idOperario);
+            List<LoteConClienteCompletoDTO> resultado = new ArrayList<>();
 
-        return clientes.stream().map(cliente -> {
-            ClienteDTO clienteDTO = convertirAClienteDTO(cliente);
+            for (Cliente cliente : clientes) {
+                for (Lote lote : cliente.getLotes()) {
+                    LoteConClienteCompletoDTO dto = new LoteConClienteCompletoDTO();
+                    dto.setCliente(convertirAClienteDTO(cliente));
+                    dto.setLote(mapearLoteALoteDTO(lote));
+                    resultado.add(dto);
+                }
+            }
 
-            List<LoteDTO> lotes = cliente.getLotes().stream()
-                    .map(this::mapearLoteALoteDTO)
-                    .collect(Collectors.toList());
-
-            ClienteConLotesDTO dto = new ClienteConLotesDTO();
-            dto.setCliente(clienteDTO);
-            dto.setLotes(lotes);
-
-            return dto;
-        }).collect(Collectors.toList());
+            return resultado;
     }
+
 
 
     private LoteDTO mapearLoteALoteDTO(Lote lote) {
-        LoteDTO dto = new LoteDTO();
-        dto.setIdLote(lote.getIdLote());
-        dto.setIdUbicacion(lote.getIdUbicacion());
-        dto.setCodigoLoteCliente(lote.getCodigoLoteCliente());
-        dto.setManzana(lote.getManzana());
-        dto.setNumeroLote(lote.getNumeroLote());
-        dto.setIdTipoContrato(lote.getIdTipoContrato());
-        dto.setAreaLote(lote.getAreaLote());
-        dto.setAreaLoteLetras(lote.getAreaLoteLetras());
-        dto.setCostoLote(lote.getCostoLote());
-        dto.setCostoLoteLetras(lote.getCostoLoteLetras());
-        dto.setMontoCuotas(lote.getMontoCuotas());
-        dto.setCantidadCuotas(lote.getCantidadCuotas());
-        dto.setCantidadCuotaLetras(lote.getCantidadCuotaLetras());
-        dto.setEmpresa(lote.getEmpresa());
-        dto.setEmpresaVende(lote.getEmpresaVende());
-        dto.setRucVendedor(lote.getRucVendedor());
-        dto.setDireccionVendedor(lote.getDireccionVendedor());
-        dto.setRepresentanteLegalVendedor(lote.getRepresentanteLegalVendedor());
-        dto.setDniVendedor(lote.getDniVendedor());
-        dto.setNumeroPartidaPoderVendedor(lote.getNumeroPartidaPoderVendedor());
-        dto.setMoneda(lote.getMoneda());
-        dto.setNumCuenta(lote.getNumCuenta());
-        dto.setCci(lote.getCci());
-        dto.setFechaSale(lote.getFechaSale());
-        dto.setCuotaInicialIncluyeSeparacion(lote.getCuotaInicialIncluyeSeparacion());
-        dto.setCuotaInicialIncluyeSeparacionLetras(lote.getCuotaInicialIncluyeSeparacionLetras());
-        dto.setFechaFirmaContratoDefinitivo(lote.getFechaFirmaContratoDefinitivo());
-        dto.setUbicacionLote(lote.getUbicacionLote());
-        dto.setPrecioMetroCuadrado(lote.getPrecioMetroCuadrado());
-        dto.setFechaPago(lote.getFechaPago());
-        dto.setMontoCuotaLetras(lote.getMontoCuotaLetras());
-        dto.setSaldoLote(lote.getSaldoLote());
-        dto.setSaldoLoteLetras(lote.getSaldoLoteLetras());
-        dto.setCuentaRecaudadora(lote.getCuentaRecaudadora());
-        dto.setCuotaInicialBanco(lote.getCuotaInicialBanco());
-        dto.setCantidadCuotaBanco(lote.getCantidadCuotaBanco());
-        dto.setPrecioMetroCuadradoLetras(lote.getPrecioMetroCuadradoLetras());
-        dto.setFechaInicioContrato(lote.getFechaInicioContrato());
-        dto.setFechaCancelacionContrato(lote.getFechaCancelacionContrato());
-        dto.setCantidadCuotaCuentaRecaudadora(lote.getCantidadCuotaCuentaRecaudadora());
-        dto.setTipoRepresentante(lote.getTipoRepresentante());
+    LoteDTO dto = new LoteDTO();
+    dto.setIdLote(lote.getIdLote());
+    dto.setIdOperario(lote.getIdOperario());
+    dto.setIdClienteLote(lote.getIdClienteLote());
+    dto.setIdUbicacion(lote.getIdUbicacion());
+    dto.setIdClienteClone(lote.getIdClienteClone());
+    dto.setCodigoLoteCliente(lote.getCodigoLoteCliente());
+    dto.setManzana(lote.getManzana());
+    dto.setNumeroLote(lote.getNumeroLote());
+    dto.setIdTipoContrato(lote.getIdTipoContrato());
+    dto.setAreaLote(lote.getAreaLote());
+    dto.setAreaLoteLetras(lote.getAreaLoteLetras());
+    dto.setCostoLote(lote.getCostoLote());
+    dto.setCostoLoteLetras(lote.getCostoLoteLetras());
+    dto.setMontoCuotas(lote.getMontoCuotas());
+    dto.setCantidadCuotas(lote.getCantidadCuotas());
+    dto.setCantidadCuotaLetras(lote.getCantidadCuotaLetras());
+    dto.setEmpresa(lote.getEmpresa());
+    dto.setEmpresaVende(lote.getEmpresaVende());
+    dto.setRucVendedor(lote.getRucVendedor());
+    dto.setDireccionVendedor(lote.getDireccionVendedor());
+    dto.setRepresentanteLegalVendedor(lote.getRepresentanteLegalVendedor());
+    dto.setDniVendedor(lote.getDniVendedor());
+    dto.setNumeroPartidaPoderVendedor(lote.getNumeroPartidaPoderVendedor());
+    dto.setMoneda(lote.getMoneda());
+    dto.setNumCuenta(lote.getNumCuenta());
+    dto.setCci(lote.getCci());
+    dto.setFechaSale(lote.getFechaSale());
+    dto.setCuotaInicialIncluyeSeparacion(lote.getCuotaInicialIncluyeSeparacion());
+    dto.setCuotaInicialIncluyeSeparacionLetras(lote.getCuotaInicialIncluyeSeparacionLetras());
+    dto.setFechaFirmaContratoDefinitivo(lote.getFechaFirmaContratoDefinitivo());
+    dto.setUbicacionLote(lote.getUbicacionLote());
+    dto.setPrecioMetroCuadrado(lote.getPrecioMetroCuadrado());
+    dto.setFechaPago(lote.getFechaPago());
+    dto.setMontoCuotaLetras(lote.getMontoCuotaLetras());
+    dto.setSaldoLote(lote.getSaldoLote());
+    dto.setSaldoLoteLetras(lote.getSaldoLoteLetras());
+    dto.setCuentaRecaudadora(lote.getCuentaRecaudadora());
+    dto.setCuotaInicialBanco(lote.getCuotaInicialBanco());
+    dto.setCantidadCuotaBanco(lote.getCantidadCuotaBanco());
+    dto.setPrecioMetroCuadradoLetras(lote.getPrecioMetroCuadradoLetras());
+    dto.setFechaInicioContrato(lote.getFechaInicioContrato());
+    dto.setFechaCancelacionContrato(lote.getFechaCancelacionContrato());
+    dto.setCantidadCuotaCuentaRecaudadora(lote.getCantidadCuotaCuentaRecaudadora());
+    dto.setTipoRepresentante(lote.getTipoRepresentante());
 
 
-        dto.setTipoProyecto(obtenerTexto(tipoProyectoRepository.findById(lote.getIdTipoProyecto()), "TipoProyecto"));
-        dto.setUbicacion(obtenerTexto(ubicacionRepository.findById(lote.getIdUbicacion()), "Ubicacion"));
-        dto.setContrato(obtenerTexto(tipoContratoRepository.findById(lote.getIdTipoContrato()), "TipoContrato"));
+    dto.setTipoProyecto(obtenerTexto(tipoProyectoRepository.findById(lote.getIdTipoProyecto()), "TipoProyecto"));
+    dto.setUbicacion(obtenerTexto(ubicacionRepository.findById(lote.getIdUbicacion()), "Ubicacion"));
+    dto.setContrato(obtenerTexto(tipoContratoRepository.findById(lote.getIdTipoContrato()), "TipoContrato"));
 
 
-        linderoRepository.findByIdLote(lote.getIdLote())
-                .map(this::convertirALinderoDTO)
-                .ifPresent(dto::setLindero);
+    linderoRepository.findByIdLote(lote.getIdLote())
+            .map(this::convertirALinderoDTO)
+            .ifPresent(dto::setLindero);
 
-        List<CuotaExtraordinariaDTO> cuotas = cuotaExtraordinariaRepository.findByIdLote(lote.getIdLote()).stream()
-                .map(this::convertirACuotaDTO)
-                .collect(Collectors.toList());
-        dto.setCuotasExtraordinarias(cuotas);
+    List<CuotaExtraordinariaDTO> cuotas = cuotaExtraordinariaRepository.findByIdLote(lote.getIdLote()).stream()
+            .map(this::convertirACuotaDTO)
+            .collect(Collectors.toList());
+    dto.setCuotasExtraordinarias(cuotas);
 
-        List<MatrizDTO> matriz = matrizRepository.findByIdLote(lote.getIdLote()).stream()
-                .map(this::convertirAMatrizDTO)
-                .collect(Collectors.toList());
-        dto.setMatriz(matriz);
+    List<MatrizDTO> matriz = matrizRepository.findByIdLote(lote.getIdLote()).stream()
+            .map(this::convertirAMatrizDTO)
+            .collect(Collectors.toList());
+    dto.setMatriz(matriz);
 
-        return dto;
+    return dto;
     }
 
 
@@ -513,31 +511,42 @@ public class ClienteService {
         dto.setAlicuota(matriz.getAlicuota());
         dto.setAlicuotaLetras(matriz.getAlicuotaLetras());
 
-        dto.setDepartamento(obtenerTexto(departamentoRepository.findById(matriz.getIdDepartamento()), "NombreDepartamento"));
-        dto.setProvincia(obtenerTexto(provinciaRepository.findById(matriz.getIdProvincia()), "NombreProvincia"));
+        dto.setDepartamentoMatriz(obtenerTexto(departamentoRepository.findById(matriz.getIdDepartamento()), "NombreDepartamento"));
+        dto.setProvinciaMatriz(obtenerTexto(provinciaRepository.findById(matriz.getIdProvincia()), "NombreProvincia"));
         dto.setUbicacion(obtenerTexto(ubicacionRepository.findById(matriz.getIdUbicacion()), "Ubicacion"));
-        dto.setDistrito(obtenerTexto(distritoRepository.findById(matriz.getIdDistrito()), "NombreDistrito"));
+        dto.setDistritoMatriz(obtenerTexto(distritoRepository.findById(matriz.getIdDistrito()), "NombreDistrito"));
         return dto;
     }
 
     public ClienteDTO guardarCliente(ClienteDTO clienteDTO) {
+        List<Cliente> todosLosClientes = clienteRepository.findAll();
 
-        // Buscar si ya existe un cliente con el mismo NumeroIdentificacion
-        Optional<Cliente> clienteExistente = clienteRepository.findByNumeroIdentificacion(clienteDTO.getNumeroIdentificacion());
+        // Buscar si ya existe alguien con ese número de identificación
+        List<Cliente> existentes = todosLosClientes.stream()
+                .filter(c -> c.getNumeroIdentificacion().equals(clienteDTO.getNumeroIdentificacion()))
+                .collect(Collectors.toList());
 
-        // Si el cliente ya existe, no crear un nuevo cliente, solo devolver el cliente existente
-        if (clienteExistente.isPresent()) {
-            // Convertir y retornar el cliente existente en formato DTO
-            return convertirAClienteDTO(clienteExistente.get());
-        }
-
-        // Si el cliente no existe, crear un nuevo cliente
         Cliente cliente = convertirAClienteEntidad(clienteDTO);
-
-        // Guardar el nuevo cliente en la base de datos
         Cliente clienteGuardado = clienteRepository.save(cliente);
 
-        // Convertir y retornar el DTO del nuevo cliente guardado
+        if (existentes.isEmpty()) {
+            // No existe el grupo, buscar el mayor idClienteClone manualmente
+            OptionalInt maxIdClienteClone = todosLosClientes.stream()
+                    .mapToInt(Cliente::getIdClienteClone)
+                    .max();
+
+            int nuevoIdClone = maxIdClienteClone.orElse(clienteGuardado.getIdCliente() - 1) + 1;
+            clienteGuardado.setIdClienteClone(nuevoIdClone);
+        } else {
+            // Ya existe el grupo, usar el idClienteClone del grupo existente
+            int idPadre = existentes.stream()
+                    .map(Cliente::getIdClienteClone)
+                    .min(Integer::compareTo)
+                    .orElseThrow();
+            clienteGuardado.setIdClienteClone(idPadre);
+        }
+
+        clienteGuardado = clienteRepository.save(clienteGuardado);
         return convertirAClienteDTO(clienteGuardado);
     }
 
@@ -570,6 +579,7 @@ public class ClienteService {
     private ClienteDTO convertirAClienteDTO(Cliente cliente) {
         ClienteDTO dto = new ClienteDTO();
         dto.setIdCliente(cliente.getIdCliente());
+        dto.setIdClienteClone(cliente.getIdClienteClone());
         dto.setIdEstadoCivil(cliente.getIdEstadoCivil());
         dto.setIdIdentificacion(cliente.getIdIdentificacion());
         dto.setIdNacionalidad(cliente.getIdNacionalidad());
@@ -586,6 +596,7 @@ public class ClienteService {
         dto.setIdDepartamento(cliente.getIdDepartamento());
         dto.setIdProvincia(cliente.getIdProvincia());
         dto.setIdDistrito(cliente.getIdDistrito());
+        dto.setDescripcionEstadoCivil(cliente.getDescripcionEstadoCivil());
 
         dto.setOperario(obtenerTexto(operarioRepository.findById(cliente.getIdOperario()), "TipoOperario"));
         dto.setPrefijoPais(obtenerTexto(prefijotelefonicoRepository.findById(cliente.getIdPrefijo()), "PrefijoPais"));
@@ -685,6 +696,7 @@ public class ClienteService {
     private Cliente convertirAClienteEntidad(ClienteDTO dto) {
         Cliente cliente = new Cliente();
         cliente.setIdEstadoCivil(dto.getIdEstadoCivil());
+        cliente.setIdClienteClone(dto.getIdClienteClone());
         cliente.setIdNacionalidad(dto.getIdNacionalidad());
         cliente.setIdIdentificacion(dto.getIdIdentificacion());
         cliente.setIdResidencia(dto.getIdResidencia());
@@ -700,6 +712,7 @@ public class ClienteService {
         cliente.setIdDepartamento(dto.getIdDepartamento());
         cliente.setIdProvincia(dto.getIdProvincia());
         cliente.setIdDistrito(dto.getIdDistrito());
+        cliente.setDescripcionEstadoCivil(dto.getDescripcionEstadoCivil());
         return cliente;
     }
 
@@ -713,12 +726,7 @@ public class ClienteService {
         }).orElse(null);
     }
 
-    public List<ClienteDTO> obtenerClientesPorOperarioYFecha(int idOperario, LocalDate fecha) {
-        return clienteRepository.findByIdOperarioAndFechaRegistro(idOperario, fecha)
-                .stream()
-                .map(this::convertirAClienteDTO)
-                .collect(Collectors.toList());
-    }
+
 
 
     public void transferirCliente(int idCliente, TransferenciaClienteDTO dto) {

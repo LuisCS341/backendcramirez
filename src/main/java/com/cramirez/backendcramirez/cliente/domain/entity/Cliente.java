@@ -21,6 +21,9 @@ public class Cliente {
     @Column(name = "ID_Cliente",nullable = false)
     private int idCliente;
 
+    @Column(name = "ID_ClienteClone",nullable = false)
+    private int idClienteClone;
+
     @Column(name = "ID_Operario")
     private Integer  idOperario;
 
@@ -53,6 +56,9 @@ public class Cliente {
     @Column(name = "Correo_Electronico",nullable = false)
     private String correoElectronico;
 
+    @Column(name = "DescripcionEstadoCivil",nullable = false)
+    private String descripcionEstadoCivil;
+
     @Column(name = "Celular",nullable = false)
     private int celularCliente;
 
@@ -70,6 +76,8 @@ public class Cliente {
 
     @Column(name = "ID_Prefijo",nullable = false)
     private int idPrefijo;
+
+
 
     @Column(name = "FechaRegistro", nullable = false, updatable = false)
     private LocalDateTime fechaRegistro;

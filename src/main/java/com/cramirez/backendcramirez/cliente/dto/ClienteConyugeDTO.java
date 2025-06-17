@@ -27,25 +27,15 @@ import lombok.Setter;
 
 public class ClienteConyugeDTO {
 
-        @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         private int idCliente;
-        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
         private int idClienteConyuge;
-        @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         private int idNacionalidadConyuge;
-        @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         private int idPrefijoConyuge;
-        @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         private int idIdentificacionConyuge;
-        @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         private int idResidenciaConyuge;
-        @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         private int idOperarioConyuge;
-        @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         private int idDepartamentoConyuge;
-        @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         private int idProvinciaConyuge;
-        @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         private int idDistritoConyuge;
 
 

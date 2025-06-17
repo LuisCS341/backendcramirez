@@ -31,9 +31,9 @@ public class MatrizDTO {
     private Float alicuota;
     private String alicuotaLetras;
 //--------------------------------------------------
-    private String departamento;
-    private String provincia;
-    private String distrito;
+    private String departamentoMatriz;
+    private String provinciaMatriz;
+    private String distritoMatriz;
     private String ubicacion;
 
 

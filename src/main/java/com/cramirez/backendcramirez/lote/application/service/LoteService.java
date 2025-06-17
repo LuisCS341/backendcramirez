@@ -1,4 +1,6 @@
 package com.cramirez.backendcramirez.lote.application.service;
+import com.cramirez.backendcramirez.cliente.domain.entity.Cliente;
+import com.cramirez.backendcramirez.cliente.infrastructure.repository.ClienteRepository;
 import com.cramirez.backendcramirez.lote.domain.entity.CuotaExtraordinaria;
 import com.cramirez.backendcramirez.lote.dto.CuotaExtraordinariaDTO;
 import com.cramirez.backendcramirez.lote.infrastructure.repository.CuotaExtraordinariaRepository;
@@ -25,6 +27,7 @@ import java.util.stream.Collectors;
 public class LoteService {
 
     private final LoteRepository loteRepository;
+    private final ClienteRepository clienteRepository;
     private final TipoProyectoRepository tipoProyectoRepository;
     private final UbicacionRepository ubicacionRepository;
     private final TipoContratoRepository tipoContratoRepository;
@@ -33,8 +36,9 @@ public class LoteService {
     private final LinderoRepository linderoRepository;
 
     @Autowired
-    public LoteService(LoteRepository loteRepository, TipoContratoRepository tipoContratoRepository, UbicacionRepository ubicacionRepository, TipoProyectoRepository tipoProyectoRepository, MatrizRepository matrizRepository, CuotaExtraordinariaRepository cuotaExtraordinariaRepository, LinderoRepository linderoRepository) {
+    public LoteService(LoteRepository loteRepository, ClienteRepository clienteRepository, TipoContratoRepository tipoContratoRepository, UbicacionRepository ubicacionRepository, TipoProyectoRepository tipoProyectoRepository, MatrizRepository matrizRepository, CuotaExtraordinariaRepository cuotaExtraordinariaRepository, LinderoRepository linderoRepository) {
         this.loteRepository = loteRepository;
+        this.clienteRepository = clienteRepository;
         this.tipoProyectoRepository = tipoProyectoRepository;
         this.ubicacionRepository = ubicacionRepository;
         this.tipoContratoRepository = tipoContratoRepository;
@@ -45,32 +49,42 @@ public class LoteService {
 
     public List<LoteDTO> getAllLotes() {
         List<Lote> lotes = loteRepository.findAll();
-        return lotes.stream().map(this::convertToDTO).collect(Collectors.toList());
+        return lotes.stream().map(this::convertToLoteDTO).collect(Collectors.toList());
     }
 
     public Optional<LoteDTO> getLoteById(Integer id) {
-        return loteRepository.findById(id).map(this::convertToDTO);
+        return loteRepository.findById(id).map(this::convertToLoteDTO);
     }
 
     public LoteDTO saveLote(LoteDTO loteDTO) {
 
-        int cantidadLotes = loteRepository.countByClienteIdCliente(loteDTO.getIdClienteLote());
+        // 1. Buscar el cliente original para obtener su ID_ClienteClone
+        Cliente cliente = clienteRepository.findById(loteDTO.getIdClienteLote())
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
 
+        // 2. Asignar el ID_ClienteClone desde el cliente real
+        loteDTO.setIdClienteClone(cliente.getIdClienteClone());
 
-        int siguienteNumero = cantidadLotes + 1;
+        // 3. Obtener todos los lotes del cliente
+        List<Lote> lotes = loteRepository.findByClienteIdClienteClone(loteDTO.getIdClienteClone());
 
+        // 4. Filtrar solo los lotes que tienen un código válido (≠ null o vacío)
+        long cantidadLotesValidos = lotes.stream()
+                .filter(l -> l.getCodigoLoteCliente() != null && !l.getCodigoLoteCliente().isBlank())
+                .count();
 
-        String codigo = loteDTO.getIdClienteLote() + "-" + siguienteNumero;
+        // 5. Generar el código: siempre debe ser ID-1, ID-2, ...
+        long siguienteNumero = cantidadLotesValidos + 1;
+        String codigo = loteDTO.getIdClienteClone() + "-" + siguienteNumero;
         loteDTO.setCodigoLoteCliente(codigo);
 
+        // 6. Guardar lote en base de datos
         Lote lote = convertToEntity(loteDTO);
-
         Lote savedLote = loteRepository.save(lote);
 
-        return convertToDTO(savedLote);
+        // 7. Retornar el resultado
+        return convertToLoteDTO(savedLote);
     }
-
-
 
 
     public void deleteLote(Integer id) {
@@ -94,6 +108,7 @@ public class LoteService {
         lote.setIdOperario(dto.getIdOperario());
         lote.setIdClienteLote(dto.getIdClienteLote());
         lote.setCodigoLoteCliente(dto.getCodigoLoteCliente());
+        lote.setIdClienteClone(dto.getIdClienteClone());
         lote.setIdTipoProyecto(dto.getIdTipoProyecto());
         lote.setIdTipoContrato(dto.getIdTipoContrato());
         lote.setIdUbicacion(dto.getIdUbicacion());
@@ -137,11 +152,12 @@ public class LoteService {
         return lote;
     }
 
-    private LoteDTO convertToDTO(Lote lote) {
+    private LoteDTO convertToLoteDTO(Lote lote) {
         LoteDTO dto = new LoteDTO();
         dto.setIdLote(lote.getIdLote());
         dto.setIdOperario(lote.getIdOperario());
         dto.setIdClienteLote(lote.getIdClienteLote());
+        dto.setIdClienteClone(lote.getIdClienteClone());
         dto.setCodigoLoteCliente(lote.getCodigoLoteCliente());
         dto.setIdTipoProyecto(lote.getIdTipoProyecto());
         dto.setIdTipoContrato(lote.getIdTipoContrato());

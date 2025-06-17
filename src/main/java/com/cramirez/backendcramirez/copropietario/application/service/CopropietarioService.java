@@ -58,7 +58,7 @@ public class CopropietarioService {
     }
 
     public CopropietarioDTO crearCopropietario(CopropietarioDTO copropietarioDTO) {
-        Copropietario copropietario = convertirA_Entidad(copropietarioDTO);
+        Copropietario copropietario = convertirACopropietarioEntidad(copropietarioDTO);
         Copropietario copropietarioGuardado = copropietarioRepository.save(copropietario);
         return convertirACopropietarioDTO(copropietarioGuardado);
     }
@@ -136,7 +136,7 @@ public class CopropietarioService {
         }).orElse(null);
     }
 
-    private Copropietario convertirA_Entidad(CopropietarioDTO dto) {
+    private Copropietario convertirACopropietarioEntidad(CopropietarioDTO dto) {
         Copropietario copropietario = new Copropietario();
         copropietario.setIdClienteCopropietarios(dto.getIdClienteCopropietarios());
         copropietario.setIdResidenciaCopropietarios(dto.getIdResidenciaCopropietarios());

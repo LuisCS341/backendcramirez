@@ -13,25 +13,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@JsonPropertyOrder({
-        "idCliente",
-        "nombresApellidos",
-        "ocupacion",
-        "documentoIdentificacion",
-        "numeroIdentificacion",
-        "nacionalidad",
-        "residencia",
-        "direccion",
-        "departamento",
-        "provincia",
-        "distrito",
-        "correoElectronico",
-        "prefijoPais",
-        "celularCliente",
-        "estadoCivil",
-        "operario",
-        "fechaRegistro"
-})
 public class ClienteDTO {
     private int idIdentificacion;
     private int idNacionalidad;
@@ -42,6 +23,7 @@ public class ClienteDTO {
     private int idPrefijo;
     private int idEstadoCivil;
     private int idCliente;
+    private int idClienteClone;
     private int idOperario;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime fechaRegistro;
@@ -62,9 +44,8 @@ public class ClienteDTO {
     private String departamento;
     private String provincia;
     private String distrito;
+    private String descripcionEstadoCivil;
 
     private List<CopropietarioDTO> copropietarios;
     private ClienteConyugeDTO conyuge;
-    public ClienteDTO() {}
-
 }

@@ -3,14 +3,11 @@ package com.cramirez.backendcramirez.lote.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+
 
 
 import java.util.List;
 
-@Getter
-@Setter
 @Data
 @JsonPropertyOrder({
         "nombreProyecto",
@@ -40,11 +37,10 @@ import java.util.List;
 })
 public class LoteDTO {
     private int idLote;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int idOperario;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int idClienteLote;
     private String codigoLoteCliente;
+    private int idClienteClone;
 //-----------------------------------
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int idTipoProyecto;
@@ -97,6 +93,5 @@ public class LoteDTO {
     private LinderoDTO lindero;
     private List<CuotaExtraordinariaDTO> cuotasExtraordinarias;
     private List<MatrizDTO> matriz;
-    public LoteDTO() {}
 
 }

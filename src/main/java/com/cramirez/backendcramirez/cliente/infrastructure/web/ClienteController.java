@@ -1,17 +1,13 @@
 package com.cramirez.backendcramirez.cliente.infrastructure.web;
-
-import com.cramirez.backendcramirez.cliente.domain.entity.Cliente;
-import com.cramirez.backendcramirez.cliente.dto.ClienteConLotesDTO;
 import com.cramirez.backendcramirez.cliente.dto.ClienteDTO;
 import com.cramirez.backendcramirez.cliente.application.service.ClienteService;
+import com.cramirez.backendcramirez.cliente.dto.LoteConClienteCompletoDTO;
 import com.cramirez.backendcramirez.cliente.dto.TransferenciaClienteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,9 +50,10 @@ public class ClienteController {
 
 
     @GetMapping("/conlotes")
-    public List<ClienteConLotesDTO> obtenerClientesConLotes() {
+    public List<LoteConClienteCompletoDTO> obtenerClientesConLotes() {
         return clienteService.obtenerClientesConLotes();
     }
+
 
     @PutMapping("/transferir/{idCliente}")
     public ResponseEntity<String> transferirCliente(
@@ -75,21 +72,22 @@ public class ClienteController {
 
 
     @PutMapping("/editar")
-    public ResponseEntity<ClienteConLotesDTO> editarClienteYComponentes(@RequestBody ClienteConLotesDTO clienteConLotesDTO) {
-        System.out.println("Recibido: " + clienteConLotesDTO);
+    public ResponseEntity<LoteConClienteCompletoDTO> editarClienteYComponentes(@RequestBody LoteConClienteCompletoDTO loteConClienteCompletoDTO) {
+        System.out.println("Recibido: " + loteConClienteCompletoDTO);
         try {
-            ClienteConLotesDTO clienteConLotesDTOResult = clienteService.editarClienteYComponentes(clienteConLotesDTO);
-            return ResponseEntity.ok(clienteConLotesDTOResult);
+            LoteConClienteCompletoDTO loteConClienteCompletoDTOResult = clienteService.editarClienteYComponentes(loteConClienteCompletoDTO);
+            return ResponseEntity.ok(loteConClienteCompletoDTOResult);
         } catch (Exception e) {
             e.printStackTrace(); // Para depurar el error exacto
             return ResponseEntity.badRequest().body(null);
         }
     }
 
+
     @GetMapping("/por-operario/{idOperario}")
-    public ResponseEntity<List<ClienteConLotesDTO>> obtenerClientesPorOperario(@PathVariable int idOperario) {
-        List<ClienteConLotesDTO> clientes = clienteService.obtenerClientesConLotesPorOperario(idOperario);
-        return ResponseEntity.ok(clientes); // 200 con la lista
+    public ResponseEntity<List<LoteConClienteCompletoDTO>> obtenerClientesPorOperario(@PathVariable int idOperario) {
+        List<LoteConClienteCompletoDTO> clientes = clienteService.obtenerClientesConLotesPorOperario(idOperario);
+        return ResponseEntity.ok(clientes);
     }
 
 
@@ -108,16 +106,6 @@ public class ClienteController {
 
         return ResponseEntity.ok(clienteGuardado);
     }
-
-
-    @GetMapping("/clientes/operario/{idOperario}/fecha/{fecha}")
-    public ResponseEntity<List<ClienteDTO>> obtenerClientesPorOperarioYFecha(
-            @PathVariable int idOperario,
-            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha) {
-        List<ClienteDTO> clientes = clienteService.obtenerClientesPorOperarioYFecha(idOperario, fecha);
-        return ResponseEntity.ok(clientes);
-    }
-
 
 
     @DeleteMapping("/{id}")
