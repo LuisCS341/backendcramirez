@@ -13,7 +13,7 @@ public class ReniecController {
 
     private static final String API_URL = "https://api.apis.net.pe/v2/reniec/dni?numero=";
     private static final String AUTHORIZATION_TOKEN = "apis-token-13743.JAxDGOGDqgM1YDvLgoWtbtQBhmbNWvFr";
-
+    private static final String API_SUNAT_URL = "https://api.apis.net.pe/v2/sunat/ruc/full?numero=";
     @GetMapping("/buscarCliente/{dni}")
     public ResponseEntity<String> buscarCliente(@PathVariable String dni) {
         try {
@@ -49,7 +49,7 @@ public class ReniecController {
 
     @GetMapping("/buscarEmpresa/{ruc}")
     public ResponseEntity<String> buscarEmpresa(@PathVariable String ruc) {
-        final String API_SUNAT_URL = "https://api.apis.net.pe/v2/sunat/ruc/full?numero=";
+
 
         try {
             RestTemplate restTemplate = new RestTemplate();

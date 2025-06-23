@@ -29,10 +29,11 @@ public class ClienteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClienteDTO> obtenerClientePorId(@PathVariable int id) {
-        ClienteDTO cliente = clienteService.obtenerClientePorId(id);
-        return cliente != null ? ResponseEntity.ok(cliente) : ResponseEntity.notFound().build();
+    public ResponseEntity<LoteConClienteCompletoDTO> obtenerClienteConLotesPorId(@PathVariable int id) {
+        LoteConClienteCompletoDTO clienteConLotes = clienteService.obtenerClientePorId(id);
+        return clienteConLotes != null ? ResponseEntity.ok(clienteConLotes) : ResponseEntity.notFound().build();
     }
+
 
     @GetMapping("/existe")
     public ResponseEntity<Boolean> verificarExistenciaPorNumeroIdentificacion(@RequestParam("numeroIdentificacion") String numeroIdentificacion) {
@@ -71,17 +72,26 @@ public class ClienteController {
     }
 
 
-    @PutMapping("/editar")
-    public ResponseEntity<LoteConClienteCompletoDTO> editarClienteYComponentes(@RequestBody LoteConClienteCompletoDTO loteConClienteCompletoDTO) {
-        System.out.println("Recibido: " + loteConClienteCompletoDTO);
-        try {
-            LoteConClienteCompletoDTO loteConClienteCompletoDTOResult = clienteService.editarClienteYComponentes(loteConClienteCompletoDTO);
-            return ResponseEntity.ok(loteConClienteCompletoDTOResult);
-        } catch (Exception e) {
-            e.printStackTrace(); // Para depurar el error exacto
+    @PutMapping("/{id}")
+    public ResponseEntity<LoteConClienteCompletoDTO> editarClienteYComponentes(
+            @PathVariable int id,
+            @RequestBody LoteConClienteCompletoDTO loteConClienteCompletoDTO) {
+
+        if (loteConClienteCompletoDTO.getCliente() == null ||
+                loteConClienteCompletoDTO.getCliente().getIdCliente() != id) {
             return ResponseEntity.badRequest().body(null);
         }
+
+        try {
+            LoteConClienteCompletoDTO loteConClienteCompletoDTOResult =
+                    clienteService.editarClienteYComponentes(loteConClienteCompletoDTO);
+            return ResponseEntity.ok(loteConClienteCompletoDTOResult);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
+
 
 
     @GetMapping("/por-operario/{idOperario}")

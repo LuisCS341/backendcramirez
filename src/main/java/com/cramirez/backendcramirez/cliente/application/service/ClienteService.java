@@ -560,15 +560,29 @@ public class ClienteService {
     }
 
 
-    public ClienteDTO obtenerClientePorId(int id) {
-        return clienteRepository.findById(id)
-                .map(this::convertirAClienteDTO)
+    public LoteConClienteCompletoDTO obtenerClientePorId(int idCliente) {
+        Optional<Cliente> clienteOptional = clienteRepository.findById(idCliente);
+
+        if (clienteOptional.isEmpty()) {
+            return null;
+        }
+
+        Cliente cliente = clienteOptional.get();
+
+        ClienteDTO clienteDTO = convertirAClienteDTO(cliente);
+
+        LoteDTO loteDTO = cliente.getLotes()
+                .stream()
+                .findFirst()
+                .map(this::mapearLoteALoteDTO)
                 .orElse(null);
+
+        LoteConClienteCompletoDTO dto = new LoteConClienteCompletoDTO();
+        dto.setCliente(clienteDTO);
+        dto.setLote(loteDTO);
+
+        return dto;
     }
-
-
-
-
 
 
 
