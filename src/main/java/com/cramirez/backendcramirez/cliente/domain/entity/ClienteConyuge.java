@@ -47,22 +47,22 @@ public class ClienteConyuge {
     @Column(name = "ID_Distrito",nullable = false)
     private int idDistritoConyuge;
 
-    @Column(name = "Nombres_Apellidos",nullable = false)
+    @Column(name = "NombresApellidosConyugeCliente",nullable = false)
     private String NombresApellidosConyuge;
 
-    @Column(name = "Direccion",nullable = false)
+    @Column(name = "DireccionConyugeCliente",nullable = false)
     private String DireccionConyuge;
 
-    @Column(name = "Correo_Electronico",nullable = false)
+    @Column(name = "CorreoElectronicoConyugeCliente",nullable = false)
     private String CorreoElectronicoConyuge;
 
-    @Column(name = "Celular",nullable = false)
+    @Column(name = "CelularConyugeCliente",nullable = false)
     private String CelularConyuge;
 
-    @Column(name = "Ocupacion",nullable = false)
+    @Column(name = "OcupacionConyugeCliente",nullable = false)
     private String ocupacionConyuge;
 
-    @Column(name = "NumeroIdentificacion",nullable = false)
+    @Column(name = "NumeroIdentificacionConyugeCliente",nullable = false)
     private String NumeroIdentificacionConyuge;
 
 
