@@ -44,25 +44,25 @@ public class Cliente {
     @Column(name = "ID_Residencia",nullable = false)
     private int idResidencia;
 
-    @Column(name = "Nombres_Apellidos",nullable = false)
+    @Column(name = "NombresApellidosCliente",nullable = false)
     private String nombresApellidos;
 
-    @Column(name = "Ocupacion",nullable = false)
+    @Column(name = "OcupacionCliente",nullable = false)
     private String ocupacion;
 
-    @Column(name = "Direccion",nullable = false)
+    @Column(name = "DireccionCliente",nullable = false)
     private String direccion;
 
-    @Column(name = "Correo_Electronico",nullable = false)
+    @Column(name = "CorreoElectronicoCliente",nullable = false)
     private String correoElectronico;
 
-    @Column(name = "DescripcionEstadoCivil",nullable = false)
+    @Column(name = "DescripcionEstadoCivilCliente",nullable = false)
     private String descripcionEstadoCivil;
 
     @Column(name = "CelularCliente",nullable = false)
     private int celularCliente;
 
-    @Column(name = "NumeroIdentificacion",nullable = false,unique = true)
+    @Column(name = "NumeroIdentificacionCliente",nullable = false,unique = true)
     private String numeroIdentificacion;
 
     @Column(name = "ID_Departamento")
@@ -77,9 +77,7 @@ public class Cliente {
     @Column(name = "ID_Prefijo",nullable = false)
     private int idPrefijo;
 
-
-
-    @Column(name = "FechaRegistro", nullable = false, updatable = false)
+    @Column(name = "FechaRegistroCliente", nullable = false, updatable = false)
     private LocalDateTime fechaRegistro;
 
     @PrePersist
