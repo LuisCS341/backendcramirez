@@ -3,9 +3,6 @@ package com.cramirez.backendcramirez.lote.domain.entity;
 import com.cramirez.backendcramirez.cliente.domain.entity.Cliente;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "Lote")
@@ -59,21 +56,6 @@ public class Lote {
      private String costoLoteLetras;
 
 
-    @Column(name="MontoCuotas",nullable = false)
-    private Float montoCuotas;
-
-    @Column(name="MontoCuotaLetras",nullable = false)
-    private String montoCuotaLetras;
-
-    @Column(name="CantidadCuotas",nullable = false)
-    private int cantidadCuotas;
-
-    @Column(name="CantidadCuotaLetras",nullable = false)
-    private String cantidadCuotaLetras;
-
-    @Column(name="CantidadCuotaCuentaRecaudadora",nullable = false)
-    private String cantidadCuotaCuentaRecaudadora;
-
     @Column(name = "Empresa", nullable = false)
     private String empresa;
 
@@ -119,30 +101,6 @@ public class Lote {
     @Column(name = "FechaCancelacionContrato", nullable = false)
     private String fechaCancelacionContrato;
 
-    @Column(name = "SaldoLote", nullable = false)
-    private Float saldoLote;
-
-    @Column(name = "SaldoLoteLetras", nullable = false)
-    private String saldoLoteLetras;
-
-    @Column(name = "CuentaRecaudadora", nullable = false)
-    private String cuentaRecaudadora;
-
-    @Column(name = "CuotaInicialBanco", nullable = false)
-    private String cuotaInicialBanco;
-
-    @Column(name = "CantidadCuotaBanco", nullable = false)
-    private Float cantidadCuotaBanco;
-
-    @Column(name = "FechaPago", nullable = false)
-    private String fechaPago;
-
-    @Column(name = "CuotaInicialIncluyeSeparacion", nullable = false)
-    private Float cuotaInicialIncluyeSeparacion;
-
-    @Column(name = "CuotaInicialIncluyeSeparacionLetras", nullable = false)
-    private String cuotaInicialIncluyeSeparacionLetras;
-
     @Column(name = "PrecioMetroCuadrado", nullable = false)
     private Float precioMetroCuadrado;
 
@@ -151,5 +109,24 @@ public class Lote {
 
     @Column(name = "TipoRepresentante", nullable = false)
     private String tipoRepresentante;
+
+
+    @Column(name = "MantenimientoMensual", nullable = false)
+    private Double mantenimientoMensual;
+
+    @Column(name = "MantenimientoMensualLetras", nullable = false)
+    private String mantenimientoMensualLetras;
+
+    @Column(name = "EstadoCuenta", nullable = false)
+    private String estadoCuenta;
+
+    @Column(name = "MontoDeudaLetra", nullable = false)
+    private String montoDeudaLetra;
+
+    @Column(name = "CuotaPendientePago", nullable = false)
+    private Float cuotaPendientePago;
+
+    @Column(name = "FechaEntrega", nullable = false)
+    private String fechaEntrega;
 
 }

@@ -9,23 +9,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@JsonPropertyOrder({
-        "nombresApellidosCopropietarios",
-        "ocupacionCopropietarios",
-        "documentoIdentificacionCopropietarios",
-        "numeroIdentificacionCopropietarios",
-        "nacionalidadCopropietarios",
-        "residenciaCopropietarios",
-        "direccionCopropietarios",
-        "correoElectronicoCopropietarios",
-        "prefijoPaisCopropietarios",
-        "celularCopropietarios",
-        "departamentoCopropietarios",
-        "provinciaCopropietarios",
-        "distritoCopropietarios",
-        "estadoCivilCopropietarios",
-        "operarioCopropietarios"
-})
 public class CopropietarioDTO {
     private int idCopropietario;
     private int idClienteCopropietarios;
@@ -53,6 +36,7 @@ public class CopropietarioDTO {
     private String correoElectronicoCopropietarios;
     private String celularCopropietarios;
     private String numeroIdentificacionCopropietarios;
+    private String descripcionEstadoCivilCopropietarios;
 
     private String operarioCopropietarios;
     private String prefijoPaisCopropietarios;

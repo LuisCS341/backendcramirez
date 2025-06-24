@@ -69,4 +69,7 @@ public class Copropietario {
 
     @Column(name = "NumeroIdentificacion",nullable = false  )
     private String numeroIdentificacionCopropietarios;
+
+    @Column(name = "DescripcionEstadoCivil",nullable = false  )
+    private String descripcionEstadoCivilCopropietarios;
 }
