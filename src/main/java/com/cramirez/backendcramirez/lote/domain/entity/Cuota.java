@@ -48,7 +48,7 @@ public class Cuota {
     private String saldoLoteLetras;
 
     @Column(name="CantidadCuotas",nullable = false)
-    private int cantidadCuotas;
+    private long cantidadCuotas;
 
     @Column(name="CantidadCuotaLetras",nullable = false)
     private String cantidadCuotaLetras;
