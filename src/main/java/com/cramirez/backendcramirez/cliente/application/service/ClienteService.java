@@ -228,7 +228,6 @@ public class ClienteService {
             lote.setMantenimientoMensualLetras(loteDTO.getMantenimientoMensualLetras());
             lote.setEstadoCuenta(loteDTO.getEstadoCuenta());
             lote.setMontoDeudaLetra(loteDTO.getMontoDeudaLetra());
-            lote.setCuotaPendientePago(loteDTO.getCuotaPendientePago());
             lote.setFechaEntrega(loteDTO.getFechaEntrega());
 
             loteRepository.save(lote);
@@ -366,7 +365,6 @@ public class ClienteService {
         dto.setMantenimientoMensualLetras(lote.getMantenimientoMensualLetras());
         dto.setEstadoCuenta(lote.getEstadoCuenta());
         dto.setMontoDeudaLetra(lote.getMontoDeudaLetra());
-        dto.setCuotaPendientePago(lote.getCuotaPendientePago());
         dto.setFechaEntrega(lote.getFechaEntrega());
 
         dto.setTipoProyecto(obtenerTexto(tipoProyectoRepository.findById(lote.getIdTipoProyecto()), "TipoProyecto"));

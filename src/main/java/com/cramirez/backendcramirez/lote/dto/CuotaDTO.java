@@ -2,7 +2,11 @@ package com.cramirez.backendcramirez.lote.dto;
 
 import jakarta.persistence.Column;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Data
 public class CuotaDTO {
 
@@ -23,4 +27,5 @@ public class CuotaDTO {
     private String cantidadCuotaLetras;
     private String cantidadCuotaCuentaRecaudadora;
     private Float cantidadCuotaBanco;
+    private Float cuotaPendientePago;
 }

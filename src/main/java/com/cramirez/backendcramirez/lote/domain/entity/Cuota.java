@@ -58,5 +58,9 @@ public class Cuota {
 
     @Column(name = "CantidadCuotaBanco", nullable = false)
     private Float cantidadCuotaBanco;
+
+    @Column(name = "CuotaPendientePago", nullable = false)
+    private Float cuotaPendientePago;
+
 }
 

@@ -44,7 +44,7 @@ public class LoteDTO {
     private String mantenimientoMensualLetras;
     private String estadoCuenta;
     private String montoDeudaLetra;
-    private Float cuotaPendientePago;
+
     private String fechaEntrega;
 
     //-----------------------------------

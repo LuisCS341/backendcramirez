@@ -53,31 +53,23 @@ public class LoteService {
 
     public LoteDTO saveLote(LoteDTO loteDTO) {
 
-        // 1. Buscar el cliente original para obtener su ID_ClienteClone
         Cliente cliente = clienteRepository.findById(loteDTO.getIdClienteLote())
                 .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
 
-        // 2. Asignar el ID_ClienteClone desde el cliente real
         loteDTO.setIdClienteClone(cliente.getIdClienteClone());
 
-        // 3. Obtener todos los lotes del cliente
         List<Lote> lotes = loteRepository.findByClienteIdClienteClone(loteDTO.getIdClienteClone());
-
-        // 4. Filtrar solo los lotes que tienen un código válido (≠ null o vacío)
         long cantidadLotesValidos = lotes.stream()
                 .filter(l -> l.getCodigoLoteCliente() != null && !l.getCodigoLoteCliente().isBlank())
                 .count();
 
-        // 5. Generar el código: siempre debe ser ID-1, ID-2, ...
         long siguienteNumero = cantidadLotesValidos + 1;
         String codigo = loteDTO.getIdClienteClone() + "-" + siguienteNumero;
         loteDTO.setCodigoLoteCliente(codigo);
 
-        // 6. Guardar lote en base de datos
         Lote lote = convertToEntity(loteDTO);
         Lote savedLote = loteRepository.save(lote);
 
-        // 7. Retornar el resultado
         return convertToLoteDTO(savedLote);
     }
 
@@ -135,7 +127,6 @@ public class LoteService {
         lote.setMantenimientoMensualLetras(dto.getMantenimientoMensualLetras());
         lote.setEstadoCuenta(dto.getEstadoCuenta());
         lote.setMontoDeudaLetra(dto.getMontoDeudaLetra());
-        lote.setCuotaPendientePago(dto.getCuotaPendientePago());
         lote.setFechaEntrega(dto.getFechaEntrega());
 
         return lote;
@@ -179,7 +170,6 @@ public class LoteService {
         dto.setMantenimientoMensualLetras(lote.getMantenimientoMensualLetras());
         dto.setEstadoCuenta(lote.getEstadoCuenta());
         dto.setMontoDeudaLetra(lote.getMontoDeudaLetra());
-        dto.setCuotaPendientePago(lote.getCuotaPendientePago());
         dto.setFechaEntrega(lote.getFechaEntrega());
 
         dto.setTipoProyecto(obtenerTexto(tipoProyectoRepository.findById(lote.getIdTipoProyecto()), "TipoProyecto"));

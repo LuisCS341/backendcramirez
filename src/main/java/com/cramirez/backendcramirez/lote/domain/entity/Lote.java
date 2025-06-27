@@ -123,9 +123,6 @@ public class Lote {
     @Column(name = "MontoDeudaLetra", nullable = false)
     private String montoDeudaLetra;
 
-    @Column(name = "CuotaPendientePago", nullable = false)
-    private Float cuotaPendientePago;
-
     @Column(name = "FechaEntrega", nullable = false)
     private String fechaEntrega;
 

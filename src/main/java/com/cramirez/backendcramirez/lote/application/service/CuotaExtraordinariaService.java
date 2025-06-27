@@ -17,19 +17,19 @@ public class CuotaExtraordinariaService {
 
     public List<CuotaExtraordinariaDTO> getAll() {
         return repository.findAll().stream()
-                .map(this::convertirACuotaDTO)
+                .map(this::convertirACuotaExtraordinariaDTO)
                 .collect(Collectors.toList());
     }
 
     public CuotaExtraordinariaDTO getById(int id) {
         Optional<CuotaExtraordinaria> optional = repository.findById(id);
-        return optional.map(this::convertirACuotaDTO).orElse(null);
+        return optional.map(this::convertirACuotaExtraordinariaDTO).orElse(null);
     }
 
     public CuotaExtraordinariaDTO save(CuotaExtraordinariaDTO dto) {
         CuotaExtraordinaria entity = convertToEntity(dto);
         CuotaExtraordinaria saved = repository.save(entity);
-        return convertirACuotaDTO(saved);
+        return convertirACuotaExtraordinariaDTO(saved);
     }
 
     public void deleteById(int id) {
@@ -47,7 +47,7 @@ public class CuotaExtraordinariaService {
         return cuota;
     }
 
-    private CuotaExtraordinariaDTO convertirACuotaDTO(CuotaExtraordinaria entity) {
+    private CuotaExtraordinariaDTO convertirACuotaExtraordinariaDTO(CuotaExtraordinaria entity) {
         CuotaExtraordinariaDTO dto = new CuotaExtraordinariaDTO();
         dto.setIdCuotaExtraordinaria(entity.getIdCuotaExtraordinaria());
         dto.setIdLote(entity.getIdLote());
