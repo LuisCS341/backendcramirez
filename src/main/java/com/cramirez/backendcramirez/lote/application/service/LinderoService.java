@@ -21,24 +21,24 @@ public class LinderoService {
 
     public List<LinderoDTO> getAllLinderos() {
         List<Lindero> linderos = linderoRepository.findAll();
-        return linderos.stream().map(this::convertToDTO).collect(Collectors.toList());
+        return linderos.stream().map(this::convertToLinderoDTO).collect(Collectors.toList());
     }
 
     public Optional<LinderoDTO> getLinderoById(Integer id) {
-        return linderoRepository.findById(id).map(this::convertToDTO);
+        return linderoRepository.findById(id).map(this::convertToLinderoDTO);
     }
 
     public LinderoDTO saveLindero(LinderoDTO linderoDTO) {
         Lindero lindero = convertToEntity(linderoDTO);
         Lindero savedLindero = linderoRepository.save(lindero);
-        return convertToDTO(savedLindero);
+        return convertToLinderoDTO(savedLindero);
     }
 
     public void deleteLindero(Integer id) {
         linderoRepository.deleteById(id);
     }
 
-    private LinderoDTO convertToDTO(Lindero lindero) {
+    private LinderoDTO convertToLinderoDTO(Lindero lindero) {
         LinderoDTO dto = new LinderoDTO();
         dto.setIdLindero(lindero.getIdLindero());
         dto.setIdLote(lindero.getIdLote());

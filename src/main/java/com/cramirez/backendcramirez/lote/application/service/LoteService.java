@@ -128,6 +128,8 @@ public class LoteService {
         lote.setEstadoCuenta(dto.getEstadoCuenta());
         lote.setMontoDeudaLetra(dto.getMontoDeudaLetra());
         lote.setFechaEntrega(dto.getFechaEntrega());
+        lote.setSaldoLote(dto.getSaldoLote());
+        lote.setSaldoLoteLetras(dto.getSaldoLoteLetras());
 
         return lote;
     }
@@ -171,6 +173,8 @@ public class LoteService {
         dto.setEstadoCuenta(lote.getEstadoCuenta());
         dto.setMontoDeudaLetra(lote.getMontoDeudaLetra());
         dto.setFechaEntrega(lote.getFechaEntrega());
+        dto.setSaldoLote(lote.getSaldoLote());
+        dto.setSaldoLoteLetras(lote.getSaldoLoteLetras());
 
         dto.setTipoProyecto(obtenerTexto(tipoProyectoRepository.findById(lote.getIdTipoProyecto()), "TipoProyecto"));
         dto.setUbicacion(obtenerTexto(ubicacionRepository.findById(lote.getIdUbicacion()), "Ubicacion"));

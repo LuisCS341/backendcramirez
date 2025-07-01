@@ -41,12 +41,6 @@ public class Cuota {
     @Column(name = "CuotaInicialBanco", nullable = false)
     private String cuotaInicialBanco;
 
-    @Column(name = "SaldoLote", nullable = false)
-    private Float saldoLote;
-
-    @Column(name = "SaldoLoteLetras", nullable = false)
-    private String saldoLoteLetras;
-
     @Column(name="CantidadCuotas",nullable = false)
     private int cantidadCuotas;
 

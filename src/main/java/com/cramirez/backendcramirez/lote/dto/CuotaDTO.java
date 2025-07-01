@@ -21,8 +21,7 @@ public class CuotaDTO {
     private String montoCuotaLetras;
     private String fechaPago;
     private String cuotaInicialBanco;
-    private Float saldoLote;
-    private String saldoLoteLetras;
+
     private int cantidadCuotas;
     private String cantidadCuotaLetras;
     private String cantidadCuotaCuentaRecaudadora;
