@@ -132,4 +132,9 @@ public class Lote {
     @Column(name = "SaldoLoteLetras", nullable = false)
     private String saldoLoteLetras;
 
+    @Column(name = "Alicuota", nullable = false)
+    private Float alicuota;
+
+    @Column(name = "AlicuotaLetras", nullable = false)
+    private String alicuotaLetras;
 }

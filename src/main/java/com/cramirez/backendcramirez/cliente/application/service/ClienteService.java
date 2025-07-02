@@ -361,6 +361,8 @@ public class ClienteService {
         dto.setFechaEntrega(lote.getFechaEntrega());
         dto.setSaldoLote(lote.getSaldoLote());
         dto.setSaldoLoteLetras(lote.getSaldoLoteLetras());
+        dto.setAlicuota(lote.getAlicuota());
+        dto.setAlicuotaLetras(lote.getAlicuotaLetras());
 
         dto.setTipoProyecto(obtenerTexto(tipoProyectoRepository.findById(lote.getIdTipoProyecto()), "TipoProyecto"));
         dto.setUbicacion(obtenerTexto(ubicacionRepository.findById(lote.getIdUbicacion()), "Ubicacion"));

@@ -1,4 +1,5 @@
 package com.cramirez.backendcramirez.lote.dto;
+import jakarta.persistence.Column;
 import lombok.Data;
 
 
@@ -47,7 +48,8 @@ public class LoteDTO {
     private Float saldoLote;
     private String saldoLoteLetras;
     private String fechaEntrega;
-
+    private Float alicuota;
+    private String alicuotaLetras;
     //-----------------------------------
     private String tipoProyecto;
     private String ubicacion;
