@@ -1,7 +1,9 @@
 package com.cramirez.backendcramirez.lote.application.service;
 import com.cramirez.backendcramirez.cliente.domain.entity.Cliente;
 import com.cramirez.backendcramirez.cliente.infrastructure.repository.ClienteRepository;
+import com.cramirez.backendcramirez.lote.domain.entity.Cuota;
 import com.cramirez.backendcramirez.lote.domain.entity.CuotaExtraordinaria;
+import com.cramirez.backendcramirez.lote.dto.CuotaDTO;
 import com.cramirez.backendcramirez.lote.dto.CuotaExtraordinariaDTO;
 import com.cramirez.backendcramirez.lote.infrastructure.repository.CuotaExtraordinariaRepository;
 import com.cramirez.backendcramirez.localizacion.infrastructure.repository.UbicacionRepository;
@@ -9,6 +11,7 @@ import com.cramirez.backendcramirez.lote.domain.entity.Lindero;
 import com.cramirez.backendcramirez.lote.domain.entity.Lote;
 import com.cramirez.backendcramirez.lote.dto.LinderoDTO;
 import com.cramirez.backendcramirez.lote.dto.LoteDTO;
+import com.cramirez.backendcramirez.lote.infrastructure.repository.CuotaRepository;
 import com.cramirez.backendcramirez.lote.infrastructure.repository.LinderoRepository;
 import com.cramirez.backendcramirez.lote.infrastructure.repository.LoteRepository;
 import com.cramirez.backendcramirez.metadata.infrastructure.repository.TipoContratoRepository;
@@ -30,9 +33,10 @@ public class LoteService {
     private final TipoContratoRepository tipoContratoRepository;
     private final CuotaExtraordinariaRepository cuotaExtraordinariaRepository;
     private final LinderoRepository linderoRepository;
+    private final CuotaRepository cuotaRepository;
 
     @Autowired
-    public LoteService(LoteRepository loteRepository, ClienteRepository clienteRepository, TipoContratoRepository tipoContratoRepository, UbicacionRepository ubicacionRepository, TipoProyectoRepository tipoProyectoRepository, CuotaExtraordinariaRepository cuotaExtraordinariaRepository, LinderoRepository linderoRepository) {
+    public LoteService(LoteRepository loteRepository, ClienteRepository clienteRepository, TipoContratoRepository tipoContratoRepository, UbicacionRepository ubicacionRepository, TipoProyectoRepository tipoProyectoRepository, CuotaExtraordinariaRepository cuotaExtraordinariaRepository, LinderoRepository linderoRepository, CuotaRepository cuotaRepository) {
         this.loteRepository = loteRepository;
         this.clienteRepository = clienteRepository;
         this.tipoProyectoRepository = tipoProyectoRepository;
@@ -40,6 +44,7 @@ public class LoteService {
         this.tipoContratoRepository = tipoContratoRepository;
         this.cuotaExtraordinariaRepository = cuotaExtraordinariaRepository;
         this.linderoRepository = linderoRepository;
+        this.cuotaRepository = cuotaRepository;
     }
 
     public List<LoteDTO> getAllLotes() {
@@ -128,8 +133,6 @@ public class LoteService {
         lote.setEstadoCuenta(dto.getEstadoCuenta());
         lote.setMontoDeudaLetra(dto.getMontoDeudaLetra());
         lote.setFechaEntrega(dto.getFechaEntrega());
-        lote.setSaldoLote(dto.getSaldoLote());
-        lote.setSaldoLoteLetras(dto.getSaldoLoteLetras());
         lote.setAlicuota(dto.getAlicuota());
         lote.setAlicuotaLetras(dto.getAlicuotaLetras());
 
@@ -175,8 +178,6 @@ public class LoteService {
         dto.setEstadoCuenta(lote.getEstadoCuenta());
         dto.setMontoDeudaLetra(lote.getMontoDeudaLetra());
         dto.setFechaEntrega(lote.getFechaEntrega());
-        dto.setSaldoLote(lote.getSaldoLote());
-        dto.setSaldoLoteLetras(lote.getSaldoLoteLetras());
         dto.setAlicuota(lote.getAlicuota());
         dto.setAlicuotaLetras(lote.getAlicuotaLetras());
 
@@ -195,6 +196,10 @@ public class LoteService {
                 .collect(Collectors.toList());
         dto.setCuotasExtraordinarias(cuotaDTOs);
 
+        cuotaRepository.findByIdLote(lote.getIdLote())
+                .map(this::convertirACuotaDTO)
+                .ifPresent(dto::setCuota);
+
         return dto;
     }
 
@@ -209,13 +214,35 @@ public class LoteService {
         return dto;
     }
 
-    private CuotaExtraordinariaDTO convertirACuotaDTO(CuotaExtraordinaria cuota) {
+    private CuotaExtraordinariaDTO convertirACuotaDTO(CuotaExtraordinaria cuotaextraordinaria) {
         CuotaExtraordinariaDTO dto = new CuotaExtraordinariaDTO();
-        dto.setIdCuotaExtraordinaria(cuota.getIdCuotaExtraordinaria());
+        dto.setIdCuotaExtraordinaria(cuotaextraordinaria.getIdCuotaExtraordinaria());
+        dto.setIdLote(cuotaextraordinaria.getIdLote());
+        dto.setCantidadCuotaExtraordinaria(cuotaextraordinaria.getCantidadCuotaExtraordinaria());
+        dto.setMontoCuotaExtraordinaria(cuotaextraordinaria.getMontoCuotaExtraordinaria());
+        dto.setMediosPago(cuotaextraordinaria.getMediosPago());
+        return dto;
+    }
+
+    public CuotaDTO convertirACuotaDTO(Cuota cuota) {
+        CuotaDTO dto = new CuotaDTO();
         dto.setIdLote(cuota.getIdLote());
-        dto.setCantidadCuotaExtraordinaria(cuota.getCantidadCuotaExtraordinaria());
-        dto.setMontoCuotaExtraordinaria(cuota.getMontoCuotaExtraordinaria());
-        dto.setMediosPago(cuota.getMediosPago());
+        dto.setIdCuota(cuota.getIdCuota());
+        dto.setLetrasPendientePago(cuota.getLetrasPendientePago());
+        dto.setCuentaRecaudadora(cuota.getCuentaRecaudadora());
+        dto.setCuotaInicialIncluyeSeparacion(cuota.getCuotaInicialIncluyeSeparacion());
+        dto.setCuotaInicialIncluyeSeparacionLetras(cuota.getCuotaInicialIncluyeSeparacionLetras());
+        dto.setMontoCuotas(cuota.getMontoCuotas());
+        dto.setMontoCuotaLetras(cuota.getMontoCuotaLetras());
+        dto.setFechaPago(cuota.getFechaPago());
+        dto.setCuotaInicialBanco(cuota.getCuotaInicialBanco());
+        dto.setCantidadCuotas(cuota.getCantidadCuotas());
+        dto.setCantidadCuotaLetras(cuota.getCantidadCuotaLetras());
+        dto.setCantidadCuotaCuentaRecaudadora(cuota.getCantidadCuotaCuentaRecaudadora());
+        dto.setCantidadCuotaBanco(cuota.getCantidadCuotaBanco());
+        dto.setCuotaPendientePago(cuota.getCuotaPendientePago());
+        dto.setSaldoLote(cuota.getSaldoLote());
+        dto.setSaldoLoteLetras(cuota.getSaldoLoteLetras());
         return dto;
     }
 }

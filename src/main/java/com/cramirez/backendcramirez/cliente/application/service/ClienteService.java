@@ -359,8 +359,6 @@ public class ClienteService {
         dto.setEstadoCuenta(lote.getEstadoCuenta());
         dto.setMontoDeudaLetra(lote.getMontoDeudaLetra());
         dto.setFechaEntrega(lote.getFechaEntrega());
-        dto.setSaldoLote(lote.getSaldoLote());
-        dto.setSaldoLoteLetras(lote.getSaldoLoteLetras());
         dto.setAlicuota(lote.getAlicuota());
         dto.setAlicuotaLetras(lote.getAlicuotaLetras());
 
@@ -401,6 +399,8 @@ public class ClienteService {
             dto.setCantidadCuotaCuentaRecaudadora(cuota.getCantidadCuotaCuentaRecaudadora());
             dto.setCantidadCuotaBanco(cuota.getCantidadCuotaBanco());
             dto.setCuotaPendientePago(cuota.getCuotaPendientePago());
+            dto.setSaldoLote(cuota.getSaldoLote());
+            dto.setSaldoLoteLetras(cuota.getSaldoLoteLetras());
             return dto;
     }
 
