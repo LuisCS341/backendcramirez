@@ -51,7 +51,7 @@ public class Cuota {
     private String cantidadCuotaCuentaRecaudadora;
 
     @Column(name = "CantidadCuotaBanco", nullable = false)
-    private Float cantidadCuotaBanco;
+    private String cantidadCuotaBanco;
 
     @Column(name = "CuotaPendientePago", nullable = false)
     private String cuotaPendientePago;
