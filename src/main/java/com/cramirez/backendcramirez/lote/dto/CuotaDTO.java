@@ -22,9 +22,9 @@ public class CuotaDTO {
     private String fechaPago;
     private String cuotaInicialBanco;
 
-    private int cantidadCuotas;
+    private String cantidadCuotas;
     private String cantidadCuotaLetras;
     private String cantidadCuotaCuentaRecaudadora;
     private Float cantidadCuotaBanco;
-    private Float cuotaPendientePago;
+    private String cuotaPendientePago;
 }
