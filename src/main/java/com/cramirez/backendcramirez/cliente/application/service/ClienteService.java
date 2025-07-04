@@ -140,8 +140,6 @@ public class ClienteService {
             conyuge.setOcupacionConyuge(conyugeDTO.getOcupacionConyuge());
             conyuge.setNombresApellidosConyuge(conyugeDTO.getNombresApellidosConyuge());
             conyuge.setDireccionConyuge(conyugeDTO.getDireccionConyuge());
-            conyuge.setCorreoElectronicoConyuge(conyugeDTO.getCorreoElectronicoConyuge());
-            conyuge.setCelularConyuge(conyugeDTO.getCelularConyuge());
             conyuge.setNumeroIdentificacionConyuge(conyugeDTO.getNumeroIdentificacionConyuge());
             clienteConyugeRepository.save(conyuge);
         }
@@ -154,8 +152,6 @@ public class ClienteService {
             copropietario.setOcupacionCopropietarios(copropietarioDTO.getOcupacionCopropietarios());
             copropietario.setNombresApellidosCopropietarios(copropietarioDTO.getNombresApellidosCopropietarios());
             copropietario.setDireccionCopropietarios(copropietarioDTO.getDireccionCopropietarios());
-            copropietario.setCorreoElectronicoCopropietarios(copropietarioDTO.getCorreoElectronicoCopropietarios());
-            copropietario.setCelularCopropietarios(copropietarioDTO.getCelularCopropietarios());
             copropietario.setNumeroIdentificacionCopropietarios(copropietarioDTO.getNumeroIdentificacionCopropietarios());
             copropietario.setDescripcionEstadoCivilCopropietarios(copropietarioDTO.getDescripcionEstadoCivilCopropietarios());
             copropietarioRepository.save(copropietario);
@@ -552,7 +548,6 @@ public class ClienteService {
         dto.setIdCliente(clienteConyuge.getIdCliente());
         dto.setIdClienteConyuge(clienteConyuge.getIdClienteConyuge());
         dto.setIdNacionalidadConyuge(clienteConyuge.getIdNacionalidadConyuge());
-        dto.setIdPrefijoConyuge(clienteConyuge.getIdPrefijoConyuge());
         dto.setOcupacionConyuge(clienteConyuge.getOcupacionConyuge());
         dto.setIdIdentificacionConyuge(clienteConyuge.getIdIdentificacionConyuge());
         dto.setIdResidenciaConyuge(clienteConyuge.getIdResidenciaConyuge());
@@ -562,13 +557,10 @@ public class ClienteService {
         dto.setIdDistritoConyuge(clienteConyuge.getIdDistritoConyuge());
         dto.setNombresApellidosConyuge(clienteConyuge.getNombresApellidosConyuge());
         dto.setDireccionConyuge(clienteConyuge.getDireccionConyuge());
-        dto.setCorreoElectronicoConyuge(clienteConyuge.getCorreoElectronicoConyuge());
-        dto.setCelularConyuge(clienteConyuge.getCelularConyuge());
         dto.setNumeroIdentificacionConyuge(clienteConyuge.getNumeroIdentificacionConyuge());
 
 
         dto.setOperarioConyuge(obtenerTexto(operarioRepository.findById(clienteConyuge.getIdOperarioConyuge()), "TipoOperario"));
-        dto.setPrefijoPaisConyuge(obtenerTexto(prefijotelefonicoRepository.findById(clienteConyuge.getIdPrefijoConyuge()), "PrefijoPais"));
         dto.setDocumentoIdentificacionConyuge(obtenerTexto(identificacionRepository.findById(clienteConyuge.getIdIdentificacionConyuge()), "DocumentoIdentificacion"));
         dto.setNacionalidadConyuge(obtenerTexto(nacionalidadRepository.findById(clienteConyuge.getIdNacionalidadConyuge()), "NombreNacionalidad"));
         dto.setResidenciaConyuge(obtenerTexto(residenciaRepository.findById(clienteConyuge.getIdResidenciaConyuge()), "Residencia"));
@@ -585,7 +577,6 @@ public class ClienteService {
         dto.setIdCopropietario(copropietario.getIdCopropietario());
         dto.setIdClienteCopropietarios(copropietario.getIdClienteCopropietarios());
         dto.setIdResidenciaCopropietarios(copropietario.getIdResidenciaCopropietarios());
-        dto.setIdPrefijoCopropietarios(copropietario.getIdPrefijoCopropietarios());
         dto.setIdOperarioCopropietarios(copropietario.getIdOperarioCopropietarios());
         dto.setOcupacionCopropietarios(copropietario.getOcupacionCopropietarios());
         dto.setIdDepartamentoCopropietarios(copropietario.getIdDepartamentoCopropietarios());
@@ -596,12 +587,9 @@ public class ClienteService {
         dto.setIdIdentificacionCopropietarios(copropietario.getIdIdentificacionCopropietarios());
         dto.setNombresApellidosCopropietarios(copropietario.getNombresApellidosCopropietarios());
         dto.setDireccionCopropietarios(copropietario.getDireccionCopropietarios());
-        dto.setCorreoElectronicoCopropietarios(copropietario.getCorreoElectronicoCopropietarios());
-        dto.setCelularCopropietarios(copropietario.getCelularCopropietarios());
         dto.setNumeroIdentificacionCopropietarios(copropietario.getNumeroIdentificacionCopropietarios());
 
         dto.setOperarioCopropietarios(obtenerTexto(operarioRepository.findById(copropietario.getIdOperarioCopropietarios()), "TipoOperario"));
-        dto.setPrefijoPaisCopropietarios(obtenerTexto(prefijotelefonicoRepository.findById(copropietario.getIdPrefijoCopropietarios()), "PrefijoPais"));
         dto.setDocumentoIdentificacionCopropietarios(obtenerTexto(identificacionRepository.findById(copropietario.getIdIdentificacionCopropietarios()), "DocumentoIdentificacion"));
         dto.setEstadoCivilCopropietarios(obtenerTexto(estadoCivilRepository.findById(copropietario.getIdEstadoCivilCopropietarios()), "EstadoCivil"));
         dto.setNacionalidadCopropietarios(obtenerTexto(nacionalidadRepository.findById(copropietario.getIdNacionalidadCopropietarios()), "NombreNacionalidad"));
