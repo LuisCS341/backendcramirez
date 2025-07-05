@@ -28,7 +28,7 @@ public class LoteDTO {
     private Long rucVendedor;
     private String direccionVendedor;
     private String representanteLegalVendedor;
-    private Long dniVendedor;
+    private String dniVendedor;
     private Long numeroPartidaPoderVendedor;
     private String moneda;
     private String numCuenta;

@@ -72,7 +72,7 @@ public class Lote {
     private String representanteLegalVendedor;
 
     @Column(name = "DNIVendedor", nullable = false)
-    private Long dniVendedor;
+    private String dniVendedor;
 
     @Column(name = "NPartidaPoderVendedor",  nullable = true)
     private Long numeroPartidaPoderVendedor;
