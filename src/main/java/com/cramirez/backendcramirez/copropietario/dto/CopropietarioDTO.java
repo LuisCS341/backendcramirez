@@ -15,8 +15,6 @@ public class CopropietarioDTO {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int idResidenciaCopropietarios;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private int idPrefijoCopropietarios;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int idDepartamentoCopropietarios;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int idProvinciaCopropietarios;
@@ -33,8 +31,6 @@ public class CopropietarioDTO {
 
     private String nombresApellidosCopropietarios;
     private String direccionCopropietarios;
-    private String correoElectronicoCopropietarios;
-    private String celularCopropietarios;
     private String numeroIdentificacionCopropietarios;
     private String descripcionEstadoCivilCopropietarios;
 

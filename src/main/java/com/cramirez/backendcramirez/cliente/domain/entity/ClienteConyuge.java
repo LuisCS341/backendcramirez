@@ -26,9 +26,6 @@ public class ClienteConyuge {
     @Column(name = "ID_Nacionalidad",nullable = false)
     private int idNacionalidadConyuge;
 
-    @Column(name = "ID_Prefijo",nullable = false)
-    private int idPrefijoConyuge;
-
     @Column(name = "ID_Identificacion",nullable = false)
     private int idIdentificacionConyuge;
 
@@ -52,12 +49,6 @@ public class ClienteConyuge {
 
     @Column(name = "DireccionConyugeCliente",nullable = false)
     private String DireccionConyuge;
-
-    @Column(name = "CorreoElectronicoConyugeCliente",nullable = false)
-    private String CorreoElectronicoConyuge;
-
-    @Column(name = "CelularConyugeCliente",nullable = false)
-    private String CelularConyuge;
 
     @Column(name = "OcupacionConyugeCliente",nullable = false)
     private String ocupacionConyuge;

@@ -28,9 +28,6 @@ public class CopropietarioConyuge {
     @Column(name = "ID_Operario")
     private int idOperarioCopropietarioConyuge;
 
-    @Column(name = "ID_Prefijo", nullable = false)
-    private int idPrefijoCopropietarioConyuge;
-
 
     @Column(name = "ID_Distrito", nullable = false)
     private int idDistritoCopropietarioConyuge;
@@ -57,11 +54,6 @@ public class CopropietarioConyuge {
     @Column(name = "Direccion",nullable = false)
     private String direccionCopropietarioConyuge;
 
-    @Column(name = "Correo_Electronico", nullable = false)
-    private String correoElectronicoCopropietarioConyuge;
-
-    @Column(name = "Celular",nullable = false)
-    private String celularCopropietarioConyuge;
 
     @Column(name = "NumeroIdentificacion", nullable = false)
     private String numeroIdentificacionCopropietarioConyuge;

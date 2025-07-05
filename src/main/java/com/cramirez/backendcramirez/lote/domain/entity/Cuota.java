@@ -56,5 +56,10 @@ public class Cuota {
     @Column(name = "CuotaPendientePago", nullable = false)
     private String cuotaPendientePago;
 
+    @Column(name = "SaldoLote", nullable = false)
+    private Float saldoLote;
+
+    @Column(name = "SaldoLoteLetras", nullable = false)
+    private String saldoLoteLetras;
 }
 

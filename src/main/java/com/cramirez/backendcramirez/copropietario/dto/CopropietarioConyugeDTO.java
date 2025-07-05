@@ -10,30 +10,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @Data
-@JsonPropertyOrder({
-        "nombresApellidosCopropietarioConyuge",
-        "ocupacionCopropietarioConyuge",
-        "documentoIdentificacionCopropietarioConyuge",
-        "numeroIdentificacionCopropietarioConyuge",
-        "nacionalidadCopropietarioConyuge",
-        "residenciaCopropietarioConyuge",
-        "direccionCopropietarioConyuge",
-        "departamentoCopropietarioConyuge",
-        "provinciaCopropietarioConyuge",
-        "distritoCopropietarioConyuge",
-        "correoElectronicoCopropietarioConyuge",
-        "prefijoPaisCopropietarioConyuge",
-        "celularClienteCopropietarioConyuge",
-        "operarioCopropietarioConyuge"
-})
+
 public class CopropietarioConyugeDTO {
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int idClienteCopropietarioConyuge;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int idResidenciaCopropietarioConyuge;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private int idPrefijoCopropietarioConyuge;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int idDistritoCopropietarioConyuge;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -51,8 +33,6 @@ public class CopropietarioConyugeDTO {
 
     private String nombresApellidosCopropietarioConyuge;
     private String direccionCopropietarioConyuge;
-    private String correoElectronicoCopropietarioConyuge;
-    private String celularCopropietarioConyuge;
     private String numeroIdentificacionCopropietarioConyuge;
     private String OperarioCopropietarioConyuge;
     private String PrefijoPaisCopropietarioConyuge;

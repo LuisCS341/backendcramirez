@@ -95,7 +95,6 @@ public class ClienteConyugeService {
         dto.setIdClienteConyuge(clienteConyuge.getIdClienteConyuge());
         dto.setIdCliente(clienteConyuge.getIdCliente());
         dto.setIdNacionalidadConyuge(clienteConyuge.getIdNacionalidadConyuge());
-        dto.setIdPrefijoConyuge(clienteConyuge.getIdPrefijoConyuge());
         dto.setOcupacionConyuge(clienteConyuge.getOcupacionConyuge());
         dto.setIdIdentificacionConyuge(clienteConyuge.getIdIdentificacionConyuge());
         dto.setIdResidenciaConyuge(clienteConyuge.getIdResidenciaConyuge());
@@ -105,13 +104,10 @@ public class ClienteConyugeService {
         dto.setIdDistritoConyuge(clienteConyuge.getIdDistritoConyuge());
         dto.setNombresApellidosConyuge(clienteConyuge.getNombresApellidosConyuge());
         dto.setDireccionConyuge(clienteConyuge.getDireccionConyuge());
-        dto.setCorreoElectronicoConyuge(clienteConyuge.getCorreoElectronicoConyuge());
-        dto.setCelularConyuge(clienteConyuge.getCelularConyuge());
         dto.setNumeroIdentificacionConyuge(clienteConyuge.getNumeroIdentificacionConyuge());
 
 
         dto.setOperarioConyuge(obtenerTexto(operarioRepository.findById(clienteConyuge.getIdOperarioConyuge()), "TipoOperario"));
-        dto.setPrefijoPaisConyuge(obtenerTexto(prefijotelefonicoRepository.findById(clienteConyuge.getIdPrefijoConyuge()), "PrefijoPais"));
         dto.setDocumentoIdentificacionConyuge(obtenerTexto(identificacionRepository.findById(clienteConyuge.getIdIdentificacionConyuge()), "DocumentoIdentificacion"));
         dto.setNacionalidadConyuge(obtenerTexto(nacionalidadRepository.findById(clienteConyuge.getIdNacionalidadConyuge()), "NombreNacionalidad"));
         dto.setResidenciaConyuge(obtenerTexto(residenciaRepository.findById(clienteConyuge.getIdResidenciaConyuge()), "Residencia"));
@@ -146,7 +142,6 @@ public class ClienteConyugeService {
         clienteConyuge.setIdCliente(dto.getIdCliente());
         clienteConyuge.setIdClienteConyuge(dto.getIdClienteConyuge());
         clienteConyuge.setIdNacionalidadConyuge(dto.getIdNacionalidadConyuge());
-        clienteConyuge.setIdPrefijoConyuge(dto.getIdPrefijoConyuge());
         clienteConyuge.setOcupacionConyuge(dto.getOcupacionConyuge());
         clienteConyuge.setIdIdentificacionConyuge(dto.getIdIdentificacionConyuge());
         clienteConyuge.setIdResidenciaConyuge(dto.getIdResidenciaConyuge());
@@ -156,8 +151,6 @@ public class ClienteConyugeService {
         clienteConyuge.setIdDistritoConyuge(dto.getIdDistritoConyuge());
         clienteConyuge.setNombresApellidosConyuge(dto.getNombresApellidosConyuge());
         clienteConyuge.setDireccionConyuge(dto.getDireccionConyuge());
-        clienteConyuge.setCorreoElectronicoConyuge(dto.getCorreoElectronicoConyuge());
-        clienteConyuge.setCelularConyuge(dto.getCelularConyuge());
         clienteConyuge.setNumeroIdentificacionConyuge(dto.getNumeroIdentificacionConyuge());
     }
 }

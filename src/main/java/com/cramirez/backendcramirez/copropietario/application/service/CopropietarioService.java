@@ -68,7 +68,6 @@ public class CopropietarioService {
                 .map(copropietario -> {
                     copropietario.setIdClienteCopropietarios(copropietarioDTO.getIdClienteCopropietarios());
                     copropietario.setIdResidenciaCopropietarios(copropietarioDTO.getIdResidenciaCopropietarios());
-                    copropietario.setIdPrefijoCopropietarios(copropietarioDTO.getIdPrefijoCopropietarios());
                     copropietario.setIdOperarioCopropietarios(copropietarioDTO.getIdOperarioCopropietarios());
                     copropietario.setOcupacionCopropietarios(copropietarioDTO.getOcupacionCopropietarios());
                     copropietario.setIdDepartamentoCopropietarios(copropietarioDTO.getIdDepartamentoCopropietarios());
@@ -79,8 +78,6 @@ public class CopropietarioService {
                     copropietario.setIdIdentificacionCopropietarios(copropietarioDTO.getIdIdentificacionCopropietarios());
                     copropietario.setNombresApellidosCopropietarios(copropietarioDTO.getNombresApellidosCopropietarios());
                     copropietario.setDireccionCopropietarios(copropietarioDTO.getDireccionCopropietarios());
-                    copropietario.setCorreoElectronicoCopropietarios(copropietarioDTO.getCorreoElectronicoCopropietarios());
-                    copropietario.setCelularCopropietarios(copropietarioDTO.getCelularCopropietarios());
                     copropietario.setNumeroIdentificacionCopropietarios(copropietarioDTO.getNumeroIdentificacionCopropietarios());
 
                     Copropietario copropietarioActualizado = copropietarioRepository.save(copropietario);
@@ -98,7 +95,6 @@ public class CopropietarioService {
         dto.setIdCopropietario(copropietario.getIdCopropietario());
         dto.setIdClienteCopropietarios(copropietario.getIdClienteCopropietarios());
         dto.setIdResidenciaCopropietarios(copropietario.getIdResidenciaCopropietarios());
-        dto.setIdPrefijoCopropietarios(copropietario.getIdPrefijoCopropietarios());
         dto.setIdOperarioCopropietarios(copropietario.getIdOperarioCopropietarios());
         dto.setOcupacionCopropietarios(copropietario.getOcupacionCopropietarios());
         dto.setIdDepartamentoCopropietarios(copropietario.getIdDepartamentoCopropietarios());
@@ -109,13 +105,10 @@ public class CopropietarioService {
         dto.setIdIdentificacionCopropietarios(copropietario.getIdIdentificacionCopropietarios());
         dto.setNombresApellidosCopropietarios(copropietario.getNombresApellidosCopropietarios());
         dto.setDireccionCopropietarios(copropietario.getDireccionCopropietarios());
-        dto.setCorreoElectronicoCopropietarios(copropietario.getCorreoElectronicoCopropietarios());
-        dto.setCelularCopropietarios(copropietario.getCelularCopropietarios());
         dto.setNumeroIdentificacionCopropietarios(copropietario.getNumeroIdentificacionCopropietarios());
         dto.setDescripcionEstadoCivilCopropietarios(copropietario.getDescripcionEstadoCivilCopropietarios());
 
         dto.setOperarioCopropietarios(obtenerTexto(operarioRepository.findById(copropietario.getIdOperarioCopropietarios()), "TipoOperario"));
-        dto.setPrefijoPaisCopropietarios(obtenerTexto(prefijotelefonicoRepository.findById(copropietario.getIdPrefijoCopropietarios()), "PrefijoPais"));
         dto.setDocumentoIdentificacionCopropietarios(obtenerTexto(identificacionRepository.findById(copropietario.getIdIdentificacionCopropietarios()), "DocumentoIdentificacion"));
         dto.setEstadoCivilCopropietarios(obtenerTexto(estadoCivilRepository.findById(copropietario.getIdEstadoCivilCopropietarios()), "EstadoCivil"));
         dto.setNacionalidadCopropietarios(obtenerTexto(nacionalidadRepository.findById(copropietario.getIdNacionalidadCopropietarios()), "NombreNacionalidad"));
@@ -141,7 +134,6 @@ public class CopropietarioService {
         Copropietario copropietario = new Copropietario();
         copropietario.setIdClienteCopropietarios(dto.getIdClienteCopropietarios());
         copropietario.setIdResidenciaCopropietarios(dto.getIdResidenciaCopropietarios());
-        copropietario.setIdPrefijoCopropietarios(dto.getIdPrefijoCopropietarios());
         copropietario.setOcupacionCopropietarios(dto.getOcupacionCopropietarios());
         copropietario.setIdOperarioCopropietarios(dto.getIdOperarioCopropietarios());
         copropietario.setIdDepartamentoCopropietarios(dto.getIdDepartamentoCopropietarios());
@@ -152,8 +144,6 @@ public class CopropietarioService {
         copropietario.setIdIdentificacionCopropietarios(dto.getIdIdentificacionCopropietarios());
         copropietario.setNombresApellidosCopropietarios(dto.getNombresApellidosCopropietarios());
         copropietario.setDireccionCopropietarios(dto.getDireccionCopropietarios());
-        copropietario.setCorreoElectronicoCopropietarios(dto.getCorreoElectronicoCopropietarios());
-        copropietario.setCelularCopropietarios(dto.getCelularCopropietarios());
         copropietario.setNumeroIdentificacionCopropietarios(dto.getNumeroIdentificacionCopropietarios());
         copropietario.setDescripcionEstadoCivilCopropietarios(dto.getDescripcionEstadoCivilCopropietarios());
         return copropietario;
