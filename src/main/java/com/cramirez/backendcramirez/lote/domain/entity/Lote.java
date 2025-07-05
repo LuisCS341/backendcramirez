@@ -125,12 +125,6 @@ public class Lote {
     @Column(name = "FechaEntrega", nullable = false)
     private String fechaEntrega;
 
-    @Column(name = "SaldoLote", nullable = false)
-    private Float saldoLote;
-
-    @Column(name = "SaldoLoteLetras", nullable = false)
-    private String saldoLoteLetras;
-
     @Column(name = "Alicuota", nullable = false)
     private Float alicuota;
 
