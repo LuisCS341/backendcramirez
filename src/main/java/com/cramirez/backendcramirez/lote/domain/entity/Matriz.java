@@ -16,35 +16,35 @@ public class Matriz {
     private int idLote;
 
     @Column(name = "ID_Distrito", nullable = false)
-    private int idDistrito;
+    private int idDistritoMatriz;
 
     @Column(name = "ID_Provincia", nullable = false)
-    private int idProvincia;
+    private int idProvinciaMatriz;
 
     @Column(name = "ID_Departamento", nullable = false)
-    private int idDepartamento;
+    private int idDepartamentoMatriz;
 
     @Column(name = "Ubicacion", nullable = false)
-    private String ubicacion;
+    private String ubicacionMatriz;
 
     @Column(name = "Areamatrizhas", nullable = false)
-    private String areaMatrizHas;
+    private String areaMatrizHasMatriz;
 
     @Column(name = "Registro", nullable = false)
-    private String registro;
+    private String registroMatriz;
+
+    @Column(name = "Unidadcatastral", nullable = false)
+    private String unidadCatastralMatriz;
+
+    @Column(name = "Urbanizacion", nullable = false)
+    private String urbanizacionMatriz;
+
+    @Column(name = "Compraventa", nullable = false)
+    private String compraventaMatriz;
+
+    @Column(name = "Situacionlegal", nullable = false)
+    private String situacionLegalMatriz;
 
     @Column(name = "Partidamatriz", nullable = false)
     private String partidaMatriz;
-
-    @Column(name = "Unidadcatastral", nullable = false)
-    private String unidadCatastral;
-
-    @Column(name = "Urbanizacion", nullable = false)
-    private String urbanizacion;
-
-    @Column(name = "Compraventa", nullable = false)
-    private String compraventa;
-
-    @Column(name = "Situacionlegal", nullable = false)
-    private String situacionLegal;
 }

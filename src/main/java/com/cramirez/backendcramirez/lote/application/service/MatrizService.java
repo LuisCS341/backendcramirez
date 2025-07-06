@@ -40,17 +40,17 @@ public class MatrizService {
         MatrizDTO dto = new MatrizDTO();
         dto.setIdMatriz(matriz.getIdMatriz());
         dto.setIdLote(matriz.getIdLote());
-        dto.setIdDepartamento(matriz.getIdDepartamento());
-        dto.setIdProvincia(matriz.getIdProvincia());
-        dto.setIdDistrito(matriz.getIdDistrito());
-        dto.setUbicacion(matriz.getUbicacion());
-        dto.setAreaMatrizHas(matriz.getAreaMatrizHas());
-        dto.setRegistro(matriz.getRegistro());
+        dto.setIdDepartamentoMatriz(matriz.getIdDepartamentoMatriz());
+        dto.setIdProvinciaMatriz(matriz.getIdProvinciaMatriz());
+        dto.setIdDistritoMatriz(matriz.getIdDistritoMatriz());
+        dto.setUbicacionMatriz(matriz.getUbicacionMatriz());
+        dto.setAreaMatrizHasMatriz(matriz.getAreaMatrizHasMatriz());
+        dto.setRegistroMatriz(matriz.getRegistroMatriz());
         dto.setPartidaMatriz(matriz.getPartidaMatriz());
-        dto.setUnidadCatastral(matriz.getUnidadCatastral());
-        dto.setUrbanizacion(matriz.getUrbanizacion());
-        dto.setCompraventa(matriz.getCompraventa());
-        dto.setSituacionLegal(matriz.getSituacionLegal());
+        dto.setUnidadCatastralMatriz(matriz.getUnidadCatastralMatriz());
+        dto.setUrbanizacionMatriz(matriz.getUrbanizacionMatriz());
+        dto.setCompraventaMatriz(matriz.getCompraventaMatriz());
+        dto.setSituacionLegalMatriz(matriz.getSituacionLegalMatriz());
         return dto;
     }
 
@@ -58,17 +58,17 @@ public class MatrizService {
         Matriz matriz = new Matriz();
         matriz.setIdMatriz(dto.getIdMatriz());
         matriz.setIdLote(dto.getIdLote());
-        matriz.setIdDepartamento(dto.getIdDepartamento());
-        matriz.setIdProvincia(dto.getIdProvincia());
-        matriz.setIdDistrito(dto.getIdDistrito());
-        matriz.setUbicacion(dto.getUbicacion());
-        matriz.setAreaMatrizHas(dto.getAreaMatrizHas());
-        matriz.setRegistro(dto.getRegistro());
+        matriz.setIdDepartamentoMatriz(dto.getIdDepartamentoMatriz());
+        matriz.setIdProvinciaMatriz(dto.getIdProvinciaMatriz());
+        matriz.setIdDistritoMatriz(dto.getIdDistritoMatriz());
+        matriz.setUbicacionMatriz(dto.getUbicacionMatriz());
+        matriz.setAreaMatrizHasMatriz(dto.getAreaMatrizHasMatriz());
+        matriz.setRegistroMatriz(dto.getRegistroMatriz());
         matriz.setPartidaMatriz(dto.getPartidaMatriz());
-        matriz.setUnidadCatastral(dto.getUnidadCatastral());
-        matriz.setUrbanizacion(dto.getUrbanizacion());
-        matriz.setCompraventa(dto.getCompraventa());
-        matriz.setSituacionLegal(dto.getSituacionLegal());
+        matriz.setUnidadCatastralMatriz(dto.getUnidadCatastralMatriz());
+        matriz.setUrbanizacionMatriz(dto.getUrbanizacionMatriz());
+        matriz.setCompraventaMatriz(dto.getCompraventaMatriz());
+        matriz.setSituacionLegalMatriz(dto.getSituacionLegalMatriz());
         return matriz;
     }
 }
