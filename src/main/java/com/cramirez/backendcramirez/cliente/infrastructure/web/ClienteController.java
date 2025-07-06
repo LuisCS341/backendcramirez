@@ -1,6 +1,7 @@
 package com.cramirez.backendcramirez.cliente.infrastructure.web;
-import com.cramirez.backendcramirez.cliente.dto.ClienteDTO;
+
 import com.cramirez.backendcramirez.cliente.application.service.ClienteService;
+import com.cramirez.backendcramirez.cliente.dto.ClienteDTO;
 import com.cramirez.backendcramirez.cliente.dto.LoteConClienteCompletoDTO;
 import com.cramirez.backendcramirez.cliente.dto.TransferenciaClienteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,13 +73,13 @@ public class ClienteController {
     }
 
 
-    @PutMapping("/{id}")
+    @PutMapping("/editar/{idCliente}")
     public ResponseEntity<LoteConClienteCompletoDTO> editarClienteYComponentes(
-            @PathVariable int id,
+            @PathVariable int idCliente,
             @RequestBody LoteConClienteCompletoDTO loteConClienteCompletoDTO) {
 
         if (loteConClienteCompletoDTO.getCliente() == null ||
-                loteConClienteCompletoDTO.getCliente().getIdCliente() != id) {
+                loteConClienteCompletoDTO.getCliente().getIdCliente() != idCliente) {
             return ResponseEntity.badRequest().body(null);
         }
 
