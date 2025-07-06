@@ -1,7 +1,6 @@
 package com.cramirez.backendcramirez.cliente.infrastructure.web;
-
-import com.cramirez.backendcramirez.cliente.application.service.ClienteConyugeService;
 import com.cramirez.backendcramirez.cliente.dto.ClienteConyugeDTO;
+import com.cramirez.backendcramirez.cliente.application.service.ClienteConyugeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

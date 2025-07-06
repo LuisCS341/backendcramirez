@@ -1,32 +1,19 @@
 package com.cramirez.backendcramirez.cliente.application.service;
-
 import com.cramirez.backendcramirez.auth.domain.entity.Credenciales;
 import com.cramirez.backendcramirez.auth.infrastructure.repository.CredencialesRepository;
 import com.cramirez.backendcramirez.cliente.domain.entity.Cliente;
 import com.cramirez.backendcramirez.cliente.domain.entity.ClienteConyuge;
-import com.cramirez.backendcramirez.cliente.dto.ClienteConyugeDTO;
-import com.cramirez.backendcramirez.cliente.dto.ClienteDTO;
-import com.cramirez.backendcramirez.cliente.dto.LoteConClienteCompletoDTO;
-import com.cramirez.backendcramirez.cliente.dto.TransferenciaClienteDTO;
+import com.cramirez.backendcramirez.cliente.dto.*;
 import com.cramirez.backendcramirez.cliente.infrastructure.repository.ClienteConyugeRepository;
 import com.cramirez.backendcramirez.cliente.infrastructure.repository.ClienteRepository;
 import com.cramirez.backendcramirez.copropietario.domain.entity.Copropietario;
 import com.cramirez.backendcramirez.copropietario.dto.CopropietarioDTO;
 import com.cramirez.backendcramirez.copropietario.infrastructure.repository.CopropietarioRepository;
+import com.cramirez.backendcramirez.lote.domain.entity.*;
+import com.cramirez.backendcramirez.lote.dto.*;
+import com.cramirez.backendcramirez.lote.infrastructure.repository.*;
 import com.cramirez.backendcramirez.documento.infrastructure.repository.IdentificacionRepository;
 import com.cramirez.backendcramirez.localizacion.infrastructure.repository.*;
-import com.cramirez.backendcramirez.lote.domain.entity.Cuota;
-import com.cramirez.backendcramirez.lote.domain.entity.CuotaExtraordinaria;
-import com.cramirez.backendcramirez.lote.domain.entity.Lindero;
-import com.cramirez.backendcramirez.lote.domain.entity.Lote;
-import com.cramirez.backendcramirez.lote.dto.CuotaDTO;
-import com.cramirez.backendcramirez.lote.dto.CuotaExtraordinariaDTO;
-import com.cramirez.backendcramirez.lote.dto.LinderoDTO;
-import com.cramirez.backendcramirez.lote.dto.LoteDTO;
-import com.cramirez.backendcramirez.lote.infrastructure.repository.CuotaExtraordinariaRepository;
-import com.cramirez.backendcramirez.lote.infrastructure.repository.CuotaRepository;
-import com.cramirez.backendcramirez.lote.infrastructure.repository.LinderoRepository;
-import com.cramirez.backendcramirez.lote.infrastructure.repository.LoteRepository;
 import com.cramirez.backendcramirez.metadata.infrastructure.repository.EstadoCivilRepository;
 import com.cramirez.backendcramirez.metadata.infrastructure.repository.NacionalidadRepository;
 import com.cramirez.backendcramirez.metadata.infrastructure.repository.PrefijotelefonicoRepository;
@@ -62,12 +49,13 @@ public class ClienteService {
     private final TipoContratoRepository tipoContratoRepository;
     private final CuotaExtraordinariaRepository cuotaExtraordinariaRepository;
     private final LinderoRepository linderoRepository;
+    private final MatrizRepository matrizRepository;
     private final ClienteConyugeRepository clienteConyugeRepository;
     private final CuotaRepository cuotaRepository;
 
 
     @Autowired
-    public ClienteService(ClienteRepository clienteRepository, LoteRepository loteRepository, CredencialesRepository credencialesRepository, CopropietarioRepository copropietarioRepository, OperarioRepository operarioRepository, PrefijotelefonicoRepository prefijotelefonicoRepository, IdentificacionRepository identificacionRepository, EstadoCivilRepository estadoCivilRepository, NacionalidadRepository nacionalidadRepository, ResidenciaRepository residenciaRepository, DepartamentoRepository departamentoRepository, ProvinciaRepository provinciaRepository, DistritoRepository distritoRepository, TipoProyectoRepository tipoProyectoRepository, UbicacionRepository ubicacionRepository, TipoContratoRepository tipoContratoRepository, CuotaExtraordinariaRepository cuotaExtraordinariaRepository, LinderoRepository linderoRepository, ClienteConyugeRepository clienteConyugeRepository, CuotaRepository cuotaRepository) {
+    public ClienteService(ClienteRepository clienteRepository, LoteRepository loteRepository, CredencialesRepository credencialesRepository, CopropietarioRepository copropietarioRepository, OperarioRepository operarioRepository, PrefijotelefonicoRepository prefijotelefonicoRepository, IdentificacionRepository identificacionRepository, EstadoCivilRepository estadoCivilRepository, NacionalidadRepository nacionalidadRepository, ResidenciaRepository residenciaRepository, DepartamentoRepository departamentoRepository, ProvinciaRepository provinciaRepository, DistritoRepository distritoRepository, TipoProyectoRepository tipoProyectoRepository, UbicacionRepository ubicacionRepository, TipoContratoRepository tipoContratoRepository, CuotaExtraordinariaRepository cuotaExtraordinariaRepository, LinderoRepository linderoRepository, MatrizRepository matrizRepository, ClienteConyugeRepository clienteConyugeRepository, CuotaRepository cuotaRepository) {
         this.clienteRepository = clienteRepository;
         this.loteRepository = loteRepository;
         this.credencialesRepository = credencialesRepository;
@@ -86,6 +74,7 @@ public class ClienteService {
         this.tipoContratoRepository = tipoContratoRepository;
         this.cuotaExtraordinariaRepository = cuotaExtraordinariaRepository;
         this.linderoRepository = linderoRepository;
+        this.matrizRepository = matrizRepository;
         this.clienteConyugeRepository = clienteConyugeRepository;
         this.cuotaRepository = cuotaRepository;
     }
@@ -226,6 +215,27 @@ public class ClienteService {
             lindero.setPorElFrente(linderoDTO.getPorElFrente());
             lindero.setPorElFondo(linderoDTO.getPorElFondo());
             linderoRepository.save(lindero);
+        }
+    }
+
+    private void editarMatriz(MatrizDTO matrizDTO) {
+        Optional<Matriz> matrizOpt = matrizRepository.findById(matrizDTO.getIdMatriz());
+        if (matrizOpt.isPresent()) {
+            Matriz matriz = matrizOpt.get();
+            matriz.setIdMatriz(matrizDTO.getIdMatriz());
+            matriz.setIdLote(matrizDTO.getIdLote());
+            matriz.setIdDepartamento(matrizDTO.getIdDepartamento());
+            matriz.setIdProvincia(matrizDTO.getIdProvincia());
+            matriz.setIdDistrito(matrizDTO.getIdDistrito());
+            matriz.setUbicacion(matrizDTO.getUbicacion());
+            matriz.setAreaMatrizHas(matrizDTO.getAreaMatrizHas());
+            matriz.setRegistro(matrizDTO.getRegistro());
+            matriz.setPartidaMatriz(matrizDTO.getPartidaMatriz());
+            matriz.setUnidadCatastral(matrizDTO.getUnidadCatastral());
+            matriz.setUrbanizacion(matrizDTO.getUrbanizacion());
+            matriz.setCompraventa(matrizDTO.getCompraventa());
+            matriz.setSituacionLegal(matrizDTO.getSituacionLegal());
+            matrizRepository.save(matriz);
         }
     }
 
@@ -379,7 +389,13 @@ public class ClienteService {
     cuotaRepository.findByIdLote(lote.getIdLote())
             .map(this::convertirACuotaDTO)
             .ifPresent(dto::setCuota);
-    return dto;
+
+    matrizRepository.findByIdLote(lote.getIdLote())
+            .map(this::convertirAMatrizDTO)
+            .ifPresent(dto::setMatriz);
+
+
+        return dto;
     }
 
     public CuotaDTO  convertirACuotaDTO(Cuota cuota) {
@@ -412,6 +428,24 @@ public class ClienteService {
         dto.setPorLaIzquierda(lindero.getPorLaIzquierda());
         dto.setPorElFrente(lindero.getPorElFrente());
         dto.setPorElFondo(lindero.getPorElFondo());
+        return dto;
+    }
+
+    private MatrizDTO convertirAMatrizDTO(Matriz matriz) {
+        MatrizDTO dto = new MatrizDTO();
+        dto.setIdMatriz(matriz.getIdMatriz());
+        dto.setIdLote(matriz.getIdLote());
+        dto.setIdDepartamento(matriz.getIdDepartamento());
+        dto.setIdProvincia(matriz.getIdProvincia());
+        dto.setIdDistrito(matriz.getIdDistrito());
+        dto.setUbicacion(matriz.getUbicacion());
+        dto.setAreaMatrizHas(matriz.getAreaMatrizHas());
+        dto.setRegistro(matriz.getRegistro());
+        dto.setPartidaMatriz(matriz.getPartidaMatriz());
+        dto.setUnidadCatastral(matriz.getUnidadCatastral());
+        dto.setUrbanizacion(matriz.getUrbanizacion());
+        dto.setCompraventa(matriz.getCompraventa());
+        dto.setSituacionLegal(matriz.getSituacionLegal());
         return dto;
     }
 

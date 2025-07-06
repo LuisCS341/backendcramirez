@@ -55,6 +55,7 @@ public class LoteDTO {
 
     private LinderoDTO lindero;
     private CuotaDTO cuota;
+    private MatrizDTO matriz;
     private List<CuotaExtraordinariaDTO> cuotasExtraordinarias;
 
 }
