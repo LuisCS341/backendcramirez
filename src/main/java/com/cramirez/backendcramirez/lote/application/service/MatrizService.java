@@ -1,5 +1,8 @@
 package com.cramirez.backendcramirez.lote.application.service;
 
+import com.cramirez.backendcramirez.localizacion.infrastructure.repository.DepartamentoRepository;
+import com.cramirez.backendcramirez.localizacion.infrastructure.repository.DistritoRepository;
+import com.cramirez.backendcramirez.localizacion.infrastructure.repository.ProvinciaRepository;
 import com.cramirez.backendcramirez.lote.domain.entity.Matriz;
 import com.cramirez.backendcramirez.lote.dto.MatrizDTO;
 import com.cramirez.backendcramirez.lote.infrastructure.repository.MatrizRepository;
@@ -12,10 +15,16 @@ import java.util.Optional;
 public class MatrizService {
 
     private final MatrizRepository matrizRepository;
+    private final DistritoRepository distritoRepository;
+    private final ProvinciaRepository provinciaRepository;
+    private final DepartamentoRepository departamentoRepository;
 
     @Autowired
-    public MatrizService(MatrizRepository matrizRepository) {
+    public MatrizService(MatrizRepository matrizRepository, DistritoRepository distritoRepository, ProvinciaRepository provinciaRepository, DepartamentoRepository departamentoRepository) {
         this.matrizRepository = matrizRepository;
+        this.distritoRepository = distritoRepository;
+        this.provinciaRepository = provinciaRepository;
+        this.departamentoRepository = departamentoRepository;
     }
 
     public Optional<MatrizDTO> getMatrizById(Integer id) {
@@ -51,6 +60,11 @@ public class MatrizService {
         dto.setUrbanizacionMatriz(matriz.getUrbanizacionMatriz());
         dto.setCompraventaMatriz(matriz.getCompraventaMatriz());
         dto.setSituacionLegalMatriz(matriz.getSituacionLegalMatriz());
+
+        dto.setDistritoMatriz(obtenerTexto(distritoRepository.findById(matriz.getIdDistritoMatriz()), "DistritoMatriz"));
+        dto.setDepartamentoMatriz(obtenerTexto(departamentoRepository.findById(matriz.getIdProvinciaMatriz()), "ProvinciaMatriz"));
+        dto.setProvinciaMatriz(obtenerTexto(provinciaRepository.findById(matriz.getIdDepartamentoMatriz()), "DepartamentoMatriz"));
+
         return dto;
     }
 
@@ -71,4 +85,14 @@ public class MatrizService {
         matriz.setSituacionLegalMatriz(dto.getSituacionLegalMatriz());
         return matriz;
     }
+    private String obtenerTexto(Optional<?> entidad, String campo) {
+        return entidad.map(e -> {
+            try {
+                return e.getClass().getMethod("get" + campo).invoke(e).toString();
+            } catch (Exception ex) {
+                return null;
+            }
+        }).orElse(null);
+    }
 }
+

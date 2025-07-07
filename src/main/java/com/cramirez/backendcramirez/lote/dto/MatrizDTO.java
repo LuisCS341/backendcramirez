@@ -19,4 +19,7 @@ public class MatrizDTO {
     private String urbanizacionMatriz;
     private String compraventaMatriz;
     private String situacionLegalMatriz;
+    private String DistritoMatriz;
+    private String provinciaMatriz;
+    private String departamentoMatriz;
 }
