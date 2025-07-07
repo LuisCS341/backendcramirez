@@ -11,7 +11,8 @@ public class MatrizDTO {
     private int idDistritoMatriz;
     private int idProvinciaMatriz;
     private int idDepartamentoMatriz;
-    private String ubicacionMatriz;
+    private int idUbicacionMatriz;
+    private String ubicacionMatriz;;
     private String areaMatrizHasMatriz;
     private String registroMatriz;
     private String partidaMatriz;
