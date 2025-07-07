@@ -55,7 +55,7 @@ public class MatrizService {
         dto.setIdDepartamentoMatriz(matriz.getIdDepartamentoMatriz());
         dto.setIdProvinciaMatriz(matriz.getIdProvinciaMatriz());
         dto.setIdDistritoMatriz(matriz.getIdDistritoMatriz());
-        dto.setIdUbicacionMatriz(matriz.getIdUbicacionMatriz());
+        dto.setUbicacionMatriz(matriz.getUbicacionMatriz());
         dto.setAreaMatrizHasMatriz(matriz.getAreaMatrizHasMatriz());
         dto.setRegistroMatriz(matriz.getRegistroMatriz());
         dto.setPartidaMatriz(matriz.getPartidaMatriz());
@@ -67,7 +67,7 @@ public class MatrizService {
         dto.setDistritoMatriz(obtenerTexto(distritoRepository.findById(matriz.getIdDistritoMatriz()), "DistritoMatriz"));
         dto.setDepartamentoMatriz(obtenerTexto(departamentoRepository.findById(matriz.getIdProvinciaMatriz()), "ProvinciaMatriz"));
         dto.setProvinciaMatriz(obtenerTexto(provinciaRepository.findById(matriz.getIdDepartamentoMatriz()), "DepartamentoMatriz"));
-        dto.setUbicacionMatriz(obtenerTexto(ubicacionRepository.findById(matriz.getIdUbicacionMatriz()), "Ubicacion"));
+
         return dto;
     }
 
@@ -78,7 +78,7 @@ public class MatrizService {
         matriz.setIdDepartamentoMatriz(dto.getIdDepartamentoMatriz());
         matriz.setIdProvinciaMatriz(dto.getIdProvinciaMatriz());
         matriz.setIdDistritoMatriz(dto.getIdDistritoMatriz());
-        matriz.setIdUbicacionMatriz(dto.getIdUbicacionMatriz());
+        matriz.setUbicacionMatriz(dto.getUbicacionMatriz());
         matriz.setAreaMatrizHasMatriz(dto.getAreaMatrizHasMatriz());
         matriz.setRegistroMatriz(dto.getRegistroMatriz());
         matriz.setPartidaMatriz(dto.getPartidaMatriz());

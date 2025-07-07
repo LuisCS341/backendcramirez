@@ -227,7 +227,7 @@ public class ClienteService {
             matriz.setIdDepartamentoMatriz(matrizDTO.getIdDepartamentoMatriz());
             matriz.setIdProvinciaMatriz(matrizDTO.getIdProvinciaMatriz());
             matriz.setIdDistritoMatriz(matrizDTO.getIdDistritoMatriz());
-            matriz.setIdUbicacionMatriz(matrizDTO.getIdUbicacionMatriz());
+            matriz.setUbicacionMatriz(matrizDTO.getUbicacionMatriz());
             matriz.setAreaMatrizHasMatriz(matrizDTO.getAreaMatrizHasMatriz());
             matriz.setRegistroMatriz(matrizDTO.getRegistroMatriz());
             matriz.setPartidaMatriz(matrizDTO.getPartidaMatriz());
@@ -438,7 +438,7 @@ public class ClienteService {
         dto.setIdDepartamentoMatriz(matriz.getIdDepartamentoMatriz());
         dto.setIdProvinciaMatriz(matriz.getIdProvinciaMatriz());
         dto.setIdDistritoMatriz(matriz.getIdDistritoMatriz());
-        dto.setIdUbicacionMatriz(matriz.getIdUbicacionMatriz());
+        dto.setUbicacionMatriz(matriz.getUbicacionMatriz());
         dto.setAreaMatrizHasMatriz(matriz.getAreaMatrizHasMatriz());
         dto.setRegistroMatriz(matriz.getRegistroMatriz());
         dto.setPartidaMatriz(matriz.getPartidaMatriz());
