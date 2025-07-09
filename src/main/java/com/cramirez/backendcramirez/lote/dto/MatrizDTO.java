@@ -11,8 +11,7 @@ public class MatrizDTO {
     private int idDistritoMatriz;
     private int idProvinciaMatriz;
     private int idDepartamentoMatriz;
-    private int ubicacionMatriz;
-    private String ubicacionMatrizTexto;;
+    private int  idUbicacion;
     private String areaMatrizHasMatriz;
     private String registroMatriz;
     private String partidaMatriz;
@@ -20,7 +19,9 @@ public class MatrizDTO {
     private String urbanizacionMatriz;
     private String compraventaMatriz;
     private String situacionLegalMatriz;
-    private String DistritoMatriz;
+    //-----------------------------
+    private String distritoMatriz;
     private String provinciaMatriz;
     private String departamentoMatriz;
+    private String ubicacionMatriz;
 }

@@ -189,7 +189,7 @@ public class LoteService {
 
         List<CuotaExtraordinaria> cuotas = cuotaExtraordinariaRepository.findByIdLote(lote.getIdLote());
         List<CuotaExtraordinariaDTO> cuotaDTOs = cuotas.stream()
-                .map(this::convertirACuotaDTO)
+                .map(this::convertirACuotaExtraordinariaDTO)
                 .collect(Collectors.toList());
         dto.setCuotasExtraordinarias(cuotaDTOs);
 
@@ -217,7 +217,7 @@ public class LoteService {
         dto.setIdDepartamentoMatriz(matriz.getIdDepartamentoMatriz());
         dto.setIdProvinciaMatriz(matriz.getIdProvinciaMatriz());
         dto.setIdDistritoMatriz(matriz.getIdDistritoMatriz());
-        dto.setUbicacionMatriz(matriz.getUbicacionMatriz());
+        dto.setIdUbicacion(matriz.getIdUbicacion());
         dto.setAreaMatrizHasMatriz(matriz.getAreaMatrizHasMatriz());
         dto.setRegistroMatriz(matriz.getRegistroMatriz());
         dto.setPartidaMatriz(matriz.getPartidaMatriz());
@@ -228,7 +228,7 @@ public class LoteService {
         return dto;
     }
 
-    private CuotaExtraordinariaDTO convertirACuotaDTO(CuotaExtraordinaria cuotaextraordinaria) {
+    private CuotaExtraordinariaDTO convertirACuotaExtraordinariaDTO(CuotaExtraordinaria cuotaextraordinaria) {
         CuotaExtraordinariaDTO dto = new CuotaExtraordinariaDTO();
         dto.setIdCuotaExtraordinaria(cuotaextraordinaria.getIdCuotaExtraordinaria());
         dto.setIdLote(cuotaextraordinaria.getIdLote());

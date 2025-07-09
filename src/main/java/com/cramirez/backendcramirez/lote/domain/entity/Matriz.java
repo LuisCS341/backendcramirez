@@ -25,7 +25,7 @@ public class Matriz {
     private int idDepartamentoMatriz;
 
     @Column(name = "ID_Ubicacion", nullable = false)
-    private int ubicacionMatriz;
+    private int idUbicacion;
 
     @Column(name = "Areamatrizhas", nullable = false)
     private String areaMatrizHasMatriz;
