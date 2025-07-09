@@ -19,15 +19,13 @@ public class MatrizService {
     private final DistritoRepository distritoRepository;
     private final ProvinciaRepository provinciaRepository;
     private final DepartamentoRepository departamentoRepository;
-    private final UbicacionRepository ubicacionRepository;
 
     @Autowired
-    public MatrizService(MatrizRepository matrizRepository, DistritoRepository distritoRepository, ProvinciaRepository provinciaRepository, DepartamentoRepository departamentoRepository, MatrizService matrizService, UbicacionRepository ubicacionRepository) {
+    public MatrizService(MatrizRepository matrizRepository, DistritoRepository distritoRepository, ProvinciaRepository provinciaRepository, DepartamentoRepository departamentoRepository) {
         this.matrizRepository = matrizRepository;
         this.distritoRepository = distritoRepository;
         this.provinciaRepository = provinciaRepository;
         this.departamentoRepository = departamentoRepository;
-        this.ubicacionRepository = ubicacionRepository;
     }
 
     public Optional<MatrizDTO> getMatrizById(Integer id) {
