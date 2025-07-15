@@ -1,9 +1,9 @@
 package com.cramirez.backendcramirez.lote.dto;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class MatrizDTO {
 
     private int idMatriz;
