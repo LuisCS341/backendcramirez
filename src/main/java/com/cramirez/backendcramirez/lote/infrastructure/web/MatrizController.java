@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -19,11 +20,10 @@ public class MatrizController {
         this.matrizService = matrizService;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<MatrizDTO> getMatrizById(@PathVariable Integer id) {
-        Optional<MatrizDTO> matrizDTO = matrizService.getMatrizById(id);
-        return matrizDTO.map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    @GetMapping
+    public ResponseEntity<List<MatrizDTO>> getAllMatrices() {
+        List<MatrizDTO> matrices = matrizService.getAllMatrices();
+        return ResponseEntity.ok(matrices);
     }
 
     @GetMapping("/lote/{idLote}")
