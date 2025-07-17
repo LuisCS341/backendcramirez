@@ -1,6 +1,9 @@
 package com.cramirez.backendcramirez.lote.application.service;
 import com.cramirez.backendcramirez.cliente.domain.entity.Cliente;
 import com.cramirez.backendcramirez.cliente.infrastructure.repository.ClienteRepository;
+import com.cramirez.backendcramirez.localizacion.infrastructure.repository.DepartamentoRepository;
+import com.cramirez.backendcramirez.localizacion.infrastructure.repository.DistritoRepository;
+import com.cramirez.backendcramirez.localizacion.infrastructure.repository.ProvinciaRepository;
 import com.cramirez.backendcramirez.lote.domain.entity.*;
 import com.cramirez.backendcramirez.lote.dto.*;
 import com.cramirez.backendcramirez.lote.infrastructure.repository.*;
@@ -26,9 +29,13 @@ public class LoteService {
     private final LinderoRepository linderoRepository;
     private final CuotaRepository cuotaRepository;
     private final MatrizRepository matrizRepository;
+    private final DepartamentoRepository departamentoRepository;
+    private final DistritoRepository distritoRepository;
+    private final ProvinciaRepository provinciaRepository;
+
 
     @Autowired
-    public LoteService(LoteRepository loteRepository, ClienteRepository clienteRepository, TipoContratoRepository tipoContratoRepository, UbicacionRepository ubicacionRepository, TipoProyectoRepository tipoProyectoRepository, CuotaExtraordinariaRepository cuotaExtraordinariaRepository, LinderoRepository linderoRepository, CuotaRepository cuotaRepository, MatrizRepository matrizRepository) {
+    public LoteService(LoteRepository loteRepository, ClienteRepository clienteRepository, TipoContratoRepository tipoContratoRepository, UbicacionRepository ubicacionRepository, TipoProyectoRepository tipoProyectoRepository, CuotaExtraordinariaRepository cuotaExtraordinariaRepository, LinderoRepository linderoRepository, CuotaRepository cuotaRepository, MatrizRepository matrizRepository, DepartamentoRepository departamentoRepository, DistritoRepository distritoRepository, ProvinciaRepository provinciaRepository) {
         this.loteRepository = loteRepository;
         this.clienteRepository = clienteRepository;
         this.tipoProyectoRepository = tipoProyectoRepository;
@@ -38,6 +45,9 @@ public class LoteService {
         this.linderoRepository = linderoRepository;
         this.cuotaRepository = cuotaRepository;
         this.matrizRepository = matrizRepository;
+        this.departamentoRepository = departamentoRepository;
+        this.distritoRepository = distritoRepository;
+        this.provinciaRepository = provinciaRepository;
     }
 
     public List<LoteDTO> getAllLotes() {
@@ -225,6 +235,11 @@ public class LoteService {
         dto.setUrbanizacionMatriz(matriz.getUrbanizacionMatriz());
         dto.setCompraventaMatriz(matriz.getCompraventaMatriz());
         dto.setSituacionLegalMatriz(matriz.getSituacionLegalMatriz());
+
+        dto.setTxtdepartamentomatriz(obtenerTexto(departamentoRepository.findById(matriz.getIdDepartamentoMatriz()), "NombreDepartamento"));
+        dto.setTxtprovinciamatriz(obtenerTexto(provinciaRepository.findById(matriz.getIdProvinciaMatriz()), "NombreProvincia"));
+        dto.setTxtdistritomatriz(obtenerTexto(distritoRepository.findById(matriz.getIdDistritoMatriz()), "NombreDistrito"));
+        dto.setTxtubicacionmatriz(obtenerTexto(ubicacionRepository.findById(matriz.getIdUbicacion()), "Ubicacion"));
         return dto;
     }
 

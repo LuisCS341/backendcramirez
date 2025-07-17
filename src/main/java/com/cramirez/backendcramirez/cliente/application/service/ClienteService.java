@@ -446,6 +446,12 @@ public class ClienteService {
         dto.setUrbanizacionMatriz(matriz.getUrbanizacionMatriz());
         dto.setCompraventaMatriz(matriz.getCompraventaMatriz());
         dto.setSituacionLegalMatriz(matriz.getSituacionLegalMatriz());
+
+        dto.setTxtdepartamentomatriz(obtenerTexto(departamentoRepository.findById(matriz.getIdDepartamentoMatriz()), "NombreDepartamento"));
+        dto.setTxtprovinciamatriz(obtenerTexto(provinciaRepository.findById(matriz.getIdProvinciaMatriz()), "NombreProvincia"));
+        dto.setTxtdistritomatriz(obtenerTexto(distritoRepository.findById(matriz.getIdDistritoMatriz()), "NombreDistrito"));
+        dto.setTxtubicacionmatriz(obtenerTexto(ubicacionRepository.findById(matriz.getIdUbicacion()), "Ubicacion"));
+
         return dto;
     }
 
