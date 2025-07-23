@@ -24,7 +24,4 @@ public class CuotaExtraordinaria {
     @Column(name = "MontoCuotaExtraordinaria")
     private Float montoCuotaExtraordinaria;
 
-    @Column(name = "MediosPago")
-    private String mediosPago;
-
 }

@@ -133,8 +133,6 @@ public class LoteService {
         lote.setTipoRepresentante(dto.getTipoRepresentante());
         lote.setMantenimientoMensual(dto.getMantenimientoMensual());
         lote.setMantenimientoMensualLetras(dto.getMantenimientoMensualLetras());
-        lote.setEstadoCuenta(dto.getEstadoCuenta());
-        lote.setMontoDeudaLetra(dto.getMontoDeudaLetra());
         lote.setFechaEntrega(dto.getFechaEntrega());
         lote.setAlicuota(dto.getAlicuota());
         lote.setAlicuotaLetras(dto.getAlicuotaLetras());
@@ -178,8 +176,6 @@ public class LoteService {
         dto.setTipoRepresentante(lote.getTipoRepresentante());
         dto.setMantenimientoMensual(lote.getMantenimientoMensual());
         dto.setMantenimientoMensualLetras(lote.getMantenimientoMensualLetras());
-        dto.setEstadoCuenta(lote.getEstadoCuenta());
-        dto.setMontoDeudaLetra(lote.getMontoDeudaLetra());
         dto.setFechaEntrega(lote.getFechaEntrega());
         dto.setAlicuota(lote.getAlicuota());
         dto.setAlicuotaLetras(lote.getAlicuotaLetras());
@@ -187,7 +183,6 @@ public class LoteService {
         dto.setTipoProyecto(obtenerTexto(tipoProyectoRepository.findById(lote.getIdTipoProyecto()), "TipoProyecto"));
         dto.setUbicacion(obtenerTexto(ubicacionRepository.findById(lote.getIdUbicacion()), "Ubicacion"));
         dto.setContrato(obtenerTexto(tipoContratoRepository.findById(lote.getIdTipoContrato()), "TipoContrato"));
-
 
         linderoRepository.findByIdLote(lote.getIdLote())
                 .map(this::convertirALinderoDTO)
@@ -197,13 +192,12 @@ public class LoteService {
                 .map(this::convertirAMatrizDTO)
                 .ifPresent(dto::setMatriz);
 
-        List<CuotaExtraordinaria> cuotas = cuotaExtraordinariaRepository.findByIdLote(lote.getIdLote());
-        List<CuotaExtraordinariaDTO> cuotaDTOs = cuotas.stream()
+       cuotaExtraordinariaRepository.findByIdLote(lote.getIdLote())
                 .map(this::convertirACuotaExtraordinariaDTO)
-                .collect(Collectors.toList());
-        dto.setCuotasExtraordinarias(cuotaDTOs);
+                .ifPresent(dto::setCuotaextraordinaria);
 
-        cuotaRepository.findByIdLote(lote.getIdLote())
+
+       cuotaRepository.findByIdLote(lote.getIdLote())
                 .map(this::convertirACuotaDTO)
                 .ifPresent(dto::setCuota);
 
@@ -249,7 +243,7 @@ public class LoteService {
         dto.setIdLote(cuotaextraordinaria.getIdLote());
         dto.setCantidadCuotaExtraordinaria(cuotaextraordinaria.getCantidadCuotaExtraordinaria());
         dto.setMontoCuotaExtraordinaria(cuotaextraordinaria.getMontoCuotaExtraordinaria());
-        dto.setMediosPago(cuotaextraordinaria.getMediosPago());
+
         return dto;
     }
 
@@ -272,6 +266,7 @@ public class LoteService {
         dto.setCuotaPendientePago(cuota.getCuotaPendientePago());
         dto.setSaldoLote(cuota.getSaldoLote());
         dto.setSaldoLoteLetras(cuota.getSaldoLoteLetras());
+        dto.setMediosPago(cuota.getMediosPago());
         return dto;
     }
 }

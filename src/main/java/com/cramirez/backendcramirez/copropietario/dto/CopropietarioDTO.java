@@ -35,7 +35,6 @@ public class CopropietarioDTO {
     private String descripcionEstadoCivilCopropietarios;
 
     private String operarioCopropietarios;
-    private String prefijoPaisCopropietarios;
     private String documentoIdentificacionCopropietarios;
     private String estadoCivilCopropietarios;
     private String ocupacionCopropietarios;

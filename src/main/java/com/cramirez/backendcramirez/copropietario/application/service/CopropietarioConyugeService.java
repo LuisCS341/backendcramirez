@@ -131,18 +131,18 @@ public class CopropietarioConyugeService {
     }
 
     // Actualizar la entidad desde el DTO
-    private void actualizarEntidad(CopropietarioConyuge entidad, CopropietarioConyugeDTO dto) {
-        entidad.setIdClienteCopropietarioConyuge(dto.getIdClienteCopropietarioConyuge());
-        entidad.setOcupacionCopropietarioConyuge(dto.getOcupacionCopropietarioConyuge());
-        entidad.setIdResidenciaCopropietarioConyuge(dto.getIdResidenciaCopropietarioConyuge());
-        entidad.setIdOperarioCopropietarioConyuge(dto.getIdOperarioCopropietarioConyuge());
-        entidad.setIdDistritoCopropietarioConyuge(dto.getIdDistritoCopropietarioConyuge());
-        entidad.setIdProvinciaCopropietarioConyuge(dto.getIdProvinciaCopropietarioConyuge());
-        entidad.setIdDepartamentoCopropietarioConyuge(dto.getIdDepartamentoCopropietarioConyuge());
-        entidad.setIdNacionalidadCopropietarioConyuge(dto.getIdNacionalidadCopropietarioConyuge());
-        entidad.setIdIdentificacionCopropietarioConyuge(dto.getIdIdentificacionCopropietarioConyuge());
-        entidad.setNombresApellidosCopropietarioConyuge(dto.getNombresApellidosCopropietarioConyuge());
-        entidad.setDireccionCopropietarioConyuge(dto.getDireccionCopropietarioConyuge());
-        entidad.setNumeroIdentificacionCopropietarioConyuge(dto.getNumeroIdentificacionCopropietarioConyuge());
+    private void actualizarEntidad(CopropietarioConyuge copropietarioConyuge, CopropietarioConyugeDTO dto) {
+        copropietarioConyuge.setIdClienteCopropietarioConyuge(dto.getIdClienteCopropietarioConyuge());
+        copropietarioConyuge.setOcupacionCopropietarioConyuge(dto.getOcupacionCopropietarioConyuge());
+        copropietarioConyuge.setIdResidenciaCopropietarioConyuge(dto.getIdResidenciaCopropietarioConyuge());
+        copropietarioConyuge.setIdOperarioCopropietarioConyuge(dto.getIdOperarioCopropietarioConyuge());
+        copropietarioConyuge.setIdDistritoCopropietarioConyuge(dto.getIdDistritoCopropietarioConyuge());
+        copropietarioConyuge.setIdProvinciaCopropietarioConyuge(dto.getIdProvinciaCopropietarioConyuge());
+        copropietarioConyuge.setIdDepartamentoCopropietarioConyuge(dto.getIdDepartamentoCopropietarioConyuge());
+        copropietarioConyuge.setIdNacionalidadCopropietarioConyuge(dto.getIdNacionalidadCopropietarioConyuge());
+        copropietarioConyuge.setIdIdentificacionCopropietarioConyuge(dto.getIdIdentificacionCopropietarioConyuge());
+        copropietarioConyuge.setNombresApellidosCopropietarioConyuge(dto.getNombresApellidosCopropietarioConyuge());
+        copropietarioConyuge.setDireccionCopropietarioConyuge(dto.getDireccionCopropietarioConyuge());
+        copropietarioConyuge.setNumeroIdentificacionCopropietarioConyuge(dto.getNumeroIdentificacionCopropietarioConyuge());
     }
 }

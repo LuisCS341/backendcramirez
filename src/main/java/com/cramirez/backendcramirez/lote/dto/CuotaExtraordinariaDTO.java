@@ -10,5 +10,5 @@ public class CuotaExtraordinariaDTO {
     private int idLote;
     private Float cantidadCuotaExtraordinaria;
     private Float montoCuotaExtraordinaria;
-    private String mediosPago;
+
 }

@@ -1,5 +1,6 @@
 package com.cramirez.backendcramirez.cliente.dto;
 
+import com.cramirez.backendcramirez.copropietario.dto.CopropietarioConyugeDTO;
 import com.cramirez.backendcramirez.copropietario.dto.CopropietarioDTO;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -48,4 +49,5 @@ public class ClienteDTO {
 
     private List<CopropietarioDTO> copropietarios;
     private ClienteConyugeDTO conyuge;
+    private List<CopropietarioConyugeDTO> copropietarioconyuge;
 }
