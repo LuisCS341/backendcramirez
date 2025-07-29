@@ -42,7 +42,9 @@ public class CuotaExtraordinariaService {
         cuotaExtraordinaria.setIdCuotaExtraordinaria(cuotaExtraordinariaDTO.getIdCuotaExtraordinaria());
         cuotaExtraordinaria.setIdLote(cuotaExtraordinariaDTO.getIdLote());
         cuotaExtraordinaria.setCantidadCuotaExtraordinaria(cuotaExtraordinariaDTO.getCantidadCuotaExtraordinaria());
+        cuotaExtraordinaria.setCantidadCuotaExtraordinariaLetras(cuotaExtraordinariaDTO.getCantidadCuotaExtraordinariaLetras());
         cuotaExtraordinaria.setMontoCuotaExtraordinaria(cuotaExtraordinariaDTO.getMontoCuotaExtraordinaria());
+        cuotaExtraordinaria.setMontoCuotaExtraordinariaLetras(cuotaExtraordinariaDTO.getMontoCuotaExtraordinariaLetras());
         return cuotaExtraordinaria;
     }
 
@@ -51,8 +53,9 @@ public class CuotaExtraordinariaService {
         dto.setIdCuotaExtraordinaria(cuotaExtraordinaria.getIdCuotaExtraordinaria());
         dto.setIdLote(cuotaExtraordinaria.getIdLote());
         dto.setCantidadCuotaExtraordinaria(cuotaExtraordinaria.getCantidadCuotaExtraordinaria());
+        dto.setCantidadCuotaExtraordinariaLetras(cuotaExtraordinaria.getCantidadCuotaExtraordinariaLetras());
         dto.setMontoCuotaExtraordinaria(cuotaExtraordinaria.getMontoCuotaExtraordinaria());
-
+        dto.setMontoCuotaExtraordinariaLetras(cuotaExtraordinaria.getMontoCuotaExtraordinariaLetras());
         return dto;
     }
 }

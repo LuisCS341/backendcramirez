@@ -21,7 +21,13 @@ public class CuotaExtraordinaria {
     @Column(name = "CantidadCuotaExtraordinaria")
     private Float cantidadCuotaExtraordinaria;
 
+    @Column(name = "CantidadCuotaExtraordinariaLetras")
+    private String cantidadCuotaExtraordinariaLetras;
+
     @Column(name = "MontoCuotaExtraordinaria")
     private Float montoCuotaExtraordinaria;
+
+    @Column(name = "MontoCuotaExtraordinariaLetras")
+    private String montoCuotaExtraordinariaLetras;
 
 }

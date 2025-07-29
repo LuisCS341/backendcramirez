@@ -489,7 +489,10 @@ public class ClienteService {
         dto.setIdCuotaExtraordinaria(cuotaextraordinaria.getIdCuotaExtraordinaria());
         dto.setIdLote(cuotaextraordinaria.getIdLote());
         dto.setCantidadCuotaExtraordinaria(cuotaextraordinaria.getCantidadCuotaExtraordinaria());
+        dto.setCantidadCuotaExtraordinariaLetras(cuotaextraordinaria.getCantidadCuotaExtraordinariaLetras());
         dto.setMontoCuotaExtraordinaria(cuotaextraordinaria.getMontoCuotaExtraordinaria());
+        dto.setMontoCuotaExtraordinariaLetras(cuotaextraordinaria.getMontoCuotaExtraordinariaLetras());
+
         return dto;
     }
 
