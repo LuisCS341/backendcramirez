@@ -28,6 +28,10 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -766,5 +770,43 @@ public class ClienteService {
         clienteRepository.save(cliente);
     }
 
+    //---------Indicadores-----------------
+    public int contarClientesRegistrados() {
+        List<LoteConClienteCompletoDTO> clientes = obtenerClientesConLotes();
+
+        LocalDate hoy = LocalDate.now();
+
+        long count = clientes.stream()
+                .filter(c -> {
+                    if (c.getCliente() == null || c.getLote() == null) return false;
+                    if (c.getLote().getLindero() == null || c.getLote().getCuota() == null || c.getLote().getMatriz() == null) return false;
+
+                    LocalDate fechaRegistro = c.getCliente().getFechaRegistro().toLocalDate(); // si es LocalDateTime
+                    return fechaRegistro.equals(hoy);
+                })
+                .count();
+
+        return (int) count;
+    }
+
+
+    public int obtenerTiempoPromedioPorCliente() {
+        List<Cliente> clientes = clienteRepository.findAll();
+
+        List<Long> minutosPorCliente = clientes.stream()
+                .filter(c -> c.getFechaRegistro() != null)
+                .map(c -> {
+                    // Aquí asumimos que fechaRegistro es LocalDateTime
+                    Instant fechaRegistro = c.getFechaRegistro().atZone(ZoneId.systemDefault()).toInstant();
+                    Instant ahora = Instant.now();
+                    return Duration.between(fechaRegistro, ahora).toMinutes();
+                })
+                .collect(Collectors.toList());
+
+        if (minutosPorCliente.isEmpty()) return 0;
+
+        long suma = minutosPorCliente.stream().mapToLong(Long::longValue).sum();
+        return (int) (suma / minutosPorCliente.size());
+    }
 
 }

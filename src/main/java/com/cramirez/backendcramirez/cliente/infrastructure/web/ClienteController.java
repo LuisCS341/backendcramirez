@@ -22,6 +22,19 @@ public class ClienteController {
         this.clienteService = clienteService;
     }
 
+    @GetMapping("/registrados/count")
+    public ResponseEntity<Integer> contarClientesRegistrados() {
+        int total = clienteService.contarClientesRegistrados();
+        return ResponseEntity.ok(total);
+    }
+
+    @GetMapping("/tiempo-promedio-cliente")
+    public ResponseEntity<Integer> obtenerTiempoPromedioCliente() {
+        int tiempo = clienteService.obtenerTiempoPromedioPorCliente();
+        return ResponseEntity.ok(tiempo);
+    }
+
+
     @GetMapping
     public ResponseEntity<List<ClienteDTO>> obtenerTodosLosClientes() {
         List<ClienteDTO> clientes = clienteService.obtenerTodosLosClientes();
