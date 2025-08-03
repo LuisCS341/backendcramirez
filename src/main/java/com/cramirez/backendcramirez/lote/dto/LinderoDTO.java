@@ -1,5 +1,6 @@
 package com.cramirez.backendcramirez.lote.dto;
 
+import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,4 +14,8 @@ public class LinderoDTO {
     private Float porLaIzquierda;
     private Float porElFrente;
     private Float porElFondo;
+    private String descripcionPorLaDerecha;
+    private String descripcionPorLaIzquierda;
+    private String descripcionPorElFrente;
+    private String descripcionPorElFondo;
 }

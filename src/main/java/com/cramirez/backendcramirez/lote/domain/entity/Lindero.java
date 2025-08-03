@@ -27,4 +27,17 @@ public class Lindero {
     @Column(name="PorElFondo",nullable = false)
     private Float porElFondo;
 
+    @Column(name="DescripcionPorLaDerecha",nullable = false)
+    private String descripcionPorLaDerecha;
+
+    @Column(name="DescripcionPorLaIzquierda",nullable = false)
+    private String descripcionPorLaIzquierda;
+
+    @Column(name="DescripcionPorElFrente",nullable = false)
+    private String descripcionPorElFrente;
+
+    @Column(name="DescripcionPorElFondo",nullable = false)
+    private String descripcionPorElFondo;
+
+
 }

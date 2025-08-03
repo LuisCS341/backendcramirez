@@ -250,6 +250,11 @@ public class ClienteService {
             lindero.setPorLaIzquierda(linderoDTO.getPorLaIzquierda());
             lindero.setPorElFrente(linderoDTO.getPorElFrente());
             lindero.setPorElFondo(linderoDTO.getPorElFondo());
+            lindero.setDescripcionPorLaDerecha(linderoDTO.getDescripcionPorLaDerecha());
+            lindero.setDescripcionPorLaIzquierda(linderoDTO.getDescripcionPorLaIzquierda());
+            lindero.setDescripcionPorElFrente(linderoDTO.getDescripcionPorElFrente());
+            lindero.setDescripcionPorElFondo(linderoDTO.getDescripcionPorElFondo());
+
             linderoRepository.save(lindero);
         }
     }
@@ -461,6 +466,11 @@ public class ClienteService {
         dto.setPorLaIzquierda(lindero.getPorLaIzquierda());
         dto.setPorElFrente(lindero.getPorElFrente());
         dto.setPorElFondo(lindero.getPorElFondo());
+        dto.setDescripcionPorLaDerecha(lindero.getDescripcionPorLaDerecha());
+        dto.setDescripcionPorLaIzquierda(lindero.getDescripcionPorLaIzquierda());
+        dto.setDescripcionPorElFrente(lindero.getDescripcionPorElFrente());
+        dto.setDescripcionPorElFondo(lindero.getDescripcionPorElFondo());
+
         return dto;
     }
 

@@ -212,6 +212,11 @@ public class LoteService {
         dto.setPorLaIzquierda(lindero.getPorLaIzquierda());
         dto.setPorElFrente(lindero.getPorElFrente());
         dto.setPorElFondo(lindero.getPorElFondo());
+        dto.setDescripcionPorLaDerecha(lindero.getDescripcionPorLaDerecha());
+        dto.setDescripcionPorLaIzquierda(lindero.getDescripcionPorLaIzquierda());
+        dto.setDescripcionPorElFrente(lindero.getDescripcionPorElFrente());
+        dto.setDescripcionPorElFondo(lindero.getDescripcionPorElFondo());
+
         return dto;
     }
     private MatrizDTO convertirAMatrizDTO(Matriz matriz) {
