@@ -21,7 +21,9 @@ import com.cramirez.backendcramirez.metadata.infrastructure.repository.EstadoCiv
 import com.cramirez.backendcramirez.metadata.infrastructure.repository.NacionalidadRepository;
 import com.cramirez.backendcramirez.metadata.infrastructure.repository.PrefijotelefonicoRepository;
 import com.cramirez.backendcramirez.metadata.infrastructure.repository.TipoContratoRepository;
+import com.cramirez.backendcramirez.operario.application.service.OperarioService;
 import com.cramirez.backendcramirez.operario.domain.entity.Operario;
+import com.cramirez.backendcramirez.operario.dto.OperarioDTO;
 import com.cramirez.backendcramirez.operario.infrastructure.repository.OperarioRepository;
 import com.cramirez.backendcramirez.proyecto.infrastructure.repository.TipoProyectoRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -33,6 +35,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -60,10 +63,11 @@ public class ClienteService {
     private final ClienteConyugeRepository clienteConyugeRepository;
     private final CuotaRepository cuotaRepository;
     private final CopropietarioConyugeRepository copropietarioConyugeRepository;
+    private final OperarioService operarioService;
 
 
     @Autowired
-    public ClienteService(ClienteRepository clienteRepository, LoteRepository loteRepository, CredencialesRepository credencialesRepository, CopropietarioRepository copropietarioRepository, OperarioRepository operarioRepository, PrefijotelefonicoRepository prefijotelefonicoRepository, IdentificacionRepository identificacionRepository, EstadoCivilRepository estadoCivilRepository, NacionalidadRepository nacionalidadRepository, ResidenciaRepository residenciaRepository, DepartamentoRepository departamentoRepository, ProvinciaRepository provinciaRepository, DistritoRepository distritoRepository, TipoProyectoRepository tipoProyectoRepository, UbicacionRepository ubicacionRepository, TipoContratoRepository tipoContratoRepository, CuotaExtraordinariaRepository cuotaExtraordinariaRepository, LinderoRepository linderoRepository, MatrizRepository matrizRepository, ClienteConyugeRepository clienteConyugeRepository, CuotaRepository cuotaRepository, CopropietarioConyugeRepository copropietarioConyugeRepository) {
+    public ClienteService(ClienteRepository clienteRepository, LoteRepository loteRepository, CredencialesRepository credencialesRepository, CopropietarioRepository copropietarioRepository, OperarioRepository operarioRepository, PrefijotelefonicoRepository prefijotelefonicoRepository, IdentificacionRepository identificacionRepository, EstadoCivilRepository estadoCivilRepository, NacionalidadRepository nacionalidadRepository, ResidenciaRepository residenciaRepository, DepartamentoRepository departamentoRepository, ProvinciaRepository provinciaRepository, DistritoRepository distritoRepository, TipoProyectoRepository tipoProyectoRepository, UbicacionRepository ubicacionRepository, TipoContratoRepository tipoContratoRepository, CuotaExtraordinariaRepository cuotaExtraordinariaRepository, LinderoRepository linderoRepository, MatrizRepository matrizRepository, ClienteConyugeRepository clienteConyugeRepository, CuotaRepository cuotaRepository, CopropietarioConyugeRepository copropietarioConyugeRepository, OperarioService operarioService) {
         this.clienteRepository = clienteRepository;
         this.loteRepository = loteRepository;
         this.credencialesRepository = credencialesRepository;
@@ -86,6 +90,7 @@ public class ClienteService {
         this.clienteConyugeRepository = clienteConyugeRepository;
         this.cuotaRepository = cuotaRepository;
         this.copropietarioConyugeRepository = copropietarioConyugeRepository;
+        this.operarioService = operarioService;
     }
 
     public LoteConClienteCompletoDTO editarClienteYComponentes(LoteConClienteCompletoDTO loteConClienteCompletoDTO) {
@@ -781,6 +786,7 @@ public class ClienteService {
     }
 
     //---------Indicadores-----------------
+    //conteo de clientes
     public int contarClientesRegistrados() {
         List<LoteConClienteCompletoDTO> clientes = obtenerClientesConLotes();
 
@@ -799,7 +805,55 @@ public class ClienteService {
         return (int) count;
     }
 
+    //indicador de rendimiento mensual
+    public List<Map<String, Object>> contarClientesRegistradosPorTipoOperarioDelMes() {
+        List<LoteConClienteCompletoDTO> clientes = obtenerClientesConLotes();
 
+        Map<Integer, String> idToTipo = operarioService.obtenerTodosLosOperarios().stream()
+                .collect(Collectors.toMap(
+                        OperarioDTO::getIdOperario,
+                        OperarioDTO::getTipoOperario
+                ));
+
+        LocalDate primerDia = LocalDate.now().withDayOfMonth(1);
+        LocalDate ultimoDia = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
+
+        Map<Integer, Long> conteoPorId = clientes.stream()
+                .filter(c -> c.getCliente() != null
+                        && c.getLote() != null
+                        && c.getLote().getLindero() != null
+                        && c.getLote().getCuota() != null
+                        && c.getLote().getMatriz() != null
+                        && c.getCliente().getFechaRegistro() != null)
+                .filter(c -> {
+                    LocalDate fecha = c.getCliente().getFechaRegistro().toLocalDate();
+                    return !fecha.isBefore(primerDia) && !fecha.isAfter(ultimoDia);
+                })
+                .map(c -> c.getCliente().getIdOperario())
+                .filter(Objects::nonNull)
+                .collect(Collectors.groupingBy(
+                        Function.identity(),
+                        Collectors.counting()
+                ));
+
+        List<Map<String, Object>> resultado = new ArrayList<>();
+        for (Map.Entry<Integer, String> entry : idToTipo.entrySet()) {
+            Integer idOperario = entry.getKey();
+            String tipoOperario = entry.getValue();
+            Long cantidad = conteoPorId.getOrDefault(idOperario, 0L);
+
+            Map<String, Object> item = new HashMap<>();
+            item.put("tipoOperario", tipoOperario);
+            item.put("cantidad", cantidad.intValue());
+            resultado.add(item);
+        }
+
+        return resultado;
+    }
+
+
+
+    /*
     public int obtenerTiempoPromedioPorCliente() {
         List<Cliente> clientes = clienteRepository.findAll();
 
@@ -818,5 +872,7 @@ public class ClienteService {
         long suma = minutosPorCliente.stream().mapToLong(Long::longValue).sum();
         return (int) (suma / minutosPorCliente.size());
     }
+
+     */
 
 }
