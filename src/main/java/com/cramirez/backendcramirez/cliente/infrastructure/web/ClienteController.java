@@ -35,6 +35,11 @@ public class ClienteController {
         );
     }
 
+    @GetMapping("/total-registrados")
+    public int obtenerTotalClientesRegistrados() {
+        return clienteService.TotalClientesRegistrados();
+    }
+
 
     /*
     @GetMapping("/tiempo-promedio-cliente")

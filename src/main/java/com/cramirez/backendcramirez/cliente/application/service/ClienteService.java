@@ -805,6 +805,22 @@ public class ClienteService {
         return (int) count;
     }
 
+    public int TotalClientesRegistrados() {
+        List<LoteConClienteCompletoDTO> clientes = obtenerClientesConLotes();
+
+        long count = clientes.stream()
+                .filter(c -> {
+                    if (c.getCliente() == null || c.getLote() == null) return false;
+                    if (c.getLote().getLindero() == null || c.getLote().getCuota() == null || c.getLote().getMatriz() == null) return false;
+
+                    return c.getCliente().getFechaRegistro() != null; // Basta con que esté registrado
+                })
+                .count();
+
+        return (int) count;
+    }
+
+
     //indicador de rendimiento mensual
     public List<Map<String, Object>> contarClientesRegistradosPorTipoOperarioDelMes() {
         List<LoteConClienteCompletoDTO> clientes = obtenerClientesConLotes();
