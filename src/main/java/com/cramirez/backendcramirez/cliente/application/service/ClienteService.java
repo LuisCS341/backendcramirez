@@ -199,6 +199,7 @@ public class ClienteService {
         Optional<Lote> loteOpt = loteRepository.findById(loteDTO.getIdLote());
         if (loteOpt.isPresent()) {
             Lote lote = loteOpt.get();
+            lote.setIdTipoContrato(loteDTO.getIdTipoContrato());
             lote.setManzana(loteDTO.getManzana());
             lote.setNumeroLote(loteDTO.getNumeroLote());
             lote.setAreaLote(loteDTO.getAreaLote());
