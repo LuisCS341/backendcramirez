@@ -335,44 +335,54 @@ public class ClienteService {
 
 
 
-
-
     public List<LoteConClienteCompletoDTO> obtenerClientesConLotes() {
         List<Cliente> clientes = clienteRepository.findAll();
-
         List<LoteConClienteCompletoDTO> resultado = new ArrayList<>();
 
         for (Cliente cliente : clientes) {
+            if (cliente == null || cliente.getLotes() == null) continue;
+
             for (Lote lote : cliente.getLotes()) {
+                if (lote == null) continue;
+                LoteDTO loteDTO = mapearLoteALoteDTO(lote);
+                if (loteDTO.getLindero() == null || loteDTO.getCuota() == null || loteDTO.getMatriz() == null) {
+                    continue;
+                }
+
                 LoteConClienteCompletoDTO dto = new LoteConClienteCompletoDTO();
                 dto.setCliente(convertirAClienteDTO(cliente));
-                dto.setLote(mapearLoteALoteDTO(lote));
-
+                dto.setLote(loteDTO);
                 resultado.add(dto);
             }
         }
-
         return resultado;
     }
 
 
+
     public List<LoteConClienteCompletoDTO> obtenerClientesConLotesPorOperario(int idOperario) {
-            List<Cliente> clientes = clienteRepository.findByIdOperario(idOperario);
-            List<LoteConClienteCompletoDTO> resultado = new ArrayList<>();
+        List<Cliente> clientes = clienteRepository.findByIdOperario(idOperario);
+        List<LoteConClienteCompletoDTO> resultado = new ArrayList<>();
 
-            for (Cliente cliente : clientes) {
-                for (Lote lote : cliente.getLotes()) {
-                    LoteConClienteCompletoDTO dto = new LoteConClienteCompletoDTO();
-                    dto.setCliente(convertirAClienteDTO(cliente));
-                    dto.setLote(mapearLoteALoteDTO(lote));
-                    resultado.add(dto);
-                }
+        for (Cliente cliente : clientes) {
+            if (cliente == null || cliente.getLotes() == null) continue;
+
+            for (Lote lote : cliente.getLotes()) {
+                if (lote == null) continue;
+
+                LoteDTO loteDTO = mapearLoteALoteDTO(lote);
+                if (loteDTO == null) continue;
+
+                if (loteDTO.getLindero() == null || loteDTO.getCuota() == null || loteDTO.getMatriz() == null) continue;
+
+                LoteConClienteCompletoDTO dto = new LoteConClienteCompletoDTO();
+                dto.setCliente(convertirAClienteDTO(cliente));
+                dto.setLote(loteDTO);
+                resultado.add(dto);
             }
-
-            return resultado;
+        }
+        return resultado;
     }
-
-
 
     private LoteDTO mapearLoteALoteDTO(Lote lote) {
     LoteDTO dto = new LoteDTO();

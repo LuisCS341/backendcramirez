@@ -60,7 +60,7 @@ public class Cliente {
     private String descripcionEstadoCivil;
 
     @Column(name = "CelularCliente",nullable = false)
-    private int celularCliente;
+    private String celularCliente;
 
     @Column(name = "NumeroIdentificacionCliente",nullable = false,unique = true)
     private String numeroIdentificacion;

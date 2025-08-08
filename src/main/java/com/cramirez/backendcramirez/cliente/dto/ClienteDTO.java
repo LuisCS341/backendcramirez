@@ -31,7 +31,7 @@ public class ClienteDTO {
 
 
     private String numeroIdentificacion;
-    private int celularCliente;
+    private String celularCliente;
     private String direccion;
     private String correoElectronico;
     private String nombresApellidos;
