@@ -56,6 +56,10 @@ public class LinderoService {
         lindero.setPorLaIzquierda(dto.getPorLaIzquierda());
         lindero.setPorElFrente(dto.getPorElFrente());
         lindero.setPorElFondo(dto.getPorElFondo());
+        lindero.setDescripcionPorLaDerecha(dto.getDescripcionPorLaDerecha());
+        lindero.setDescripcionPorLaIzquierda(dto.getDescripcionPorLaIzquierda());
+        lindero.setDescripcionPorElFrente(dto.getDescripcionPorElFrente());
+        lindero.setDescripcionPorElFondo(dto.getDescripcionPorElFondo());
         return lindero;
     }
 }

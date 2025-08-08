@@ -7,7 +7,10 @@ import com.cramirez.backendcramirez.cliente.dto.*;
 import com.cramirez.backendcramirez.cliente.infrastructure.repository.ClienteConyugeRepository;
 import com.cramirez.backendcramirez.cliente.infrastructure.repository.ClienteRepository;
 import com.cramirez.backendcramirez.copropietario.domain.entity.Copropietario;
+import com.cramirez.backendcramirez.copropietario.domain.entity.CopropietarioConyuge;
+import com.cramirez.backendcramirez.copropietario.dto.CopropietarioConyugeDTO;
 import com.cramirez.backendcramirez.copropietario.dto.CopropietarioDTO;
+import com.cramirez.backendcramirez.copropietario.infrastructure.repository.CopropietarioConyugeRepository;
 import com.cramirez.backendcramirez.copropietario.infrastructure.repository.CopropietarioRepository;
 import com.cramirez.backendcramirez.lote.domain.entity.*;
 import com.cramirez.backendcramirez.lote.dto.*;
@@ -18,14 +21,21 @@ import com.cramirez.backendcramirez.metadata.infrastructure.repository.EstadoCiv
 import com.cramirez.backendcramirez.metadata.infrastructure.repository.NacionalidadRepository;
 import com.cramirez.backendcramirez.metadata.infrastructure.repository.PrefijotelefonicoRepository;
 import com.cramirez.backendcramirez.metadata.infrastructure.repository.TipoContratoRepository;
+import com.cramirez.backendcramirez.operario.application.service.OperarioService;
 import com.cramirez.backendcramirez.operario.domain.entity.Operario;
+import com.cramirez.backendcramirez.operario.dto.OperarioDTO;
 import com.cramirez.backendcramirez.operario.infrastructure.repository.OperarioRepository;
 import com.cramirez.backendcramirez.proyecto.infrastructure.repository.TipoProyectoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -52,10 +62,12 @@ public class ClienteService {
     private final MatrizRepository matrizRepository;
     private final ClienteConyugeRepository clienteConyugeRepository;
     private final CuotaRepository cuotaRepository;
+    private final CopropietarioConyugeRepository copropietarioConyugeRepository;
+    private final OperarioService operarioService;
 
 
     @Autowired
-    public ClienteService(ClienteRepository clienteRepository, LoteRepository loteRepository, CredencialesRepository credencialesRepository, CopropietarioRepository copropietarioRepository, OperarioRepository operarioRepository, PrefijotelefonicoRepository prefijotelefonicoRepository, IdentificacionRepository identificacionRepository, EstadoCivilRepository estadoCivilRepository, NacionalidadRepository nacionalidadRepository, ResidenciaRepository residenciaRepository, DepartamentoRepository departamentoRepository, ProvinciaRepository provinciaRepository, DistritoRepository distritoRepository, TipoProyectoRepository tipoProyectoRepository, UbicacionRepository ubicacionRepository, TipoContratoRepository tipoContratoRepository, CuotaExtraordinariaRepository cuotaExtraordinariaRepository, LinderoRepository linderoRepository, MatrizRepository matrizRepository, ClienteConyugeRepository clienteConyugeRepository, CuotaRepository cuotaRepository) {
+    public ClienteService(ClienteRepository clienteRepository, LoteRepository loteRepository, CredencialesRepository credencialesRepository, CopropietarioRepository copropietarioRepository, OperarioRepository operarioRepository, PrefijotelefonicoRepository prefijotelefonicoRepository, IdentificacionRepository identificacionRepository, EstadoCivilRepository estadoCivilRepository, NacionalidadRepository nacionalidadRepository, ResidenciaRepository residenciaRepository, DepartamentoRepository departamentoRepository, ProvinciaRepository provinciaRepository, DistritoRepository distritoRepository, TipoProyectoRepository tipoProyectoRepository, UbicacionRepository ubicacionRepository, TipoContratoRepository tipoContratoRepository, CuotaExtraordinariaRepository cuotaExtraordinariaRepository, LinderoRepository linderoRepository, MatrizRepository matrizRepository, ClienteConyugeRepository clienteConyugeRepository, CuotaRepository cuotaRepository, CopropietarioConyugeRepository copropietarioConyugeRepository, OperarioService operarioService) {
         this.clienteRepository = clienteRepository;
         this.loteRepository = loteRepository;
         this.credencialesRepository = credencialesRepository;
@@ -77,6 +89,8 @@ public class ClienteService {
         this.matrizRepository = matrizRepository;
         this.clienteConyugeRepository = clienteConyugeRepository;
         this.cuotaRepository = cuotaRepository;
+        this.copropietarioConyugeRepository = copropietarioConyugeRepository;
+        this.operarioService = operarioService;
     }
 
     public LoteConClienteCompletoDTO editarClienteYComponentes(LoteConClienteCompletoDTO loteConClienteCompletoDTO) {
@@ -96,6 +110,12 @@ public class ClienteService {
         if (loteConClienteCompletoDTO.getCliente().getCopropietarios() != null) {
             for (CopropietarioDTO copropietarioDTO : loteConClienteCompletoDTO.getCliente().getCopropietarios()) {
                 editarCopropietario(copropietarioDTO);
+            }
+        }
+
+        if (loteConClienteCompletoDTO.getCliente().getCopropietarioconyuge() != null) {
+            for (CopropietarioConyugeDTO copropietarioConyugeDTO : loteConClienteCompletoDTO.getCliente().getCopropietarioconyuge()) {
+                editarCopropietarioConyuge(copropietarioConyugeDTO);
             }
         }
 
@@ -151,6 +171,28 @@ public class ClienteService {
         }
     }
 
+    private void editarCopropietarioConyuge(CopropietarioConyugeDTO copropietarioConyugeDTO) {
+        Optional<CopropietarioConyuge> copropietarioConyugeOpt = copropietarioConyugeRepository.findById(copropietarioConyugeDTO.getIdCopropietarioConyuge());
+        if (copropietarioConyugeOpt.isPresent()) {
+            CopropietarioConyuge copropietarioConyuge = copropietarioConyugeOpt.get();
+
+            copropietarioConyuge.setOcupacionCopropietarioConyuge(copropietarioConyugeDTO.getOcupacionCopropietarioConyuge());
+            copropietarioConyuge.setIdResidenciaCopropietarioConyuge(copropietarioConyugeDTO.getIdResidenciaCopropietarioConyuge());
+            copropietarioConyuge.setIdOperarioCopropietarioConyuge(copropietarioConyugeDTO.getIdOperarioCopropietarioConyuge());
+            copropietarioConyuge.setIdDistritoCopropietarioConyuge(copropietarioConyugeDTO.getIdDistritoCopropietarioConyuge());
+            copropietarioConyuge.setIdProvinciaCopropietarioConyuge(copropietarioConyugeDTO.getIdProvinciaCopropietarioConyuge());
+            copropietarioConyuge.setIdDepartamentoCopropietarioConyuge(copropietarioConyugeDTO.getIdDepartamentoCopropietarioConyuge());
+            copropietarioConyuge.setIdNacionalidadCopropietarioConyuge(copropietarioConyugeDTO.getIdNacionalidadCopropietarioConyuge());
+            copropietarioConyuge.setIdIdentificacionCopropietarioConyuge(copropietarioConyugeDTO.getIdIdentificacionCopropietarioConyuge());
+            copropietarioConyuge.setNombresApellidosCopropietarioConyuge(copropietarioConyugeDTO.getNombresApellidosCopropietarioConyuge());
+            copropietarioConyuge.setDireccionCopropietarioConyuge(copropietarioConyugeDTO.getDireccionCopropietarioConyuge());
+            copropietarioConyuge.setNumeroIdentificacionCopropietarioConyuge(copropietarioConyugeDTO.getNumeroIdentificacionCopropietarioConyuge());
+
+            copropietarioConyugeRepository.save(copropietarioConyuge);
+        }
+    }
+
+
 
 
     private void editarLote(LoteDTO loteDTO) {
@@ -183,8 +225,6 @@ public class ClienteService {
             lote.setTipoRepresentante(loteDTO.getTipoRepresentante());
             lote.setMantenimientoMensual(loteDTO.getMantenimientoMensual());
             lote.setMantenimientoMensualLetras(loteDTO.getMantenimientoMensualLetras());
-            lote.setEstadoCuenta(loteDTO.getEstadoCuenta());
-            lote.setMontoDeudaLetra(loteDTO.getMontoDeudaLetra());
             lote.setFechaEntrega(loteDTO.getFechaEntrega());
 
             loteRepository.save(lote);
@@ -197,12 +237,13 @@ public class ClienteService {
                 editarCuota(loteDTO.getCuota());
             }
 
-            if (loteDTO.getCuotasExtraordinarias() != null) {
-                for (CuotaExtraordinariaDTO cuotaDTO : loteDTO.getCuotasExtraordinarias()) {
-                    editarCuotaExtraordinaria(cuotaDTO);
-                }
+            if (loteDTO.getMatriz() != null) {
+                editarMatriz(loteDTO.getMatriz());
             }
 
+            if (loteDTO.getCuotaextraordinaria() != null) {
+                editarCuotaExtraordinaria(loteDTO.getCuotaextraordinaria());
+            }
         }
     }
 
@@ -214,6 +255,11 @@ public class ClienteService {
             lindero.setPorLaIzquierda(linderoDTO.getPorLaIzquierda());
             lindero.setPorElFrente(linderoDTO.getPorElFrente());
             lindero.setPorElFondo(linderoDTO.getPorElFondo());
+            lindero.setDescripcionPorLaDerecha(linderoDTO.getDescripcionPorLaDerecha());
+            lindero.setDescripcionPorLaIzquierda(linderoDTO.getDescripcionPorLaIzquierda());
+            lindero.setDescripcionPorElFrente(linderoDTO.getDescripcionPorElFrente());
+            lindero.setDescripcionPorElFondo(linderoDTO.getDescripcionPorElFondo());
+
             linderoRepository.save(lindero);
         }
     }
@@ -222,8 +268,6 @@ public class ClienteService {
         Optional<Matriz> matrizOpt = matrizRepository.findById(matrizDTO.getIdMatriz());
         if (matrizOpt.isPresent()) {
             Matriz matriz = matrizOpt.get();
-            matriz.setIdMatriz(matrizDTO.getIdMatriz());
-            matriz.setIdLote(matrizDTO.getIdLote());
             matriz.setIdDepartamentoMatriz(matrizDTO.getIdDepartamentoMatriz());
             matriz.setIdProvinciaMatriz(matrizDTO.getIdProvinciaMatriz());
             matriz.setIdDistritoMatriz(matrizDTO.getIdDistritoMatriz());
@@ -243,8 +287,6 @@ public class ClienteService {
         Optional<Cuota> cuotaOpt = cuotaRepository.findById(cuotaDTO.getIdCuota());
         if (cuotaOpt.isPresent()) {
             Cuota cuota = cuotaOpt.get();
-            cuota.setIdLote(cuotaDTO.getIdLote());
-            cuota.setIdCuota(cuotaDTO.getIdCuota());
             cuota.setLetrasPendientePago(cuotaDTO.getLetrasPendientePago());
             cuota.setCuentaRecaudadora(cuotaDTO.getCuentaRecaudadora());
             cuota.setCuotaInicialIncluyeSeparacion(cuotaDTO.getCuotaInicialIncluyeSeparacion());
@@ -258,19 +300,20 @@ public class ClienteService {
             cuota.setCantidadCuotaCuentaRecaudadora(cuotaDTO.getCantidadCuotaCuentaRecaudadora());
             cuota.setCantidadCuotaBanco(cuotaDTO.getCantidadCuotaBanco());
             cuota.setCuotaPendientePago(cuotaDTO.getCuotaPendientePago());
+            cuota.setMediosPago(cuotaDTO.getMediosPago());
+            cuota.setEstadoCuenta(cuotaDTO.getEstadoCuenta());
+            cuota.setMontoDeudaLetra(cuotaDTO.getMontoDeudaLetra());
             cuotaRepository.save(cuota);
         }
     }
 
-    // Editar cuota extraordinaria
-    private void editarCuotaExtraordinaria(CuotaExtraordinariaDTO cuotaDTO) {
-        Optional<CuotaExtraordinaria> cuotaOpt = cuotaExtraordinariaRepository.findById(cuotaDTO.getIdCuotaExtraordinaria());
+    private void editarCuotaExtraordinaria(CuotaExtraordinariaDTO cuotaExtraordinariaDTO) {
+        Optional<CuotaExtraordinaria> cuotaOpt = cuotaExtraordinariaRepository.findById(cuotaExtraordinariaDTO.getIdCuotaExtraordinaria());
         if (cuotaOpt.isPresent()) {
-            CuotaExtraordinaria cuota = cuotaOpt.get();
-            cuota.setCantidadCuotaExtraordinaria(cuotaDTO.getCantidadCuotaExtraordinaria());
-            cuota.setMontoCuotaExtraordinaria(cuotaDTO.getMontoCuotaExtraordinaria());
-            cuota.setMediosPago(cuotaDTO.getMediosPago());
-            cuotaExtraordinariaRepository.save(cuota);
+            CuotaExtraordinaria cuotaExtraordinaria = cuotaOpt.get();
+            cuotaExtraordinaria.setCantidadCuotaExtraordinaria(cuotaExtraordinariaDTO.getCantidadCuotaExtraordinaria());
+            cuotaExtraordinaria.setMontoCuotaExtraordinaria(cuotaExtraordinariaDTO.getMontoCuotaExtraordinaria());
+            cuotaExtraordinariaRepository.save(cuotaExtraordinaria);
         }
     }
 
@@ -366,8 +409,6 @@ public class ClienteService {
         dto.setTipoRepresentante(lote.getTipoRepresentante());
         dto.setMantenimientoMensual(lote.getMantenimientoMensual());
         dto.setMantenimientoMensualLetras(lote.getMantenimientoMensualLetras());
-        dto.setEstadoCuenta(lote.getEstadoCuenta());
-        dto.setMontoDeudaLetra(lote.getMontoDeudaLetra());
         dto.setFechaEntrega(lote.getFechaEntrega());
         dto.setAlicuota(lote.getAlicuota());
         dto.setAlicuotaLetras(lote.getAlicuotaLetras());
@@ -381,10 +422,9 @@ public class ClienteService {
             .map(this::convertirALinderoDTO)
             .ifPresent(dto::setLindero);
 
-    List<CuotaExtraordinariaDTO> cuotaextraordinaria = cuotaExtraordinariaRepository.findByIdLote(lote.getIdLote()).stream()
+    cuotaExtraordinariaRepository.findByIdLote(lote.getIdLote())
             .map(this::convertirACuotaExtraordinariaDTO)
-            .collect(Collectors.toList());
-    dto.setCuotasExtraordinarias(cuotaextraordinaria);
+            .ifPresent(dto::setCuotaextraordinaria);
 
     cuotaRepository.findByIdLote(lote.getIdLote())
             .map(this::convertirACuotaDTO)
@@ -399,24 +439,27 @@ public class ClienteService {
     }
 
     public CuotaDTO  convertirACuotaDTO(Cuota cuota) {
-            CuotaDTO dto = new CuotaDTO();
-            dto.setIdLote(cuota.getIdLote());
-            dto.setIdCuota(cuota.getIdCuota());
-            dto.setLetrasPendientePago(cuota.getLetrasPendientePago());
-            dto.setCuentaRecaudadora(cuota.getCuentaRecaudadora());
-            dto.setCuotaInicialIncluyeSeparacionLetras(cuota.getCuotaInicialIncluyeSeparacionLetras());
-            dto.setCuotaInicialIncluyeSeparacion(cuota.getCuotaInicialIncluyeSeparacion());
-            dto.setMontoCuotas(cuota.getMontoCuotas());
-            dto.setMontoCuotaLetras(cuota.getMontoCuotaLetras());
-            dto.setFechaPago(cuota.getFechaPago());
-            dto.setCuotaInicialBanco(cuota.getCuotaInicialBanco());
-            dto.setCantidadCuotas(cuota.getCantidadCuotas());
-            dto.setCantidadCuotaLetras(cuota.getCantidadCuotaLetras());
-            dto.setCantidadCuotaCuentaRecaudadora(cuota.getCantidadCuotaCuentaRecaudadora());
-            dto.setCantidadCuotaBanco(cuota.getCantidadCuotaBanco());
-            dto.setCuotaPendientePago(cuota.getCuotaPendientePago());
-            dto.setSaldoLote(cuota.getSaldoLote());
-            dto.setSaldoLoteLetras(cuota.getSaldoLoteLetras());
+        CuotaDTO dto = new CuotaDTO();
+        dto.setIdLote(cuota.getIdLote());
+        dto.setIdCuota(cuota.getIdCuota());
+        dto.setLetrasPendientePago(cuota.getLetrasPendientePago());
+        dto.setCuentaRecaudadora(cuota.getCuentaRecaudadora());
+        dto.setCuotaInicialIncluyeSeparacionLetras(cuota.getCuotaInicialIncluyeSeparacionLetras());
+        dto.setCuotaInicialIncluyeSeparacion(cuota.getCuotaInicialIncluyeSeparacion());
+        dto.setMontoCuotas(cuota.getMontoCuotas());
+        dto.setMontoCuotaLetras(cuota.getMontoCuotaLetras());
+        dto.setFechaPago(cuota.getFechaPago());
+        dto.setCuotaInicialBanco(cuota.getCuotaInicialBanco());
+        dto.setCantidadCuotas(cuota.getCantidadCuotas());
+        dto.setCantidadCuotaLetras(cuota.getCantidadCuotaLetras());
+        dto.setCantidadCuotaCuentaRecaudadora(cuota.getCantidadCuotaCuentaRecaudadora());
+        dto.setCantidadCuotaBanco(cuota.getCantidadCuotaBanco());
+        dto.setCuotaPendientePago(cuota.getCuotaPendientePago());
+        dto.setSaldoLote(cuota.getSaldoLote());
+        dto.setSaldoLoteLetras(cuota.getSaldoLoteLetras());
+        dto.setMediosPago(cuota.getMediosPago());
+        dto.setEstadoCuenta(cuota.getEstadoCuenta());
+        dto.setMontoDeudaLetra(cuota.getMontoDeudaLetra());
             return dto;
     }
 
@@ -428,6 +471,11 @@ public class ClienteService {
         dto.setPorLaIzquierda(lindero.getPorLaIzquierda());
         dto.setPorElFrente(lindero.getPorElFrente());
         dto.setPorElFondo(lindero.getPorElFondo());
+        dto.setDescripcionPorLaDerecha(lindero.getDescripcionPorLaDerecha());
+        dto.setDescripcionPorLaIzquierda(lindero.getDescripcionPorLaIzquierda());
+        dto.setDescripcionPorElFrente(lindero.getDescripcionPorElFrente());
+        dto.setDescripcionPorElFondo(lindero.getDescripcionPorElFondo());
+
         return dto;
     }
 
@@ -446,6 +494,12 @@ public class ClienteService {
         dto.setUrbanizacionMatriz(matriz.getUrbanizacionMatriz());
         dto.setCompraventaMatriz(matriz.getCompraventaMatriz());
         dto.setSituacionLegalMatriz(matriz.getSituacionLegalMatriz());
+
+        dto.setTxtdepartamentomatriz(obtenerTexto(departamentoRepository.findById(matriz.getIdDepartamentoMatriz()), "NombreDepartamento"));
+        dto.setTxtprovinciamatriz(obtenerTexto(provinciaRepository.findById(matriz.getIdProvinciaMatriz()), "NombreProvincia"));
+        dto.setTxtdistritomatriz(obtenerTexto(distritoRepository.findById(matriz.getIdDistritoMatriz()), "NombreDistrito"));
+        dto.setTxtubicacionmatriz(obtenerTexto(ubicacionRepository.findById(matriz.getIdUbicacion()), "Ubicacion"));
+
         return dto;
     }
 
@@ -454,8 +508,10 @@ public class ClienteService {
         dto.setIdCuotaExtraordinaria(cuotaextraordinaria.getIdCuotaExtraordinaria());
         dto.setIdLote(cuotaextraordinaria.getIdLote());
         dto.setCantidadCuotaExtraordinaria(cuotaextraordinaria.getCantidadCuotaExtraordinaria());
+        dto.setCantidadCuotaExtraordinariaLetras(cuotaextraordinaria.getCantidadCuotaExtraordinariaLetras());
         dto.setMontoCuotaExtraordinaria(cuotaextraordinaria.getMontoCuotaExtraordinaria());
-        dto.setMediosPago(cuotaextraordinaria.getMediosPago());
+        dto.setMontoCuotaExtraordinariaLetras(cuotaextraordinaria.getMontoCuotaExtraordinariaLetras());
+
         return dto;
     }
 
@@ -463,7 +519,6 @@ public class ClienteService {
     public ClienteDTO guardarCliente(ClienteDTO clienteDTO) {
         List<Cliente> todosLosClientes = clienteRepository.findAll();
 
-        // Buscar si ya existe alguien con ese número de identificación
         List<Cliente> existentes = todosLosClientes.stream()
                 .filter(c -> c.getNumeroIdentificacion().equals(clienteDTO.getNumeroIdentificacion()))
                 .collect(Collectors.toList());
@@ -570,6 +625,12 @@ public class ClienteService {
                 .collect(Collectors.toList());
         dto.setCopropietarios(copropietarios);
 
+        List<CopropietarioConyugeDTO> copropietarioconyuge = copropietarioConyugeRepository.findByIdClienteCopropietarioConyuge (cliente.getIdCliente())
+                .stream()
+                .map(this::convertirACopropietarioConyugeDTO)
+                .collect(Collectors.toList());
+        dto.setCopropietarioconyuge(copropietarioconyuge);
+
         Optional<ClienteConyuge> conyugeOpt = clienteConyugeRepository.findByIdCliente(cliente.getIdCliente());
         if (conyugeOpt.isPresent()) {
             ClienteConyugeDTO conyugeDTO = convertirAClienteConyugeDTO(conyugeOpt.get());
@@ -639,6 +700,34 @@ public class ClienteService {
         return dto;
     }
 
+    private CopropietarioConyugeDTO convertirACopropietarioConyugeDTO(CopropietarioConyuge copropietarioConyuge) {
+        CopropietarioConyugeDTO dto = new CopropietarioConyugeDTO();
+        dto.setIdCopropietarioConyuge(copropietarioConyuge.getIdCopropietarioConyuge());
+        dto.setIdClienteCopropietarioConyuge(copropietarioConyuge.getIdClienteCopropietarioConyuge());
+        dto.setOcupacionCopropietarioConyuge(copropietarioConyuge.getOcupacionCopropietarioConyuge());
+        dto.setIdResidenciaCopropietarioConyuge(copropietarioConyuge.getIdResidenciaCopropietarioConyuge());
+        dto.setIdOperarioCopropietarioConyuge(copropietarioConyuge.getIdOperarioCopropietarioConyuge());
+        dto.setIdDistritoCopropietarioConyuge(copropietarioConyuge.getIdDistritoCopropietarioConyuge());
+        dto.setIdProvinciaCopropietarioConyuge(copropietarioConyuge.getIdProvinciaCopropietarioConyuge());
+        dto.setIdDepartamentoCopropietarioConyuge(copropietarioConyuge.getIdDepartamentoCopropietarioConyuge());
+        dto.setIdNacionalidadCopropietarioConyuge(copropietarioConyuge.getIdNacionalidadCopropietarioConyuge());
+        dto.setIdIdentificacionCopropietarioConyuge(copropietarioConyuge.getIdIdentificacionCopropietarioConyuge());
+        dto.setNombresApellidosCopropietarioConyuge(copropietarioConyuge.getNombresApellidosCopropietarioConyuge());
+        dto.setDireccionCopropietarioConyuge(copropietarioConyuge.getDireccionCopropietarioConyuge());
+        dto.setNumeroIdentificacionCopropietarioConyuge(copropietarioConyuge.getNumeroIdentificacionCopropietarioConyuge());
+
+        dto.setOperarioCopropietarioConyuge(obtenerTexto(operarioRepository.findById(copropietarioConyuge.getIdOperarioCopropietarioConyuge()), "TipoOperario"));
+        dto.setDocumentoIdentificacionCopropietarioConyuge(obtenerTexto(identificacionRepository.findById(copropietarioConyuge.getIdIdentificacionCopropietarioConyuge()), "DocumentoIdentificacion"));
+        dto.setNacionalidadCopropietarioConyuge(obtenerTexto(nacionalidadRepository.findById(copropietarioConyuge.getIdNacionalidadCopropietarioConyuge()), "NombreNacionalidad"));
+        dto.setResidenciaCopropietarioConyuge(obtenerTexto(residenciaRepository.findById(copropietarioConyuge.getIdResidenciaCopropietarioConyuge()), "Residencia"));
+        dto.setDepartamentoCopropietarioConyuge(obtenerTexto(departamentoRepository.findById(copropietarioConyuge.getIdDepartamentoCopropietarioConyuge()), "NombreDepartamento"));
+        dto.setProvinciaCopropietarioConyuge(obtenerTexto(provinciaRepository.findById(copropietarioConyuge.getIdProvinciaCopropietarioConyuge()), "NombreProvincia"));
+        dto.setDistritoCopropietarioConyuge(obtenerTexto(distritoRepository.findById(copropietarioConyuge.getIdDistritoCopropietarioConyuge()), "NombreDistrito"));
+
+
+        return dto;
+    }
+
 
 
     private Cliente convertirAClienteEntidad(ClienteDTO dto) {
@@ -696,5 +785,110 @@ public class ClienteService {
         clienteRepository.save(cliente);
     }
 
+    //---------Indicadores-----------------
+    //conteo de clientes
+    public int contarClientesRegistrados() {
+        List<LoteConClienteCompletoDTO> clientes = obtenerClientesConLotes();
+
+        LocalDate hoy = LocalDate.now();
+
+        long count = clientes.stream()
+                .filter(c -> {
+                    if (c.getCliente() == null || c.getLote() == null) return false;
+                    if (c.getLote().getLindero() == null || c.getLote().getCuota() == null || c.getLote().getMatriz() == null) return false;
+
+                    LocalDate fechaRegistro = c.getCliente().getFechaRegistro().toLocalDate(); // si es LocalDateTime
+                    return fechaRegistro.equals(hoy);
+                })
+                .count();
+
+        return (int) count;
+    }
+
+    public int TotalClientesRegistrados() {
+        List<LoteConClienteCompletoDTO> clientes = obtenerClientesConLotes();
+
+        long count = clientes.stream()
+                .filter(c -> {
+                    if (c.getCliente() == null || c.getLote() == null) return false;
+                    if (c.getLote().getLindero() == null || c.getLote().getCuota() == null || c.getLote().getMatriz() == null) return false;
+
+                    return c.getCliente().getFechaRegistro() != null; // Basta con que esté registrado
+                })
+                .count();
+
+        return (int) count;
+    }
+
+
+    //indicador de rendimiento mensual
+    public List<Map<String, Object>> contarClientesRegistradosPorTipoOperarioDelMes() {
+        List<LoteConClienteCompletoDTO> clientes = obtenerClientesConLotes();
+
+        Map<Integer, String> idToTipo = operarioService.obtenerTodosLosOperarios().stream()
+                .collect(Collectors.toMap(
+                        OperarioDTO::getIdOperario,
+                        OperarioDTO::getTipoOperario
+                ));
+
+        LocalDate primerDia = LocalDate.now().withDayOfMonth(1);
+        LocalDate ultimoDia = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
+
+        Map<Integer, Long> conteoPorId = clientes.stream()
+                .filter(c -> c.getCliente() != null
+                        && c.getLote() != null
+                        && c.getLote().getLindero() != null
+                        && c.getLote().getCuota() != null
+                        && c.getLote().getMatriz() != null
+                        && c.getCliente().getFechaRegistro() != null)
+                .filter(c -> {
+                    LocalDate fecha = c.getCliente().getFechaRegistro().toLocalDate();
+                    return !fecha.isBefore(primerDia) && !fecha.isAfter(ultimoDia);
+                })
+                .map(c -> c.getCliente().getIdOperario())
+                .filter(Objects::nonNull)
+                .collect(Collectors.groupingBy(
+                        Function.identity(),
+                        Collectors.counting()
+                ));
+
+        List<Map<String, Object>> resultado = new ArrayList<>();
+        for (Map.Entry<Integer, String> entry : idToTipo.entrySet()) {
+            Integer idOperario = entry.getKey();
+            String tipoOperario = entry.getValue();
+            Long cantidad = conteoPorId.getOrDefault(idOperario, 0L);
+
+            Map<String, Object> item = new HashMap<>();
+            item.put("tipoOperario", tipoOperario);
+            item.put("cantidad", cantidad.intValue());
+            resultado.add(item);
+        }
+
+        return resultado;
+    }
+
+
+
+    /*
+    public int obtenerTiempoPromedioPorCliente() {
+        List<Cliente> clientes = clienteRepository.findAll();
+
+        List<Long> minutosPorCliente = clientes.stream()
+                .filter(c -> c.getFechaRegistro() != null)
+                .map(c -> {
+                    // Aquí asumimos que fechaRegistro es LocalDateTime
+                    Instant fechaRegistro = c.getFechaRegistro().atZone(ZoneId.systemDefault()).toInstant();
+                    Instant ahora = Instant.now();
+                    return Duration.between(fechaRegistro, ahora).toMinutes();
+                })
+                .collect(Collectors.toList());
+
+        if (minutosPorCliente.isEmpty()) return 0;
+
+        long suma = minutosPorCliente.stream().mapToLong(Long::longValue).sum();
+        return (int) (suma / minutosPorCliente.size());
+    }
+
+     */
 
 }

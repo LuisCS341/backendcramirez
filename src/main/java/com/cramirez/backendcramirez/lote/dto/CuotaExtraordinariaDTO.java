@@ -9,6 +9,8 @@ public class CuotaExtraordinariaDTO {
     private int idCuotaExtraordinaria;
     private int idLote;
     private Float cantidadCuotaExtraordinaria;
+    private String cantidadCuotaExtraordinariaLetras;
     private Float montoCuotaExtraordinaria;
-    private String mediosPago;
+    private String montoCuotaExtraordinariaLetras;
+
 }

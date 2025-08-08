@@ -14,21 +14,21 @@ import lombok.Setter;
 public class CopropietarioConyugeDTO {
 
     private int idClienteCopropietarioConyuge;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
     private int idResidenciaCopropietarioConyuge;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
     private int idDistritoCopropietarioConyuge;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
     private int idProvinciaCopropietarioConyuge;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
     private int idDepartamentoCopropietarioConyuge;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
     private int idNacionalidadCopropietarioConyuge;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
     private int idIdentificacionCopropietarioConyuge;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
     private int idCopropietarioConyuge;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
     private int idOperarioCopropietarioConyuge;
 
     private String nombresApellidosCopropietarioConyuge;

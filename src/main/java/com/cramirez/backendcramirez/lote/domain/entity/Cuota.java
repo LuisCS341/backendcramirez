@@ -61,5 +61,15 @@ public class Cuota {
 
     @Column(name = "SaldoLoteLetras", nullable = false)
     private String saldoLoteLetras;
+
+    @Column(name = "MediosPago")
+    private String mediosPago;
+
+    @Column(name = "EstadoCuenta", nullable = false)
+    private String estadoCuenta;
+
+    @Column(name = "MontoDeudaLetra", nullable = false)
+    private String montoDeudaLetra;
+
 }
 

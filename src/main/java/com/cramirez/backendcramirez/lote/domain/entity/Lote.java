@@ -116,12 +116,6 @@ public class Lote {
     @Column(name = "MantenimientoMensualLetras", nullable = false)
     private String mantenimientoMensualLetras;
 
-    @Column(name = "EstadoCuenta", nullable = false)
-    private String estadoCuenta;
-
-    @Column(name = "MontoDeudaLetra", nullable = false)
-    private String montoDeudaLetra;
-
     @Column(name = "FechaEntrega", nullable = false)
     private String fechaEntrega;
 

@@ -28,4 +28,7 @@ public class CuotaDTO {
     private String cantidadCuotaCuentaRecaudadora;
     private String cantidadCuotaBanco;
     private String cuotaPendientePago;
+    private String mediosPago;
+    private String estadoCuenta;
+    private String montoDeudaLetra;
 }

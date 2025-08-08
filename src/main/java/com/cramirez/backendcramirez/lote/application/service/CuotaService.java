@@ -42,7 +42,9 @@ public class CuotaService {
         cuota.setCuotaPendientePago(cuotaDTO.getCuotaPendientePago());
         cuota.setSaldoLote(cuotaDTO.getSaldoLote());
         cuota.setSaldoLoteLetras(cuotaDTO.getSaldoLoteLetras());
-
+        cuota.setMediosPago(cuotaDTO.getMediosPago());
+        cuota.setEstadoCuenta(cuotaDTO.getEstadoCuenta());
+        cuota.setMontoDeudaLetra(cuotaDTO.getMontoDeudaLetra());
         return cuotaRepository.save(cuota);
     }
 
@@ -65,6 +67,9 @@ public class CuotaService {
         dto.setCuotaPendientePago(cuota.getCuotaPendientePago());
         dto.setSaldoLote(cuota.getSaldoLote());
         dto.setSaldoLoteLetras(cuota.getSaldoLoteLetras());
+        dto.setMediosPago(cuota.getMediosPago());
+        dto.setEstadoCuenta(cuota.getEstadoCuenta());
+        dto.setMontoDeudaLetra(cuota.getMontoDeudaLetra());
         return dto;
     }
 }

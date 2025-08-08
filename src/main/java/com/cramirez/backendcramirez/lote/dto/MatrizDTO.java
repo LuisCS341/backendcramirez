@@ -20,8 +20,8 @@ public class MatrizDTO {
     private String compraventaMatriz;
     private String situacionLegalMatriz;
     //-----------------------------
-    private String distritoMatriz;
-    private String provinciaMatriz;
-    private String departamentoMatriz;
-    private String ubicacionMatriz;
+    private String txtdistritomatriz;
+    private String txtprovinciamatriz;
+    private String txtdepartamentomatriz;
+    private String txtubicacionmatriz;
 }

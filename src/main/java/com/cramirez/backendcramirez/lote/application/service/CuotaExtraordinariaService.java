@@ -37,23 +37,25 @@ public class CuotaExtraordinariaService {
     }
 
 
-    private CuotaExtraordinaria convertToEntity(CuotaExtraordinariaDTO cuotaDTO) {
-        CuotaExtraordinaria cuota = new CuotaExtraordinaria();
-        cuota.setIdCuotaExtraordinaria(cuotaDTO.getIdCuotaExtraordinaria());
-        cuota.setIdLote(cuotaDTO.getIdLote());
-        cuota.setCantidadCuotaExtraordinaria(cuotaDTO.getCantidadCuotaExtraordinaria());
-        cuota.setMontoCuotaExtraordinaria(cuotaDTO.getMontoCuotaExtraordinaria());
-        cuota.setMediosPago(cuotaDTO.getMediosPago());
-        return cuota;
+    private CuotaExtraordinaria convertToEntity(CuotaExtraordinariaDTO cuotaExtraordinariaDTO) {
+        CuotaExtraordinaria cuotaExtraordinaria = new CuotaExtraordinaria();
+        cuotaExtraordinaria.setIdCuotaExtraordinaria(cuotaExtraordinariaDTO.getIdCuotaExtraordinaria());
+        cuotaExtraordinaria.setIdLote(cuotaExtraordinariaDTO.getIdLote());
+        cuotaExtraordinaria.setCantidadCuotaExtraordinaria(cuotaExtraordinariaDTO.getCantidadCuotaExtraordinaria());
+        cuotaExtraordinaria.setCantidadCuotaExtraordinariaLetras(cuotaExtraordinariaDTO.getCantidadCuotaExtraordinariaLetras());
+        cuotaExtraordinaria.setMontoCuotaExtraordinaria(cuotaExtraordinariaDTO.getMontoCuotaExtraordinaria());
+        cuotaExtraordinaria.setMontoCuotaExtraordinariaLetras(cuotaExtraordinariaDTO.getMontoCuotaExtraordinariaLetras());
+        return cuotaExtraordinaria;
     }
 
-    private CuotaExtraordinariaDTO convertirACuotaExtraordinariaDTO(CuotaExtraordinaria entity) {
+    private CuotaExtraordinariaDTO convertirACuotaExtraordinariaDTO(CuotaExtraordinaria cuotaExtraordinaria) {
         CuotaExtraordinariaDTO dto = new CuotaExtraordinariaDTO();
-        dto.setIdCuotaExtraordinaria(entity.getIdCuotaExtraordinaria());
-        dto.setIdLote(entity.getIdLote());
-        dto.setCantidadCuotaExtraordinaria(entity.getCantidadCuotaExtraordinaria());
-        dto.setMontoCuotaExtraordinaria(entity.getMontoCuotaExtraordinaria());
-        dto.setMediosPago(entity.getMediosPago());
+        dto.setIdCuotaExtraordinaria(cuotaExtraordinaria.getIdCuotaExtraordinaria());
+        dto.setIdLote(cuotaExtraordinaria.getIdLote());
+        dto.setCantidadCuotaExtraordinaria(cuotaExtraordinaria.getCantidadCuotaExtraordinaria());
+        dto.setCantidadCuotaExtraordinariaLetras(cuotaExtraordinaria.getCantidadCuotaExtraordinariaLetras());
+        dto.setMontoCuotaExtraordinaria(cuotaExtraordinaria.getMontoCuotaExtraordinaria());
+        dto.setMontoCuotaExtraordinariaLetras(cuotaExtraordinaria.getMontoCuotaExtraordinariaLetras());
         return dto;
     }
 }

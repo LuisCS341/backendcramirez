@@ -25,7 +25,7 @@ public class Cliente {
     private int idClienteClone;
 
     @Column(name = "ID_Operario")
-    private Integer  idOperario;
+    private int  idOperario;
 
     @ManyToOne
     @JoinColumn(name = "ID_Operario", referencedColumnName = "ID_Operario", insertable = false, updatable = false)

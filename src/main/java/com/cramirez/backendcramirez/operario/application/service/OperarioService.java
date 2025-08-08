@@ -52,4 +52,15 @@ public class OperarioService {
                 dto.getTipoOperario()
         );
     }
+
+    public List<OperarioDTO> obtenerTodosLosOperarios() {
+        List<Operario> operarios = operarioRepository.findAll();
+        return operarios.stream()
+                .map(op -> new OperarioDTO(
+                        op.getIdOperario(),
+                        op.getTipoIdentidad(),
+                        op.getTipoOperario()
+                ))
+                .collect(Collectors.toList());
+    }
 }

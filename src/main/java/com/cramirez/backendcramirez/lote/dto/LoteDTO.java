@@ -43,8 +43,6 @@ public class LoteDTO {
     private String tipoRepresentante;
     private Double mantenimientoMensual;
     private String mantenimientoMensualLetras;
-    private String estadoCuenta;
-    private String montoDeudaLetra;
     private String fechaEntrega;
     private Float alicuota;
     private String alicuotaLetras;
@@ -56,6 +54,6 @@ public class LoteDTO {
     private LinderoDTO lindero;
     private CuotaDTO cuota;
     private MatrizDTO matriz;
-    private List<CuotaExtraordinariaDTO> cuotasExtraordinarias;
+    private CuotaExtraordinariaDTO cuotaextraordinaria;
 
 }

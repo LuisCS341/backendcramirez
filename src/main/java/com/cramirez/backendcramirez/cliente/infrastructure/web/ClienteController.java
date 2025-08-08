@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -21,6 +22,34 @@ public class ClienteController {
     public ClienteController(ClienteService clienteService) {
         this.clienteService = clienteService;
     }
+
+    @GetMapping("/registrados/count")
+    public ResponseEntity<Integer> contarClientesRegistrados() {
+        int total = clienteService.contarClientesRegistrados();
+        return ResponseEntity.ok(total);
+    }
+    @GetMapping("/registrados-mes-tipo-operario")
+    public ResponseEntity<List<Map<String, Object>>> registradosPorTipoOperario() {
+        return ResponseEntity.ok(
+                clienteService.contarClientesRegistradosPorTipoOperarioDelMes()
+        );
+    }
+
+    @GetMapping("/total-registrados")
+    public int obtenerTotalClientesRegistrados() {
+        return clienteService.TotalClientesRegistrados();
+    }
+
+
+    /*
+    @GetMapping("/tiempo-promedio-cliente")
+    public ResponseEntity<Integer> obtenerTiempoPromedioCliente() {
+        int tiempo = clienteService.obtenerTiempoPromedioPorCliente();
+        return ResponseEntity.ok(tiempo);
+    }
+
+     */
+
 
     @GetMapping
     public ResponseEntity<List<ClienteDTO>> obtenerTodosLosClientes() {
