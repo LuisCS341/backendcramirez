@@ -190,9 +190,9 @@ public class EmailNotificacionService {
         vars.put("estadoCivil",           nullSafe(estadoCivilTxt));
 
         //Lote
-        String tipoContratoTxt = (obtenerTexto(tipoContratoRepository.findById(loteDTO.getIdTipoContrato()), "TipoContrato"));
-        String tipoProyectoTxt = (obtenerTexto(tipoProyectoRepository.findById(loteDTO.getIdTipoProyecto()), "TipoProyecto"));
         if (loteDTO != null) {
+            String tipoContratoTxt = (obtenerTexto(tipoContratoRepository.findById(loteDTO.getIdTipoContrato()), "TipoContrato"));
+            String tipoProyectoTxt = (obtenerTexto(tipoProyectoRepository.findById(loteDTO.getIdTipoProyecto()), "TipoProyecto"));
             BigDecimal ali = toBigDecimal(loteDTO.getAlicuota());
             vars.put("empresaVende", nullSafe(loteDTO.getEmpresaVende()));
             vars.put("tipoProyecto", nullSafe(tipoProyectoTxt));
@@ -264,13 +264,12 @@ public class EmailNotificacionService {
 
         }
 
-
+        //Matriz
+        if (matrizDTO != null) {
             String departamentoMatrizTxt = (obtenerTexto(departamentoRepository.findById(matrizDTO.getIdDepartamentoMatriz()), "NombreDepartamento"));
             String provinciaMatrizTxt = (obtenerTexto(provinciaRepository.findById(matrizDTO.getIdProvinciaMatriz()), "NombreProvincia"));
             String distritoMatrizTxt = (obtenerTexto(distritoRepository.findById(matrizDTO.getIdDistritoMatriz()), "NombreDistrito"));
             String ubicacionTxt = (obtenerTexto(ubicacionRepository.findById(matrizDTO.getIdUbicacion()), "Ubicacion"));
-        //Matriz
-        if (matrizDTO != null) {
             vars.put("areaMatrizHasMatriz",   nullSafe(matrizDTO.getAreaMatrizHasMatriz()));
             vars.put("registroMatriz",        nullSafe(matrizDTO.getRegistroMatriz()));
             vars.put("partidaMatriz",         nullSafe(matrizDTO.getPartidaMatriz()));
@@ -291,13 +290,11 @@ public class EmailNotificacionService {
             vars.put("montoCuotaExtraordinariaLetras",      nullSafe(cuotaExtraordinariaDTO.getMontoCuotaExtraordinariaLetras()));
         }
 
-
+        if (clienteConyugeDTO != null) {
             String IdentificacionTxt =(obtenerTexto(identificacionRepository.findById(clienteConyugeDTO.getIdIdentificacionConyuge()), "DocumentoIdentificacion"));
             String DepartamentoConyugeTxt =(obtenerTexto(departamentoRepository.findById(clienteConyugeDTO.getIdDepartamentoConyuge()), "NombreDepartamento"));
             String ProvinciaConyugeTxt =(obtenerTexto(provinciaRepository.findById(clienteConyugeDTO.getIdProvinciaConyuge()), "NombreProvincia"));
             String DistritoConyugeTxt =(obtenerTexto(distritoRepository.findById(clienteConyugeDTO.getIdDistritoConyuge()), "NombreDistrito"));
-
-        if (clienteConyugeDTO != null) {
             vars.put("nombresApellidosConyuge",        nullSafe(clienteConyugeDTO.getNombresApellidosConyuge()));
             vars.put("direccionConyuge",               nullSafe(clienteConyugeDTO.getDireccionConyuge()));
             vars.put("numeroIdentificacionConyuge",    nullSafe(clienteConyugeDTO.getNumeroIdentificacionConyuge()));
@@ -313,23 +310,24 @@ public class EmailNotificacionService {
         }
 
 
+
+
+        if (copropietarioDTO != null) {
             String DocumentoCopropietarioTxt = (obtenerTexto(identificacionRepository.findById(copropietarioDTO.getIdIdentificacionCopropietarios()), "DocumentoIdentificacion"));
             String DepartamentoCopropietarioTxt=(obtenerTexto(departamentoRepository.findById(copropietarioDTO.getIdDepartamentoCopropietarios()), "NombreDepartamento"));
             String ProvinciaCopropietarioTxt=(obtenerTexto(provinciaRepository.findById(copropietarioDTO.getIdProvinciaCopropietarios()), "NombreProvincia"));
             String DistritoCopropietarioTxt=(obtenerTexto(distritoRepository.findById(copropietarioDTO.getIdDistritoCopropietarios()), "NombreDistrito"));
             String EstadoCivilCopropietarioTxt=(obtenerTexto(estadoCivilRepository.findById(copropietarioDTO.getIdEstadoCivilCopropietarios()), "EstadoCivil"));
-
-            if (copropietarioDTO != null) {
-            vars.put("nombresApellidosCopropietarios",       nullSafe(copropietarioDTO.getNombresApellidosCopropietarios()));
-            vars.put("direccionCopropietarios",              nullSafe(copropietarioDTO.getDireccionCopropietarios()));
-            vars.put("numeroIdentificacionCopropietarios",   nullSafe(copropietarioDTO.getNumeroIdentificacionCopropietarios()));
-            vars.put("documentoIdentificacionCopropietarios",nullSafe(DocumentoCopropietarioTxt));
-            vars.put("estadoCivilCopropietarios",            nullSafe(EstadoCivilCopropietarioTxt));
-            vars.put("ocupacionCopropietarios",              nullSafe(copropietarioDTO.getOcupacionCopropietarios()));
-            vars.put("nacionalidadCopropietarios",           nullSafe(copropietarioDTO.getNacionalidadCopropietarios()));
-            vars.put("departamentoCopropietarios",           nullSafe(DepartamentoCopropietarioTxt));
-            vars.put("provinciaCopropietarios",              nullSafe(ProvinciaCopropietarioTxt));
-            vars.put("distritoCopropietarios",               nullSafe(DistritoCopropietarioTxt));
+        vars.put("nombresApellidosCopropietarios",       nullSafe(copropietarioDTO.getNombresApellidosCopropietarios()));
+        vars.put("direccionCopropietarios",              nullSafe(copropietarioDTO.getDireccionCopropietarios()));
+        vars.put("numeroIdentificacionCopropietarios",   nullSafe(copropietarioDTO.getNumeroIdentificacionCopropietarios()));
+        vars.put("documentoIdentificacionCopropietarios",nullSafe(DocumentoCopropietarioTxt));
+        vars.put("estadoCivilCopropietarios",            nullSafe(EstadoCivilCopropietarioTxt));
+        vars.put("ocupacionCopropietarios",              nullSafe(copropietarioDTO.getOcupacionCopropietarios()));
+        vars.put("nacionalidadCopropietarios",           nullSafe(copropietarioDTO.getNacionalidadCopropietarios()));
+        vars.put("departamentoCopropietarios",           nullSafe(DepartamentoCopropietarioTxt));
+        vars.put("provinciaCopropietarios",              nullSafe(ProvinciaCopropietarioTxt));
+        vars.put("distritoCopropietarios",               nullSafe(DistritoCopropietarioTxt));
         }
 
         List<CopropietarioDTO> copropietarios =
