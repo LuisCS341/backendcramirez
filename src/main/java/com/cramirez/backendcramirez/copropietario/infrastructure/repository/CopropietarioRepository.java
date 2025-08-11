@@ -1,5 +1,6 @@
 package com.cramirez.backendcramirez.copropietario.infrastructure.repository;
 import com.cramirez.backendcramirez.copropietario.domain.entity.Copropietario;
+import com.cramirez.backendcramirez.copropietario.dto.CopropietarioDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -18,4 +18,6 @@ public class LinderoDTO {
     private String descripcionPorLaIzquierda;
     private String descripcionPorElFrente;
     private String descripcionPorElFondo;
+
+
 }

@@ -10,6 +10,7 @@ import java.util.Optional;
 @Repository
 public interface LoteRepository extends JpaRepository<Lote, Integer> {
     int countByClienteIdClienteClone(int idClienteClone);
+    Optional<Lote> findFirstByIdClienteLoteOrderByIdLoteAsc(int idLote);
 
     List<Lote> findByClienteIdClienteClone(int idClienteClone);
 
